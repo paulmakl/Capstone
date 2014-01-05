@@ -7,31 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C08C9EA41879E492001C4F7B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = C08C9EA31879E492001C4F7B /* main.c */; };
-		C08C9EA61879E492001C4F7B /* Capstone.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C08C9EA51879E492001C4F7B /* Capstone.1 */; };
+		C04663D21879F229003E21DE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C04663D11879F229003E21DE /* main.cpp */; };
+		C04663D41879F229003E21DE /* Capstone.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C04663D31879F229003E21DE /* Capstone.1 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C08C9E9E1879E492001C4F7B /* CopyFiles */ = {
+		C04663CC1879F229003E21DE /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				C08C9EA61879E492001C4F7B /* Capstone.1 in CopyFiles */,
+				C04663D41879F229003E21DE /* Capstone.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C08C9EA01879E492001C4F7B /* Capstone */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Capstone; sourceTree = BUILT_PRODUCTS_DIR; };
-		C08C9EA31879E492001C4F7B /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		C08C9EA51879E492001C4F7B /* Capstone.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Capstone.1; sourceTree = "<group>"; };
+		C04663CE1879F229003E21DE /* Capstone */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Capstone; sourceTree = BUILT_PRODUCTS_DIR; };
+		C04663D11879F229003E21DE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		C04663D31879F229003E21DE /* Capstone.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Capstone.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C08C9E9D1879E492001C4F7B /* Frameworks */ = {
+		C04663CB1879F229003E21DE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,27 +41,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C08C9E971879E492001C4F7B = {
+		C04663C51879F229003E21DE = {
 			isa = PBXGroup;
 			children = (
-				C08C9EA21879E492001C4F7B /* Capstone */,
-				C08C9EA11879E492001C4F7B /* Products */,
+				C04663D01879F229003E21DE /* Capstone */,
+				C04663CF1879F229003E21DE /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		C08C9EA11879E492001C4F7B /* Products */ = {
+		C04663CF1879F229003E21DE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C08C9EA01879E492001C4F7B /* Capstone */,
+				C04663CE1879F229003E21DE /* Capstone */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C08C9EA21879E492001C4F7B /* Capstone */ = {
+		C04663D01879F229003E21DE /* Capstone */ = {
 			isa = PBXGroup;
 			children = (
-				C08C9EA31879E492001C4F7B /* main.c */,
-				C08C9EA51879E492001C4F7B /* Capstone.1 */,
+				C04663D11879F229003E21DE /* main.cpp */,
+				C04663D31879F229003E21DE /* Capstone.1 */,
 			);
 			path = Capstone;
 			sourceTree = "<group>";
@@ -69,13 +69,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C08C9E9F1879E492001C4F7B /* Capstone */ = {
+		C04663CD1879F229003E21DE /* Capstone */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C08C9EA91879E492001C4F7B /* Build configuration list for PBXNativeTarget "Capstone" */;
+			buildConfigurationList = C04663D71879F229003E21DE /* Build configuration list for PBXNativeTarget "Capstone" */;
 			buildPhases = (
-				C08C9E9C1879E492001C4F7B /* Sources */,
-				C08C9E9D1879E492001C4F7B /* Frameworks */,
-				C08C9E9E1879E492001C4F7B /* CopyFiles */,
+				C04663CA1879F229003E21DE /* Sources */,
+				C04663CB1879F229003E21DE /* Frameworks */,
+				C04663CC1879F229003E21DE /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -83,48 +83,48 @@
 			);
 			name = Capstone;
 			productName = Capstone;
-			productReference = C08C9EA01879E492001C4F7B /* Capstone */;
+			productReference = C04663CE1879F229003E21DE /* Capstone */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C08C9E981879E492001C4F7B /* Project object */ = {
+		C04663C61879F229003E21DE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Paul Makl";
 			};
-			buildConfigurationList = C08C9E9B1879E492001C4F7B /* Build configuration list for PBXProject "Capstone" */;
+			buildConfigurationList = C04663C91879F229003E21DE /* Build configuration list for PBXProject "Capstone" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = C08C9E971879E492001C4F7B;
-			productRefGroup = C08C9EA11879E492001C4F7B /* Products */;
+			mainGroup = C04663C51879F229003E21DE;
+			productRefGroup = C04663CF1879F229003E21DE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C08C9E9F1879E492001C4F7B /* Capstone */,
+				C04663CD1879F229003E21DE /* Capstone */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C08C9E9C1879E492001C4F7B /* Sources */ = {
+		C04663CA1879F229003E21DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C08C9EA41879E492001C4F7B /* main.c in Sources */,
+				C04663D21879F229003E21DE /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		C08C9EA71879E492001C4F7B /* Debug */ = {
+		C04663D51879F229003E21DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -161,7 +161,7 @@
 			};
 			name = Debug;
 		};
-		C08C9EA81879E492001C4F7B /* Release */ = {
+		C04663D61879F229003E21DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -192,14 +192,14 @@
 			};
 			name = Release;
 		};
-		C08C9EAA1879E492001C4F7B /* Debug */ = {
+		C04663D81879F229003E21DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		C08C9EAB1879E492001C4F7B /* Release */ = {
+		C04663D91879F229003E21DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -209,24 +209,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C08C9E9B1879E492001C4F7B /* Build configuration list for PBXProject "Capstone" */ = {
+		C04663C91879F229003E21DE /* Build configuration list for PBXProject "Capstone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C08C9EA71879E492001C4F7B /* Debug */,
-				C08C9EA81879E492001C4F7B /* Release */,
+				C04663D51879F229003E21DE /* Debug */,
+				C04663D61879F229003E21DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C08C9EA91879E492001C4F7B /* Build configuration list for PBXNativeTarget "Capstone" */ = {
+		C04663D71879F229003E21DE /* Build configuration list for PBXNativeTarget "Capstone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C08C9EAA1879E492001C4F7B /* Debug */,
-				C08C9EAB1879E492001C4F7B /* Release */,
+				C04663D81879F229003E21DE /* Debug */,
+				C04663D91879F229003E21DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C08C9E981879E492001C4F7B /* Project object */;
+	rootObject = C04663C61879F229003E21DE /* Project object */;
 }
