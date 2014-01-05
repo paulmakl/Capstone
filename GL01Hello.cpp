@@ -15,6 +15,7 @@ void display()
 	//glClearDepth(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
+	glutSwapBuffers();
 
 	//glFrustrum(-1.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f);
 	//glEnable(GL_DEPTH_TEST);
@@ -48,6 +49,7 @@ void display()
 /* Main function: GLUT runs as a console application starting at main()  */
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);                 // Initialize GLUT
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowSize(900, 900);   // Set the window's initial width & height
 	glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
 	glutCreateWindow("Snow Tiem"); // Create a window with the given title
