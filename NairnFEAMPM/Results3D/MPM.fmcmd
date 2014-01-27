@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<!DOCTYPE JANFEAInput SYSTEM '/Applications/NairnFEAMPM.app/Contents/Resources/binaries/NairnMPM.dtd'>
+<JANFEAInput version="3">
+
+  <Header>
+    <Description>
+Title: 3D MPM Analysis of Cantilever Beam
+User Name: User Name
+   Analysis of cantilever beam
+    </Description>
+    <Analysis>12</Analysis>
+  </Header>
+
+  <MPMHeader>
+    <MPMMethod>2</MPMMethod>
+    <GIMP type="uGIMP"/>
+    <ArchiveTime units="ms">0.4</ArchiveTime>
+    <TimeStep units="ms">1e+15</TimeStep>
+    <MaxTime units="ms">16</MaxTime>
+    <ArchiveRoot>Results3D/MPM.</ArchiveRoot>
+    <MPMArchiveOrder>mYYYYNNNNNNNYNNNNN</MPMArchiveOrder>
+    <CrackArchiveOrder>mYNNN</CrackArchiveOrder>
+    <Damping>0</Damping>
+  </MPMHeader>
+
+  <Mesh output="file">
+    <Grid xmin="-2" xmax="52" ymin="-2" ymax="10" zmin="-2" zmax="12">
+      <Horiz nx="27" rx="1"/>
+      <Vert ny="6" ry="1"/>
+      <Depth nz="7" rz="1"/>
+    </Grid>
+  </Mesh>
+
+  <MaterialPoints>
+    <Body mat="1" vx="0" vy="0" vz="8">
+      <Box xmin="0" xmax="50" ymin="0" ymax="8" zmin="0" zmax="6"/>
+    </Body>
+  </MaterialPoints>
+
+  <Material Type="1" Name="Low Stiffness">
+    <rho>1</rho>
+    <E>100</E>
+    <nu>0.33</nu>
+    <alpha>60</alpha>
+  </Material>
+
+  <GridBCs>
+    <BCBox xmin="-2.2" xmax="0.2" ymin="-2" ymax="10" zmin="-2" zmax="12">
+      <DisBC dir="1" style="1" vel="0"/>
+      <DisBC dir="3" style="1" vel="0"/>
+    </BCBox>
+  </GridBCs>
+
+  <ParticleBCs>
+    <BCBox xmin="49" xmax="50" ymin="0" ymax="8" zmin="0" zmax="6">
+      <net/>
+      <LoadBC dir="3" style="2" load="0.1728"/>
+      <LoadBC dir="3" style="2" load="-0.1728" time="8"/>
+    </BCBox>
+  </ParticleBCs>
+
+</JANFEAInput>

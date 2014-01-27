@@ -1,0 +1,2 @@
+/usr/bin/ar cr libEcosystem.a  CMakeFiles/Ecosystem.dir/glew.c.o CMakeFiles/Ecosystem.dir/glsw.c.o CMakeFiles/Ecosystem.dir/pez.win.c.o
+/usr/bin/ranlib libEcosystem.a
