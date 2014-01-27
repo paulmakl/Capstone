@@ -1,1 +1,0 @@
-/usr/bin/c++    -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/Fluid3D.dir/Utility.cpp.o CMakeFiles/Fluid3D.dir/Fluid3d.cpp.o CMakeFiles/Fluid3D.dir/Trackball.cpp.o  -o Fluid3D  libEcosystem.a -lopengl32 
