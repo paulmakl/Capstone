@@ -10,42 +10,33 @@
 #include <windows.h>
 #endif
 
-struct Particle
-{
-public:
-	int id; // Shoddy code; -1 if non-existant or placeholder.
-	float color[4];
-};
-class GL01Hello
-{
-public:
-	static Particle* grid[][240][240];
+#define xSize 64
+#define ySize 64
 
-	void setGrid(Particle* newGrid[240][240][240])
+	class Node
+	{
+	public:
+		int id; // Shoddy code; -1 if non-existant or placeholder.
+		float color[4];
+	};
+
+	class Particle
+	{
+	public:
+		float position[2];
+		float velocity[2];
+	};
+
+	Node grid[xSize][ySize];
+
+	void setGrid(Node* newGrid[240][240])
 	{
 		int x, y, z;
-		for(x = 0; x < 240; x++)
+		for(x = 0; x < xSize; x++)
 		{
-			for(y = 0; y < 240; y++)
+			for(y = 0; y < ySize; y++)
 			{
-				for(z = 0; z < 240; z++)
-				{
-					grid[x][y][z] = newGrid[x][y][z];
-				}
-			}
-		}
-	}
-
-	/* Primitive gravity method that will place the particles lower in the grid if the spot is free and exists. */
-	void applyGravity(Particle* grid[240][240][240], int x, int y, int z)
-	{
-		if(y != 0 && grid[x][y][z] == NULL)
-		{
-			if(grid[x][y-1][z] == NULL)
-			{
-				// Move particle down 1.
-				grid[x][y-1][z] = grid[x][y][z];
-				grid[x][y][z] = NULL;
+				grid[x][y] = *newGrid[x][y];
 			}
 		}
 	}
@@ -62,31 +53,31 @@ public:
 		//glFrustrum(-1.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f);
 		//glEnable(GL_DEPTH_TEST);
 		// Draw a Red 1x1 Square centered at origin
-		glBegin(GL_QUADS); // Each set of 4 vertices form a quad
-		glColor3f(1.0f, 1.0f, 0.0f);
-		glVertex3f(-2.0f, -2.0f, -2.2f);
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glVertex3f( 2.0f, -2.0f, -2.2f);
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glVertex3f( 2.0f,  2.0f, -2.2f);
-		glColor3f(0.0f, 0.0f, 0.0f);
-		glVertex3f(-2.0f,  2.0f, -2.2f);
-		glEnd();
+//		glBegin(GL_QUADS); // Each set of 4 vertices form a quad
+//		glColor3f(1.0f, 1.0f, 0.0f);
+//		glVertex3f(-2.0f, -2.0f, -2.2f);
+//		glColor3f(0.0f, 1.0f, 0.0f);
+//		glVertex3f( 2.0f, -2.0f, -2.2f);
+//		glColor3f(0.0f, 0.0f, 1.0f);
+//		glVertex3f( 2.0f,  2.0f, -2.2f);
+//		glColor3f(0.0f, 0.0f, 0.0f);
+//		glVertex3f(-2.0f,  2.0f, -2.2f);
+//		glEnd();
 
-		glBegin(GL_POINTS); // TODO: Hard coded for 1,728,000 particles (1.728 million).
-		for(float x = -1.5f; x <= 1.5f; x+= 0.0125f)
+		glBegin(GL_POINTS);
+
+		float xPoint, yPoint;
+		for(float x = 0; x < xSize; x++)
 		{
-			for(float y = -1.5f; y <= 1.5f; y+= 0.0125f)
+			for(float y = 0; y < ySize; y++)
 			{
-				for(float z = -1.5f; z <= 1.5f; z+= 0.0125f)
-				{
-					float r, g, b;
-					r = 0.7f + rand()%30/100.0f;
-					g = 0.7f + rand()%30/100.0f;
-					b = 0.7f + rand()%30/100.0f;
-					glColor3f(r, g, b);
-					glVertex3f(x, y, z);
-				}
+				float r, g, b;
+				r = 1.0f;
+				g = 1.0f;
+				b = rand()/100.0f;
+				//Node cur = grid[x][y];
+				glColor3f(r, g, b);
+				glVertex3f(x, y, 0);
 			}
 		}
 		glEnd();
@@ -94,43 +85,51 @@ public:
 		glFlush();  // Render now
 		glutSwapBuffers();
 	}
+
+	/*
+	 * Call to redraw the frame when idle.
+	 */
 	static void idle()
 	{
 		glutPostRedisplay();
 	}
-};
 
-/* Main function: GLUT runs as a console application starting at main()  */
-int main(int argc, char** argv)
-{
-	glutInit(&argc, argv);                 // Initialize GLUT
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowSize(900, 900);   // Set the window's initial width & height
-	glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
-	glutCreateWindow("Snow Tiem"); // Create a window with the given title
-
-	glutDisplayFunc(GL01Hello::display); // Register display callback handler for window re-paint
-	glutIdleFunc(GL01Hello::idle); // Method called when we are idle.
-
-	// Provide a Perspective view of our scene.
-	gluPerspective(90.0f, 1.0f, 1.0f, -10.0f);
-	gluLookAt (0.0f, 2.0f, 5.0f, 0.0f, 0.0f, -2.0f, 0.0f, 1.0f, 0.0f);
-
-
-	/*int x, y, z;
-	for(x = 0; x < 240; x++)
+	/*
+	 * Main function: GLUT runs as a console application starting at main()
+	 */
+	int main(int argc, char** argv)
 	{
-		for(y = 0; y < 240; y++)
+		glutInit(&argc, argv);                 // Initialize GLUT
+		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+		glutInitWindowSize(900, 900);   // Set the window's initial width & height
+		glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
+		glutCreateWindow("Snow Tiem"); // Create a window with the given title
+
+		glutDisplayFunc(display); // Register display callback handler for window re-paint
+		glutIdleFunc(idle); // Method called when we are idle.
+
+		// Provide a Perspective view of our scene.
+		gluPerspective(90.0f, 1.0f, 1.0f, -10.0f);
+		gluLookAt (xSize/2, ySize/2, 35.0f, xSize/2, ySize/2, -2.0f, 0.0f, 1.0f, 0.0f);
+
+
+		int x, y;
+		float r, g, b;
+		for(x = 0; x < xSize; x++)
 		{
-			for(z = 0; z < 240; z++)
+			for(y = 0; y < ySize; y+= 2)
 			{
-				Particle a;
-				//GL10Hello::grid[x][y][z] = &a;
+				Node a;
+				r = 0.7f + rand()%30/100.0f;
+				g = 0.7f + rand()%30/100.0f;
+				b = 0.7f + rand()%30/100.0f;
+				float col[] = {r, g, b, 1.0f};
+
+				//col = a.color;
+				grid[x][y] = a;
 			}
 		}
-	}*/
 
-	glutMainLoop();           // Enter the infinitely event-processing loop
-	return 0;
-}
-
+		glutMainLoop();           // Enter the infinitely event-processing loop
+		return 0;
+	}
