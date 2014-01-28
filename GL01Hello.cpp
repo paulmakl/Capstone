@@ -6,7 +6,7 @@
 #include <GLUT/glut.h>
 #else
 #include <GL/glut.h>  // GLUT, includes glu.h and gl.h
-#include <CL/opencl.h>
+//#include <CL/opencl.h>
 #include <windows.h>
 #endif
 
@@ -18,6 +18,17 @@
 	public:
 		int id; // Shoddy code; -1 if non-existant or placeholder.
 		float color[4];
+		void setRGB(float r, float g, float b)
+		{
+			color[0] = r;
+			color[1] = g;
+			color[2] = b;
+			color[3] = 1.0f;
+		}
+		float getColor()
+		{
+			return color[0];
+		}
 	};
 
 	class Particle
@@ -31,7 +42,7 @@
 
 	void setGrid(Node* newGrid[240][240])
 	{
-		int x, y, z;
+		int x, y;
 		for(x = 0; x < xSize; x++)
 		{
 			for(y = 0; y < ySize; y++)
@@ -67,15 +78,16 @@
 		glBegin(GL_POINTS);
 
 		float xPoint, yPoint;
-		for(float x = 0; x < xSize; x++)
+		for(int x = 0; x < xSize; x++)
 		{
-			for(float y = 0; y < ySize; y++)
+			for(int y = 0; y < ySize; y++)
 			{
 				float r, g, b;
-				r = 1.0f;
-				g = 1.0f;
-				b = rand()/100.0f;
-				//Node cur = grid[x][y];
+				r = 0.0f;
+				g = 0.0f;
+				b = 0.0f;
+				Node cur = grid[x][y];
+				r = cur.getColor();
 				glColor3f(r, g, b);
 				glVertex3f(x, y, 0);
 			}
@@ -123,9 +135,8 @@
 				r = 0.7f + rand()%30/100.0f;
 				g = 0.7f + rand()%30/100.0f;
 				b = 0.7f + rand()%30/100.0f;
-				float col[] = {r, g, b, 1.0f};
-
-				//col = a.color;
+				float col[4] = {r, g, b, 1.0f};
+				a.setRGB(r, g, b);
 				grid[x][y] = a;
 			}
 		}
