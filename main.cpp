@@ -7,7 +7,7 @@
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
-#include <GL/glut.h>  // GLUT, includes glu.h and gl.h
+#include <GL/freeglut.h>  // GLUT, includes glu.h and gl.h
 #include <windows.h>
 #endif
 
@@ -17,72 +17,82 @@
 #define ySize 64
 #define numParticles 2000
 
+struct Vec2
+{
+	float x, y;
+};
+
+struct Vec3
+{
+	float x, y, z;
+};
+
+struct Vec4
+{
+	float r, g, b, a;
+};
+
 class Node
 {
 public:
-	float color[4];
+	Vec4 color;
+	Vec2 force;
 
-	void setRGB(float r, float g, float b)
+	void setForce(float x, float y)
 	{
-		color[0] = r;
-		color[1] = g;
-		color[2] = b;
-		color[3] = 1.0f;
+		force.x = x;
+		force.y = y;
 	}
 
-	float getR()
+	Vec2 getForce(float x, float y)
 	{
-		return color[0];
+		return force;
 	}
-	float getG()
+
+	void setRGBA(float r, float g, float b, float a)
 	{
-		return color[1];
+		color.r = r;
+		color.g = g;
+		color.b = b;
+		color.a = 1.0f;
 	}
-	float getB()
+
+	Vec4 getRGBA()
 	{
-		return color[2];
+		return color;
 	}
 };
 
 class Particle
 {
 public:
-	float position[2];
-	float velocity[2];
+	Vec2 position;
+	Vec2 velocity;
 
 	void setPosition(float x, float y)
 	{
-		position[0] = x;
-		position[1] = y;
+		position.x = x;
+		position.y = y;
 	}
 	void setVelocity(float x, float y)
 	{
-		velocity[0] = x;
-		velocity[1] = y;
+		velocity.x = x;
+		velocity.y = y;
 	}
-	float getVelocityX()
+	Vec2 getVelocity()
 	{
-		return velocity[0];
+		return velocity;
 	}
-	float getVelocityY()
+	Vec2 getPosition()
 	{
-		return velocity[1];
-	}
-	float getPositionX()
-	{
-		return position[0];
-	}
-	float getPositionY()
-	{
-		return position[1];
+		return position;
 	}
 };
 
 Node grid[xSize][ySize];
-Particle particles[2000];
-float asdf = 2000;
+Particle particles[numParticles];
 
-void setGrid(Node* newGrid[240][240])
+void setGrid(Node* newGrid[xSize][ySize])
 {
 	int x, y;
 	for(x = 0; x < xSize; x++)
@@ -103,19 +113,15 @@ static void display()
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
 
 	glBegin(GL_POINTS);
+	Vec4 color;
 	for(int x = 0; x < xSize; x++)
 	{
 		for(int y = 0; y < ySize; y++)
 		{
-			float r, g, b;
-			r = 0.0f;
-			g = 0.0f;
-			b = 0.0f;
+
 			Node cur = grid[x][y];
-			r = cur.getR();
-			g = cur.getG();
-			b = cur.getB();
-			glColor3f(r, g, b);
+			color = cur.getRGBA();
+			glColor3f(color.r, color.g, color.b);
 			glVertex3f(x, y, 0);
 		}
 	}
@@ -123,28 +129,31 @@ static void display()
 
 	glBegin(GL_POINTS);
 
-	float xPoint, yPoint, xVelo, yVelo;
-	for(int i = 0; i < asdf; i++)
+	Vec2 position, velocity;
+	for(int i = 0; i < numParticles; i++)
 	{
 		float r, g, b;
 		r = 1.0f;
 		g = 1.0f;
 		b = 1.0f;
 		Particle* cur = &particles[i];
-		xPoint = cur -> getPositionX();
-		yPoint = cur -> getPositionY();
-		xVelo = cur -> getVelocityX();
-		yVelo = cur -> getVelocityY();
-		if(xPoint + xVelo <= 0 || xPoint + xVelo >= xSize)
-			xVelo = -xVelo;
-		if(yPoint + yVelo <= 0 || yPoint  + yVelo>= ySize)
-			yVelo = -yVelo;
+		position = cur -> getPosition();
+		velocity = cur -> getVelocity();
+		if(position.x + velocity.x <= 0 || position.x + velocity.x >= xSize)
+			velocity.x = -velocity.x*2;
+		if(position.y + velocity.y <= 0 || position.y  + velocity.y >= ySize)
+			velocity.y = -velocity.y*2;
 
-		cur -> setPosition(xPoint + xVelo, yPoint + yVelo);
+		cur -> setPosition(position.x + velocity.x, position.y + velocity.y);
+
 		glColor3f(r, g, b);
-		glVertex3f(xPoint, yPoint, 0);
+		glVertex3f(position.x, position.y, 0);
 	}
 	glEnd();
+
+
+	glVertex3f(32.0f, 32.0f, 0);
+	//glutSolidTeapot(2.0);
 
 	glFlush();  // Render now
 	glutSwapBuffers();
@@ -204,8 +213,8 @@ int main(int argc, char** argv)
 			r = 0.2f + rand()%30/100.0f;
 			g = 0.2f + rand()%30/100.0f;
 			b = 0.2f + rand()%30/100.0f;
-			float col[4] = {r, g, b, 1.0f};
-			a.setRGB(r, g, b);
+			a.setRGBA(r, g, b, 1.0f);
+			a.setForce(0.0f, -0.001f);
 			grid[x][y] = a;
 		}
 	}
