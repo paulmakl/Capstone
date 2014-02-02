@@ -179,10 +179,6 @@ static void display()
 	displayGrid();
 	displayParticles();
 
-
-	glVertex3f(32.0f, 32.0f, 0);
-	//glutSolidTeapot(2.0);
-
 	glFlush();  // Render now
 	glutSwapBuffers();
 	glutTimerFunc(33, timer, 0);
@@ -248,8 +244,10 @@ int main(int argc, char** argv)
 	glutIdleFunc(idle); // Method called when we are idle.
 
 	// Provide a Perspective view of our scene.
-	gluPerspective(90.0f, 1.0f, 1.0f, -10.0f);
-	gluLookAt(xSize/2, ySize/2, 35.0f, xSize/2, ySize/2, -200.0f, 0.0f, 1.0f, 0.0f);
+	//gluPerspective(90.0f, 1.0f, 1.0f, -10.0f);
+	//gluLookAt(xSize/2, ySize/2, 35.0f, xSize/2, ySize/2, -200.0f, 0.0f, 1.0f, 0.0f);
+
+	glOrtho(0.0f , xSize, 0.0f, ySize, 30.0, -10.0);
 
 	generateNodes();
 
