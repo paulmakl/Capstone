@@ -9,33 +9,23 @@
 #include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut_ext.h"
 #include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut_std.h"
 #include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut.h"
+#define pixels 720
 #else
 #include <GL/freeglut.h>  // GLUT, includes glu.h and gl.h
 #include <windows.h>
+#define pixels 900
 #endif
 
 #include <time.h>
 #include <string>
 #include <cmath>
+#include "vectors.h"
 
 #define xSize 64
-#define ySize 64
-#define numParticles 10
+#define ySize 64 // For now, keep xSize and ySize the same!
+#define numParticles 100000
 
-struct Vec2
-{
-	float x, y;
-};
 
-struct Vec3
-{
-	float x, y, z;
-};
-
-struct Vec4
-{
-	float r, g, b, a;
-};
 
 class Node
 {
@@ -121,9 +111,17 @@ void displayGrid()
 	glEnd();
 }
 
+Vec2 interpolate(Vec2 a, Vec2 b, float offset)
+{
+	Vec2 ret;
+	ret.x = offset*a.x + (1-offset)*b.x;
+	ret.y = offset*a.y + (1-offset)*b.y;
+	return ret;
+}
+
 void displayParticles()
 {
-	glPointSize(3.0);
+	glPointSize(1.0);
 	glBegin(GL_POINTS);
 
 	Vec2 position, velocity;
@@ -149,19 +147,9 @@ void displayParticles()
 		float xOffset = highX - position.x;
 		float yOffset = highY - position.y;
 
-		Vec2 r1;
-		r1.x = xOffset*downLeftForce.x + (1-xOffset)*downRightForce.x;
-		r1.y = xOffset*downLeftForce.y + (1-xOffset)*downRightForce.y;
-
-		Vec2 r2;
-		r2.x = xOffset*upLeftForce.x + (1-xOffset)*upRightForce.x;
-		r2.y = xOffset*upLeftForce.y + (1-xOffset)*upRightForce.y;
-
-		Vec2 force;
-		force.x = yOffset*r1.x + (1-yOffset)*r2.x;
-		force.y = yOffset*r1.y + (1-yOffset)*r2.y;
-
-		velocity = force;
+		Vec2 r1 = interpolate(downLeftForce, downRightForce, xOffset);
+		Vec2 r2 = interpolate(upLeftForce, upRightForce, xOffset);
+		velocity = interpolate(r1, r2, yOffset);
 
 		if(position.x + velocity.x <= 0 || position.x + velocity.x >= xSize)
 			velocity.x = -velocity.x;
@@ -189,7 +177,7 @@ static void display()
 
 	glFlush();  // Render now
 	glutSwapBuffers();
-	glutTimerFunc(33, timer, 0);
+	glutTimerFunc(50, timer, 0);
 }
 
 /*
@@ -207,8 +195,8 @@ static void generateParticles()
 	{
 
 		Particle a;
-		xPos = (float)(rand()%6400) / 100.0f;
-		yPos = (float)(rand()%6400) / 100.0f;
+		xPos = (float)(rand()%3200) / 100.0f + 16;
+		yPos = (float)(rand()%3200) / 100.0f + 16;
 		a.setPosition(xPos, yPos);
 
 		xVelo = (rand()%10)/1000.0f - 0.0055f;
@@ -224,14 +212,14 @@ static void generateNodes()
 	float r, g, b;
 	for(x = 0; x < xSize; x++)
 	{
-		for(y = 0; y < ySize; y+= 2)
+		for(y = 0; y < ySize; y++)
 		{
 			Node a;
 			r = 0.2f + rand()%30/100.0f;
 			g = 0.2f + rand()%30/100.0f;
 			b = 0.2f + rand()%30/100.0f;
 			a.setRGBA(r, g, b, 1.0f);
-			a.setForce(rand()%30/1000.0f, rand()%30/1000.0f);
+			a.setForce(rand()%100/1000.0f - 0.055f, rand()%100/1000.0f - 0.055f);
 			grid[x][y] = a;
 		}
 	}
@@ -244,7 +232,7 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv); // Initialize GLUT
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowSize(1280, 720); // Set the window's initial width & height
+	glutInitWindowSize(pixels, pixels); // Set the window's initial width & height
 	glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
 	glutCreateWindow("Snow Tiem"); // Create a window with the given title
 
