@@ -5,7 +5,10 @@
  */
 
 #ifdef __APPLE__
-//#include <GLUT/glut.h>
+#include "/usr/local/Cellar/freeglut/2.8.1/include/GL/glut.h"
+#include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut_ext.h"
+#include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut_std.h"
+#include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut.h"
 #else
 #include <GL/freeglut.h>  // GLUT, includes glu.h and gl.h
 #include <windows.h>
@@ -241,7 +244,7 @@ int main(int argc, char** argv)
 	glutCreateWindow("Snow Tiem"); // Create a window with the given title
 
 	glutDisplayFunc(display); // Register display callback handler for window re-paint
-	glutIdleFunc(idle); // Method called when we are idle.
+	//glutIdleFunc(idle); // Method called when we are idle.
 
 	// Provide a Perspective view of our scene.
 	//gluPerspective(90.0f, 1.0f, 1.0f, -10.0f);
