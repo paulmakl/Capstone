@@ -1,11 +1,10 @@
 /*
  * main.cpp: Test OpenGL C/C++ Setup
  * Authors: Etan Bard, Paul Makl
- * Version: 1/27/2014
+ * Version: 2/2/2014
  */
 
 #ifdef __APPLE__
-//#include <GLUT/glut.h>
 #else
 #include <GL/freeglut.h>  // GLUT, includes glu.h and gl.h
 #include <windows.h>
@@ -17,7 +16,7 @@
 
 #define xSize 64
 #define ySize 64
-#define numParticles 10000
+#define numParticles 10
 
 struct Vec2
 {
@@ -120,7 +119,7 @@ void displayGrid()
 
 void displayParticles()
 {
-	glPointSize(1.0);
+	glPointSize(3.0);
 	glBegin(GL_POINTS);
 
 	Vec2 position, velocity;
@@ -143,15 +142,20 @@ void displayParticles()
 		Vec2 upLeftForce = grid[lowX][highY].force;
 		Vec2 upRightForce = grid[highX][highY].force;
 
-		//float xOffset = position.x - lowX;
-		//float yOffset = position.y - lowY;
+		float xOffset = highX - position.x;
+		float yOffset = highY - position.y;
+
+		Vec2 r1;
+		r1.x = xOffset*downLeftForce.x + (1-xOffset)*downRightForce.x;
+		r1.y = xOffset*downLeftForce.y + (1-xOffset)*downRightForce.y;
+
+		Vec2 r2;
+		r2.x = xOffset*upLeftForce.x + (1-xOffset)*upRightForce.x;
+		r2.y = xOffset*upLeftForce.y + (1-xOffset)*upRightForce.y;
 
 		Vec2 force;
-		// TODO: replace
-		force.x = downLeftForce.x + downRightForce.x + upLeftForce.x + upRightForce.x;
-		force.y = downLeftForce.y + downRightForce.y + upLeftForce.y + upRightForce.y;
-		force.x /= 4;
-		force.y /= 4;
+		force.x = yOffset*r1.x + (1-yOffset)*r2.x;
+		force.y = yOffset*r1.y + (1-yOffset)*r2.y;
 
 		velocity = force;
 
@@ -223,7 +227,7 @@ static void generateNodes()
 			g = 0.2f + rand()%30/100.0f;
 			b = 0.2f + rand()%30/100.0f;
 			a.setRGBA(r, g, b, 1.0f);
-			a.setForce(rand()%30/10000.0f, rand()%30/10000.0f);
+			a.setForce(rand()%30/1000.0f, rand()%30/1000.0f);
 			grid[x][y] = a;
 		}
 	}
@@ -236,12 +240,12 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv); // Initialize GLUT
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowSize(1600, 900); // Set the window's initial width & height
+	glutInitWindowSize(1280, 720); // Set the window's initial width & height
 	glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
 	glutCreateWindow("Snow Tiem"); // Create a window with the given title
 
 	glutDisplayFunc(display); // Register display callback handler for window re-paint
-	glutIdleFunc(idle); // Method called when we are idle.
+	//glutIdleFunc(idle); // Method called when we are idle.
 
 	// Provide a Perspective view of our scene.
 	//gluPerspective(90.0f, 1.0f, 1.0f, -10.0f);
