@@ -19,3 +19,6 @@
 *.exe
 *.out
 *.app
+
+#Paul's xcode Project
+Capstone/
