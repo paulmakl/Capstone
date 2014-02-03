@@ -20,69 +20,12 @@
 #include <string>
 #include <cmath>
 #include "vectors.h"
+#include "Node.cpp"
+#include "Particle.cpp"
 
 #define xSize 64
 #define ySize 64 // For now, keep xSize and ySize the same!
 #define numParticles 100000
-
-
-
-class Node
-{
-public:
-	Vec4 color;
-	Vec2 force;
-
-	void setForce(float x, float y)
-	{
-		force.x = x;
-		force.y = y;
-	}
-
-	Vec2 getForce(float x, float y)
-	{
-		return force;
-	}
-
-	void setRGBA(float r, float g, float b, float a)
-	{
-		color.r = r;
-		color.g = g;
-		color.b = b;
-		color.a = 1.0f;
-	}
-
-	Vec4 getRGBA()
-	{
-		return color;
-	}
-};
-
-class Particle
-{
-public:
-	Vec2 position;
-	Vec2 velocity;
-
-	void setPosition(float x, float y)
-	{
-		position.x = x;
-		position.y = y;
-	}
-	void setVelocity(float x, float y)
-	{
-		velocity.x = x;
-		velocity.y = y;
-	}
-	Vec2 getVelocity()
-	{
-		return velocity;
-	}
-	Vec2 getPosition()
-	{
-		return position;
-	}
-};
 
 Node grid[xSize][ySize];
 Particle particles[numParticles];
