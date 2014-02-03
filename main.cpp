@@ -157,7 +157,7 @@ void displayParticles()
 			velocity.y = -velocity.y;
 
 		cur -> setPosition(position.x + velocity.x, position.y + velocity.y);
-		cur -> setVelocity(velocity.x, velocity.y);
+		cur -> setVelocity((velocity.x + position.x)/2.0f, (velocity.y + position.y)/2.0f);
 
 		glVertex3f(position.x, position.y, 0);
 	}
@@ -195,8 +195,8 @@ static void generateParticles()
 	{
 
 		Particle a;
-		xPos = (float)(rand()%3200) / 100.0f + 16;
-		yPos = (float)(rand()%3200) / 100.0f + 16;
+		xPos = (float)(rand()%(xSize*100)) / 100.0f;
+		yPos = (float)(rand()%(ySize*100)) / 100.0f;
 		a.setPosition(xPos, yPos);
 
 		xVelo = (rand()%10)/1000.0f - 0.0055f;
@@ -244,6 +244,8 @@ int main(int argc, char** argv)
 	//gluLookAt(xSize/2, ySize/2, 35.0f, xSize/2, ySize/2, -200.0f, 0.0f, 1.0f, 0.0f);
 
 	glOrtho(0.0f , xSize, 0.0f, ySize, 30.0, -10.0);
+
+	srand(time(NULL)); // Turn this off if you want a random value uniform across all simulations.
 
 	generateNodes();
 
