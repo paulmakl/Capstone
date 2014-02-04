@@ -5,30 +5,22 @@
  */
 
 #ifdef __APPLE__
-#include "/usr/local/Cellar/freeglut/2.8.1/include/GL/glut.h"
-#include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut_ext.h"
-#include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut_std.h"
-#include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut.h"
-#define pixels 720
+    #include "/usr/local/Cellar/freeglut/2.8.1/include/GL/glut.h"
+    #include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut_ext.h"
+    #include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut_std.h"
+    #include "/usr/local/Cellar/freeglut/2.8.1/include/GL/freeglut.h"
 #else
-#include <GL/freeglut.h>  // GLUT, includes glu.h and gl.h
-#include <windows.h>
-#define pixels 900
+    #include <GL/freeglut.h>  // GLUT, includes glu.h and gl.h
+    #include <windows.h>
 #endif
 
 #include <time.h>
 #include <string>
 #include <cmath>
+#include "Constants.h"
 #include "vectors.h"
-#include "Node.cpp"
-#include "Particle.cpp"
-
-#define xSize 64
-#define ySize 64 // For now, keep xSize and ySize the same!
-#define numParticles 100000
-
-Node grid[xSize][ySize];
-Particle particles[numParticles];
+#include "Node.h"
+#include "Particle.h"
 
 void timer(int id)
 {
@@ -44,7 +36,7 @@ void displayGrid()
 	{
 		for(int y = 0; y < ySize; y++)
 		{
-
+            
 			Node cur = grid[x][y];
 			color = cur.getRGBA();
 			glColor3f(color.r, color.g, color.b);
@@ -66,9 +58,9 @@ void displayParticles()
 {
 	glPointSize(1.0);
 	glBegin(GL_POINTS);
-
+    
 	Vec2 position, velocity;
-
+    
 	glColor3f(1.0f, 1.0f, 1.0f);
 	for(int i = 0; i < numParticles; i++)
 	{
@@ -76,48 +68,48 @@ void displayParticles()
 		cur = &particles[i];
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
-
+        
 		int lowX = floor(position.x);
 		int highX = ceil(position.x);
 		int lowY = floor(position.y);
 		int highY = ceil(position.y);
-
+        
 		Vec2 downLeftForce = grid[lowX][lowY].force;
 		Vec2 downRightForce = grid[highX][lowY].force;
 		Vec2 upLeftForce = grid[lowX][highY].force;
 		Vec2 upRightForce = grid[highX][highY].force;
-
+        
 		float xOffset = highX - position.x;
 		float yOffset = highY - position.y;
-
+        
 		Vec2 r1 = interpolate(downLeftForce, downRightForce, xOffset);
 		Vec2 r2 = interpolate(upLeftForce, upRightForce, xOffset);
 		velocity = interpolate(r1, r2, yOffset);
-
+        
 		if(position.x + velocity.x <= 0 || position.x + velocity.x >= xSize)
 			velocity.x = -velocity.x;
 		if(position.y + velocity.y <= 0 || position.y  + velocity.y >= ySize)
 			velocity.y = -velocity.y;
-
+        
 		cur -> setPosition(position.x + velocity.x, position.y + velocity.y);
 		cur -> setVelocity((velocity.x + position.x)/2.0f, (velocity.y + position.y)/2.0f);
-
+        
 		glVertex3f(position.x, position.y, 0);
 	}
 	glEnd();
 }
 
 /* Handler for window-repaint event. Call back when the window first appears and
-    whenever the window needs to be re-painted. */
+ whenever the window needs to be re-painted. */
 static void display()
 {
 	//glClearDepth(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
-
+    
 	displayGrid();
 	displayParticles();
-
+    
 	glFlush();  // Render now
 	glutSwapBuffers();
 	glutTimerFunc(50, timer, 0);
@@ -136,12 +128,12 @@ static void generateParticles()
 	float xVelo, yVelo, xPos, yPos;
 	for(int i = 0; i < numParticles; i++)
 	{
-
+        
 		Particle a;
 		xPos = (float)(rand()%(xSize*100)) / 100.0f;
 		yPos = (float)(rand()%(ySize*100)) / 100.0f;
 		a.setPosition(xPos, yPos);
-
+        
 		xVelo = (rand()%10)/1000.0f - 0.0055f;
 		yVelo = (rand()%10)/1000.0f - 0.0055f;
 		a.setVelocity(xVelo, yVelo);
@@ -167,6 +159,9 @@ static void generateNodes()
 		}
 	}
 }
+
+
+
 
 /*
  * Main function: GLUT runs as a console application starting at main()
