@@ -2,31 +2,26 @@
  * Particle.cpp
  *
  *  Created on: Feb 3, 2014
- *      Author: Etan
+ *      Author: Etan and Paul
  */
+#include "Particle.h"
 
-class Particle
+void Particle::setPosition(float x, float y)
 {
-public:
-	Vec2 position;
-	Vec2 velocity;
+    position.x = x;
+    position.y = y;
+}
+void Particle::setVelocity(float x, float y)
+{
+    velocity.x = x;
+    velocity.y = y;
+}
+Vec2 Particle::getVelocity()
+{
+    return velocity;
+}
+Vec2 Particle::getPosition()
+{
+    return position;
+}
 
-	void setPosition(float x, float y)
-	{
-		position.x = x;
-		position.y = y;
-	}
-	void setVelocity(float x, float y)
-	{
-		velocity.x = x;
-		velocity.y = y;
-	}
-	Vec2 getVelocity()
-	{
-		return velocity;
-	}
-	Vec2 getPosition()
-	{
-		return position;
-	}
-};

@@ -4,10 +4,10 @@
  *  Created on: Feb 2, 2014
  *      Author: Etan
  */
-
+#pragma once
 #ifndef VECTORS_H_
 #define VECTORS_H_
-#endif /* VECTORS_H_ */
+
 
 struct Vec2
 {
@@ -23,3 +23,4 @@ struct Vec4
 {
 	float r, g, b, a;
 };
+#endif /* VECTORS_H_ */
