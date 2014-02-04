@@ -16,6 +16,13 @@
 
 Node grid[xSize][ySize];
 Particle particles[numParticles];
+float degree = 0;
 
+const GLfloat quadVertices[] = {
+		-1.0f, 1.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
+		1.0f,-1.0f, 0.0f,
+		-1.0f,-1.0f, 0.0f
+};
 
 #endif /* CONSTANTS_H_ */
