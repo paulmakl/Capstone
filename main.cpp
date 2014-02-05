@@ -36,7 +36,6 @@ void displayGrid()
 	{
 		for(int y = 0; y < ySize; y++)
 		{
-
 			Node cur = grid[x][y];
 			color = cur.getRGBA();
 			glColor3f(color.r, color.g, color.b);
@@ -103,20 +102,16 @@ void displayParticles()
  whenever the window needs to be re-painted. */
 static void display()
 {
-
 	//glClearDepth(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
-
-
-
 
 	glPushMatrix();
 	displayGrid();
 	displayParticles();
 	glTranslatef(xSize/2.0f, ySize/2.0f, 0.0f);
-	glRotatef(degree, 0.0f, 0.0f, 1.0f);
-	degree+= 1.5f;
+	//glRotatef(degree, 0.0f, 0.0f, 1.0f);
+	//degree+= 1.5f;
 	glColor3f(0.5f, 0.5f, 0.5f);
 	glutWireCube(10.0f);
 	glPopMatrix();
@@ -157,8 +152,11 @@ static void generateNodes()
 {
 	int x, y;
 	float r, g, b;
+	float forceX, forceY;
+	forceX = 0.064;
 	for(x = 0; x < xSize; x++)
 	{
+		forceY = 0.0f;
 		for(y = 0; y < ySize; y++)
 		{
 			Node a;
@@ -166,9 +164,11 @@ static void generateNodes()
 			g = 0.2f + rand()%30/100.0f;
 			b = 0.2f + rand()%30/100.0f;
 			a.setRGBA(r, g, b, 1.0f);
-			a.setForce(rand()%100/1000.0f - 0.055f, rand()%100/1000.0f - 0.055f);
+			a.setForce(forceX + rand()%100/1000.0f - 0.055f, forceY + rand()%100/1000.0f - 0.055f); //, rand()%100/1000.0f - 0.055f);
 			grid[x][y] = a;
+			forceY += 0.002f;
 		}
+		forceX += 0.002f;
 	}
 }
 
