@@ -5,11 +5,14 @@
  *      Author: Etan
  */
 
-#ifndef SPHERE_CPP_
-#define SPHERE_CPP_
+#include "Sphere.h"
 
+void Sphere::intersect(Node a)
+{
 
+}
 
-
-
-#endif /* SPHERE_CPP_ */
+void Sphere::draw()
+{
+	GLFuncs::drawSphere(radius, location);
+}

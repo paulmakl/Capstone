@@ -17,6 +17,10 @@
 #include "Node.h"
 #include <math.h>
 #include <time.h>
+#include "Shape.h"
+#include "Cube.h"
+#include "Sphere.h"
+#pragma once
 
 class GLFuncs{
     
@@ -46,7 +50,8 @@ public:
     
     static void generateNodes();
     
-    
+    static void drawCube(float length, Vec3 location);
+    static void drawSphere(float radius, Vec3 location);
     
 };
 

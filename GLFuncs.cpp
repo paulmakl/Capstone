@@ -12,6 +12,17 @@ void GLFuncs::init(int argc, char **argv)
 	glutDisplayFunc(GLFuncs::display); // Register display callback handler for window re-paint
 	//glutIdleFunc(idle); // Method called when we are idle.
     
+	for(int i = 0; i < numShapes; i++)
+	{
+		Cube a;
+		Vec3 location;
+		location.x = 5.0f;
+		location.y = 5.0f;
+		location.z = 0.0f;
+		a.setVariables(5, location);
+		shapes[i] = a;
+	}
+
 	// Provide a Perspective view of our scene.
 	//gluPerspective(90.0f, 1.0f, 1.0f, -10.0f);
 	//gluLookAt(xSize/2, ySize/2, 35.0f, xSize/2, ySize/2, -200.0f, 0.0f, 1.0f, 0.0f);
@@ -110,7 +121,13 @@ void GLFuncs::display()
 	//glRotatef(degree, 0.0f, 0.0f, 1.0f);
 	//degree+= 1.5f;
 	glColor3f(0.5f, 0.5f, 0.5f);
-	glutWireCube(10.0f);
+	for(int i; i < numShapes; i++)
+	{
+
+		shapes[i].draw();
+	}
+
+	//glutWireCube(10.0f);
 	glPopMatrix();
     
 	glFlush();
@@ -166,4 +183,13 @@ void GLFuncs::generateNodes()
 		}
 		forceX += 0.002f;
 	}
+
+
 }
+
+void drawCube(float length, Vec3 location)
+	{
+		glutWireCube(10.0f);
+	}
+
+	//void drawSphere(float radius, Vec3 location);

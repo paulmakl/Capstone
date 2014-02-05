@@ -7,12 +7,21 @@
 
 #ifndef SHAPE_H_
 #define SHAPE_H_
+
+#include "Node.h"
 #include "vectors.h"
+#include "GLFuncs.h"
+#pragma once
 
 class Shape
 {
 public:
-	Shape(ShapeType st, float size, Vec3 location, );
+	Vec3 location;
+	float size;
+
+	void intersect(Node a);
+
+	void draw();
 };
 
 #endif /* SHAPE_H_ */
