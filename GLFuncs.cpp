@@ -113,7 +113,6 @@ void GLFuncs::display()
 	glutWireCube(10.0f);
 	glPopMatrix();
     
-    
 	glFlush();
 	glutSwapBuffers();
 	glutTimerFunc(50, timer, 0);

@@ -23,11 +23,6 @@
 #include "Particle.h"
 #include "GLFuncs.h"
 
-
-
-
-
-
 /*
  * Main function: GLUT runs as a console application starting at main()
  */
@@ -38,7 +33,6 @@ int main(int argc, char** argv)
 	srand(time(NULL)); // Turn this off if you want a random value uniform across all simulations.
     
 	GLFuncs::generateNodes();
-    
 	GLFuncs::generateParticles();
     
 	glutMainLoop();           // Enter the infinitely event-processing loop
