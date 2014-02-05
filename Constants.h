@@ -1,6 +1,6 @@
 #include "Node.h"
 #include "Particle.h"
-#pragma once
+
 #ifndef CONSTANTS_H_
 #define CONSTANTS_H_
 
@@ -12,10 +12,10 @@
 
 #define xSize 64
 #define ySize 64 // For now, keep xSize and ySize the same!
-#define numParticles 100000
+#define numParticles 100
 
-Node grid[xSize][ySize];
-Particle particles[numParticles];
+static Node theGrid[xSize][ySize];
+static Particle particleList[numParticles];
 
 
 #endif /* CONSTANTS_H_ */
