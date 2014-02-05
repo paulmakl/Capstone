@@ -12,10 +12,17 @@
 
 #define xSize 64
 #define ySize 64 // For now, keep xSize and ySize the same!
-#define numParticles 100
+#define numParticles 10000
 
-static Node theGrid[xSize][ySize];
-static Particle particleList[numParticles];
+static Node grid[xSize][ySize];
+static Particle particles[numParticles];
+static float degree = 0;
 
+const GLfloat quadVertices[] = {
+		-1.0f, 1.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
+		1.0f,-1.0f, 0.0f,
+		-1.0f,-1.0f, 0.0f
+};
 
 #endif /* CONSTANTS_H_ */
