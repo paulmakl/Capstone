@@ -1,6 +1,25 @@
 
 #include "GLFuncs.h"
 
+
+void GLFuncs::displayGrid()
+{
+	glPointSize(1.0);
+	glBegin(GL_POINTS);
+	Vec4 color;
+	for(int x = 0; x < xSize; x++)
+	{
+		for(int y = 0; y < ySize; y++)
+		{
+			Node cur = grid[x][y];
+			color = cur.getRGBA();
+			glColor3f(color.r, color.g, color.b);
+			glVertex3f(x, y, 0);
+		}
+	}
+	glEnd();
+}
+
 void GLFuncs::init(int argc, char **argv)
 {
     glutInit(&argc, argv); // Initialize GLUT
@@ -35,23 +54,7 @@ void GLFuncs::timer(int id)
 	glutPostRedisplay();
 }
 
-void GLFuncs::displayGrid()
-{
-	glPointSize(1.0);
-	glBegin(GL_POINTS);
-	Vec4 color;
-	for(int x = 0; x < xSize; x++)
-	{
-		for(int y = 0; y < ySize; y++)
-		{
-			Node cur = grid[x][y];
-			color = cur.getRGBA();
-			glColor3f(color.r, color.g, color.b);
-			glVertex3f(x, y, 0);
-		}
-	}
-	glEnd();
-}
+
 
 Vec2 GLFuncs::interpolate(Vec2 a, Vec2 b, float offset)
 {
