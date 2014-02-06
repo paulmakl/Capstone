@@ -2,7 +2,6 @@
 #define CONSTANTS_H_
 
 #include "Shape.h"
-//#include "Node.h"
 #include "Particle.h"
 
 #ifdef __APPLE__
@@ -20,7 +19,7 @@ static Node grid[xSize][ySize];
 static Particle particles[numParticles];
 static float degree = 0;
 
-Shape shapes[numShapes];
+static Shape shapes[numShapes];
 
 const GLfloat quadVertices[] = {
 		-1.0f, 1.0f, 0.0f,

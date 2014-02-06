@@ -14,5 +14,5 @@ void Sphere::intersect(Node a)
 
 void Sphere::draw()
 {
-	GLFuncs::drawSphere(radius, location);
+	//GLFuncs::drawSphere(radius, location);
 }
