@@ -1,5 +1,6 @@
 #include "Switch.h"
 
+<<<<<<< HEAD
 void Switch::init(int argc, char **argv)
 {
 	phys.temp(&env);
@@ -75,3 +76,13 @@ void Switch::display()
 	// TODO: The method specified must be static, but this will require to make a whole lot of stuff static.
 	glutTimerFunc(50, Switch::timer, 0);
 }
+=======
+void Switch::init(){
+    
+}
+
+void Switch::loop(){
+    
+    
+}
+>>>>>>> 7c40d12ca73902e6aa832c090e28c900f5c17c32

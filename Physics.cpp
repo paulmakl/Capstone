@@ -1,5 +1,6 @@
 #include "Physics.h" 
 
+<<<<<<< HEAD
 /*Physics::Physics(Environment* envPointer){
 	env = envPointer;
 }*/
@@ -53,3 +54,8 @@ void Physics::updatePositions()
 		cur -> setVelocity((velocity.x + position.x)/2.0f, (velocity.y + position.y)/2.0f);
 	}
 }
+=======
+Physics::Physics(Environment* envPointer){
+    env = envPointer;
+}
+>>>>>>> 7c40d12ca73902e6aa832c090e28c900f5c17c32

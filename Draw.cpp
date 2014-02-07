@@ -1,5 +1,6 @@
 #include "Draw.h"
 
+<<<<<<< HEAD
 /*Draw::Draw(Environment* envPointer){
 	env = envPointer;
 }*/
@@ -44,3 +45,8 @@ void Draw::displayParticles()
 	}
 	glEnd();
 }
+=======
+Draw::Draw(Environment* envPointer){
+    env = envPointer;
+}
+>>>>>>> 7c40d12ca73902e6aa832c090e28c900f5c17c32
