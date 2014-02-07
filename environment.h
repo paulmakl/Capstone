@@ -4,7 +4,6 @@
 #include "Grid.h"
 #include "Particle.h"
 #include "Shape.h"
-<<<<<<< HEAD
 #include "vectors.h"
 #include <math.h>
 #include <cstdlib>
@@ -26,15 +25,3 @@ public:
 };
 
 #endif
-=======
-
-class Environment{
-public:
-    
-    Particle particles[1000];
-    Shape shapes[1];
-    
-};
-
-#endif
->>>>>>> 7c40d12ca73902e6aa832c090e28c900f5c17c32

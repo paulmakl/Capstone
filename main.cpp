@@ -14,18 +14,7 @@
 #include <windows.h>
 #endif
 
-<<<<<<< HEAD
 #include "Switch.h"
-=======
-/*#include <time.h>
-#include <string>
-#include <cmath>
-#include "Constants.h"
-#include "vectors.h"
-#include "Node.h"
-#include "Particle.h"*/
-#include "GLFuncs.h"
->>>>>>> 7c40d12ca73902e6aa832c090e28c900f5c17c32
 
 /*
  * Main function: GLUT runs as a console application starting at main()

@@ -8,7 +8,6 @@
 #ifndef VECTORS_H_
 #define VECTORS_H_
 
-
 struct Vec2
 {
 	float x, y;
