@@ -24,4 +24,3 @@ Vec2 Particle::getPosition()
 {
     return position;
 }
-

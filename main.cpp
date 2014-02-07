@@ -14,13 +14,13 @@
 #include <windows.h>
 #endif
 
-#include <time.h>
+/*#include <time.h>
 #include <string>
 #include <cmath>
 #include "Constants.h"
 #include "vectors.h"
 #include "Node.h"
-#include "Particle.h"
+#include "Particle.h"*/
 #include "GLFuncs.h"
 
 /*
