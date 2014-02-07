@@ -8,9 +8,9 @@
 #include <math.h>
 #include <cstdlib>
 
-#define xSize 64
-#define ySize 64 // For now, keep xSize and ySize the same!
-#define numParticles 100000
+#define xSize 32
+#define ySize 32 // For now, keep xSize and ySize the same!
+#define numParticles 1000
 #define numShapes 1
 
 class Environment{

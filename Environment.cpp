@@ -5,7 +5,7 @@ void Environment::generateNodes()
 	int x, y;
 	float r, g, b;
 	float forceX, forceY;
-	forceX = 0.064;
+	forceX = 0.0;//0.064;
 	for(x = 0; x < xSize; x++)
 	{
 		forceY = 0.0f;
@@ -18,9 +18,9 @@ void Environment::generateNodes()
 			a.setRGBA(r, g, b, 1.0f);
 			a.setForce(forceX + rand()%100/1000.0f - 0.055f, forceY + rand()%100/1000.0f - 0.055f); //, rand()%100/1000.0f - 0.055f);
 			grid[x][y] = a;
-			forceY += 0.002f;
+			//forceY += 0.002f;
 		}
-		forceX += 0.002f;
+		//forceX += 0.002f;
 	}
 }
 
