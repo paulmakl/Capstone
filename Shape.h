@@ -10,8 +10,7 @@
 
 #include "Node.h"
 #include "vectors.h"
-#include "GLFuncs.h"
-#pragma once
+//#include "GLFuncs.h"
 
 class Shape
 {
@@ -19,7 +18,7 @@ public:
 	Vec3 location;
 	float size;
 
-	void intersect(Node a);
+	bool intersect(Node a);
 
 	void draw();
 };

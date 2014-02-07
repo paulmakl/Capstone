@@ -29,4 +29,3 @@ Vec4 Node::getRGBA()
 {
     return color;
 }
-
