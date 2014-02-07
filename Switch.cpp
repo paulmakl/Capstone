@@ -1,5 +1,18 @@
 #include "Switch.h"
 
+#include "Physics.h"
+#include "Draw.h"
+
+#define pixels 720
+
+	Environment env;
+    Physics phys;
+    Draw draw;
+
+    void init(int argc, char **argv);
+    void timer(int id);
+    void display();
+
 void Switch::init(int argc, char **argv)
 {
 	phys.temp(&env);
@@ -31,7 +44,7 @@ void Switch::init(int argc, char **argv)
 	env.generateParticles();
 
 	// TODO: The method specified must be static, but this will require to make a whole lot of stuff static.
-	glutDisplayFunc(Switch::display); // Register display callback handler for window re-paint
+	glutDisplayFunc(display); // Register display callback handler for window re-paint
 
 	// Provide a Perspective view of our scene.
 	//gluPerspective(90.0f, 1.0f, 1.0f, -10.0f);
@@ -41,12 +54,12 @@ void Switch::init(int argc, char **argv)
 	glOrtho(0.0f , xSize, 0.0f, ySize, 30.0, -10.0);
 }
 
-void Switch::timer(int id)
+void timer(int id)
 {
 	glutPostRedisplay();
 }
 
-void Switch::display()
+void display()
 {
 	//glClearDepth(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
@@ -73,5 +86,5 @@ void Switch::display()
 	glFlush();
 	glutSwapBuffers();
 	// TODO: The method specified must be static, but this will require to make a whole lot of stuff static.
-	glutTimerFunc(50, Switch::timer, 0);
+	glutTimerFunc(50, timer, 0);
 }

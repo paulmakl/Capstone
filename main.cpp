@@ -21,8 +21,7 @@
  */
 int main(int argc, char** argv)
 {
-   	Switch runtime;
-   	runtime.init(argc, argv);
+   	Switch::init(argc, argv);
    	glutMainLoop();
 	return 0;
-}
+};

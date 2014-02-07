@@ -20,8 +20,6 @@ public:
     
     Vec2 getVelocity();
 	Vec2 getPosition();
-    
 };
-
 
 #endif
