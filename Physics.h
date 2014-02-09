@@ -10,7 +10,9 @@ public:
     //Physics(Environment* envPointer);
     void temp(Environment* envPointer);
     Vec2 interpolate(Vec2 a, Vec2 b, float offset);
-    void updatePositions();
+    void updateParticlePositions();
+    void updateShapePositions();
+    void checkEulerianCollisions();
 };
 
 #endif

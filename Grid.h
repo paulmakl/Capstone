@@ -6,8 +6,6 @@
 class Grid{
     public:
         Node grid[64][64];
-    
-    
 };
 
 

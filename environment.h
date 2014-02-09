@@ -5,23 +5,24 @@
 #include "Particle.h"
 #include "Shape.h"
 #include "vectors.h"
+#include "Cube.h"
 #include <math.h>
 #include <cstdlib>
 
-#define xSize 32
-#define ySize 32 // For now, keep xSize and ySize the same!
-#define numParticles 1000
+#define xSize 64
+#define ySize 64 // For now, keep xSize and ySize the same!
+#define numParticles 100000
 #define numShapes 1
 
 class Environment{
 public:
-	Node grid[64][64];
+	Node grid[xSize][ySize];
+	Particle particles[numParticles];
+	Cube shapes[numShapes];
+
 	void generateNodes();
-
-    Particle particles[1000];
-    void generateParticles();
-
-    Shape shapes[1];
+	void generateParticles();
+	void generateShapes();
 };
 
 #endif

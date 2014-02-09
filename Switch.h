@@ -4,16 +4,18 @@
 #include "Physics.h"
 #include "Draw.h"
 
-//#define pixels 720
+#ifdef __APPLE__
+#define pixels 720
+#else
+#define pixels 900
+#endif
 
 class Switch{
 public:
-	//Environment env;
-    //Physics phys;
-    //Draw draw;
+//	Environment env;
+//    Physics phys;
+//    Draw draw;
     
     static void init(int argc, char **argv);
-    // void timer(int id);
-    // void display();
 };
 #endif

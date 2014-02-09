@@ -3,8 +3,6 @@
 #include "Physics.h"
 #include "Draw.h"
 
-#define pixels 720
-
 	Environment env;
     Physics phys;
     Draw draw;
@@ -42,6 +40,7 @@ void Switch::init(int argc, char **argv)
 
 	env.generateNodes();
 	env.generateParticles();
+	env.generateShapes();
 
 	// TODO: The method specified must be static, but this will require to make a whole lot of stuff static.
 	glutDisplayFunc(display); // Register display callback handler for window re-paint
@@ -65,20 +64,15 @@ void display()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
 
-	phys.updatePositions();
+	phys.updateParticlePositions();
+	phys.updateShapePositions();
+	phys.checkEulerianCollisions();
 
 	glPushMatrix();
+
 	draw.displayGrid();
 	draw.displayParticles();
-	glTranslatef(xSize/2.0f, ySize/2.0f, 0.0f);
-	//glRotatef(degree, 0.0f, 0.0f, 1.0f);
-	//degree+= 1.5f;
-	glColor3f(0.5f, 0.5f, 0.5f);
-	/*for(int i; i < numShapes; i++)
-	{
-
-		shapes[i].draw();
-	}*/
+	draw.displayShapes();
 
 	//glutWireCube(10.0f);
 	glPopMatrix();

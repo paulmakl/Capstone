@@ -44,3 +44,17 @@ void Draw::displayParticles()
 	}
 	glEnd();
 }
+
+void Draw::displayShapes()
+{
+	Vec3 position;
+	float length;
+	for(int i = 0; i < numShapes; i++)
+	{
+		Cube* cur;
+		cur = &env->shapes[i];
+		position = cur -> getPosition();
+		glTranslatef(position.x, position.y, position.z);
+		glutWireCube(cur -> getLength());
+	}
+}
