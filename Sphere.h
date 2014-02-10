@@ -5,7 +5,7 @@
  *      Author: Etan
  */
 
-#ifndef SPHERE_H_
+/*#ifndef SPHERE_H_
 #define SPHERE_H_
 
 //#include "Node.h"
@@ -23,4 +23,4 @@ public:
 	void intersect(Node a);
 	void draw();
 };
-#endif /* SPHERE_H_ */
+#endif*/ /* SPHERE_H_ */

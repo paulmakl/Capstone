@@ -10,6 +10,8 @@ public:
     //Physics(Environment* envPointer);
     void temp(Environment* envPointer);
     Vec2 interpolate(Vec2 a, Vec2 b, float offset);
+    Vec2 extrapolate(Vec2 velocity, float offset);
+    void updateGridForces();
     void updateParticlePositions();
     void updateShapePositions();
     void checkEulerianCollisions();

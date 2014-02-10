@@ -12,10 +12,6 @@
 
 class Switch{
 public:
-//	Environment env;
-//    Physics phys;
-//    Draw draw;
-    
     static void init(int argc, char **argv);
 };
 #endif

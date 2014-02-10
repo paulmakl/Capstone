@@ -64,6 +64,7 @@ void display()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
 
+	//phys.updateGridForces(); // Reset the grid velocities and extrapolate particles forces to the grid.
 	phys.updateParticlePositions();
 	phys.updateShapePositions();
 	phys.checkEulerianCollisions();
@@ -74,7 +75,6 @@ void display()
 	draw.displayParticles();
 	draw.displayShapes();
 
-	//glutWireCube(10.0f);
 	glPopMatrix();
 
 	glFlush();

@@ -5,7 +5,7 @@
  *      Author: Etan
  */
 
-#include "Sphere.h"
+/*#include "Sphere.h"
 
 void Sphere::intersect(Node a)
 {
@@ -16,3 +16,4 @@ void Sphere::draw()
 {
 	//GLFuncs::drawSphere(radius, location);
 }
+*/

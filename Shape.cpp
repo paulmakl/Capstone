@@ -1,4 +1,4 @@
-#include "Shape.h"
+/*#include "Shape.h"
 
 bool Shape::intersect(Node a){
     return false;
@@ -6,4 +6,4 @@ bool Shape::intersect(Node a){
 
 void Shape::draw(){
     
-}
+}*/

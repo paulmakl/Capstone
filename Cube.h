@@ -9,19 +9,20 @@
 #define CUBE_H_
 
 //#include "Node.h"
-//#include "vectors.h"
+#include "vectors.h"
 #include "Shape.h"
 #pragma once
 
-class Cube: public Shape
+class Cube//: public Shape
 {
 public:
-	Vec3 location;
+	Vec3 position;
 	float length;
 
-	void intersect(Node a);
-	void draw();
-	void setVariables(float length2, Vec3 location2);
+	void setVariables(float length, Vec3 position);
+	void setPosition(Vec3 position);
+	Vec3 getPosition();
+	float getLength();
 };
 
 #endif /* CUBE_H_ */

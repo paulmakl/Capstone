@@ -11,7 +11,7 @@
 
 #define xSize 64
 #define ySize 64 // For now, keep xSize and ySize the same!
-#define numParticles 100000
+#define numParticles 10000
 #define numShapes 1
 
 class Environment{
