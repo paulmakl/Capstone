@@ -56,3 +56,19 @@ void Environment::generateParticles()
 		particles[i] = a;
 	}
 }
+
+void Environment::generateShapes()
+{
+	//TODO: These are hard-coded shapes. We will read in information later to determine what shapes to draw.
+	Vec3 location;
+	location.x = xSize/2.0f;
+	location.y = ySize/2.0f;
+	location.z = 0.0f;
+	float length = 10.0f;
+	for(int i = 0; i < numShapes; i++)
+	{
+		Cube b;
+		b.setVariables(length, location);
+		shapes[i] = b;
+	}
+}

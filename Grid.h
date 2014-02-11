@@ -10,10 +10,8 @@
 
 class Grid{
     public:
-        //Node grid[64][64];
         std::vector<std::vector<Node>> grid;
         void init(float a, float b);
-    
 };
 
 

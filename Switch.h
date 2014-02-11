@@ -14,7 +14,11 @@
 #include "Physics.h"
 #include "Draw.h"
 
-//#define pixels 720
+#ifdef __APPLE__
+#define pixels 720
+#else
+#define pixels 900
+#endif
 
 class Switch{
 public:
@@ -24,6 +28,5 @@ public:
     static void display();
     static void timer(int id);
     // void display();
-    
 };
 #endif

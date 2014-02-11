@@ -10,7 +10,11 @@ public:
     void init(Environment* envPointer);
     
     Vec2 interpolate(Vec2 a, Vec2 b, float offset);
-    void updatePositions();
+    Vec2 extrapolate(Vec2 velocity, float offset);
+    void updateGridForces();
+    void updateParticlePositions();
+    void updateShapePositions();
+    void checkEulerianCollisions();
 };
 
 #endif

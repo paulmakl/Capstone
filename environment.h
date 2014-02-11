@@ -5,6 +5,7 @@
 #include "Particle.h"
 #include "Shape.h"
 #include "vectors.h"
+#include "Cube.h"
 #include <math.h>
 #include <cstdlib>
 #include <vector>
@@ -13,6 +14,7 @@
 
 class Environment{
 public:
+
     int xSize;
     int ySize;
     int numParticles;
@@ -26,6 +28,8 @@ public:
     std::vector<Particle> particles;
     void generateParticles();
 
-    Shape shapes[1];
+	Cube shapes[numShapes];
+
+	void generateShapes();
 };
 #endif

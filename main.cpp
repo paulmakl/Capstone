@@ -20,7 +20,7 @@
 #include "Switch.h"
 
 /*
- * Main function: GLUT runs as a console application starting at main()
+ * Main function
  */
 int main(int argc, char** argv)
 {

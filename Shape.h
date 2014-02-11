@@ -5,12 +5,11 @@
  *      Author: Etan
  */
 
-#ifndef SHAPE_H_
+/*#ifndef SHAPE_H_
 #define SHAPE_H_
 
 #include "Node.h"
 #include "vectors.h"
-//#include "GLFuncs.h"
 
 class Shape
 {
@@ -18,9 +17,9 @@ public:
 	Vec3 location;
 	float size;
 
-	bool intersect(Node a);
-
-	void draw();
+	float getPosition();
+	float getLength();
 };
 
-#endif /* SHAPE_H_ */
+#endif*/ /* SHAPE_H_ */
+

@@ -7,18 +7,23 @@
 
 #include "Cube.h"
 
-void Cube::intersect(Node a)
-{
-
-}
-
-void Cube::draw()
-{
-	//GLFuncs::drawCube(length, location);
-}
-
 void Cube::setVariables(float length2, Vec3 location2)
 {
 	length = length2;
-	location = location2;
+	position = location2;
+}
+
+void Cube::setPosition(Vec3 location)
+{
+	position = location;
+}
+
+Vec3 Cube::getPosition()
+{
+	return position;
+}
+
+float Cube::getLength()
+{
+	return length;
 }

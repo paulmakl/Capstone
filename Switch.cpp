@@ -25,11 +25,11 @@ Switch::Switch(float x, float y, int numPs, int argc, char** argv)
     
     env.generateNodes();
     env.generateParticles();
+    //env.generateShapes();
     
     glutDisplayFunc( display ); // Register display callback handler for window re-paint
     
     glOrtho(0.0f , env.xSize, 0.0f, env.ySize, 30.0, -10.0);
-    
 }
 
 void Switch::timer(int id)
@@ -39,6 +39,7 @@ void Switch::timer(int id)
 
 void Switch::display(void)
 {
+/*<<<<<<< HEAD
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
     glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
     
@@ -61,3 +62,27 @@ void Switch::display(void)
     glutTimerFunc(50, Switch::timer, 0);
     disps++;
 }
+=======*/
+	//glClearDepth(GL_DEPTH_TEST);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
+
+	//phys.updateGridForces(); // Reset the grid velocities and extrapolate particles forces to the grid.
+	phys.updateParticlePositions();
+	phys.updateShapePositions();
+	phys.checkEulerianCollisions();
+
+	glPushMatrix();
+
+	draw.displayGrid();
+	draw.displayParticles();
+	draw.displayShapes();
+
+	glPopMatrix();
+
+	glFlush();
+	glutSwapBuffers();
+	// TODO: The method specified must be static, but this will require to make a whole lot of stuff static.
+	glutTimerFunc(50, timer, 0);
+}
+//>>>>>>> 19edcd17071ef4e2530151086b0ef76d8c4cc3f7
