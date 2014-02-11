@@ -18,8 +18,8 @@ class Draw{
 public:
     Environment* env;
     
-    //Draw(Environment* envPointer);
-    void temp(Environment* envPointer);
+    void init(Environment* envPointer);
+    
     void displayGrid();
     void displayParticles();
     void displayShapes();

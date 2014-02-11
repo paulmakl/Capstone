@@ -1,5 +1,17 @@
 #include "Environment.h"
 
+Environment::Environment(){
+    
+}
+
+void Environment::init(int x, int y, int numPs){
+    xSize = x;
+    ySize = y;
+    particles.resize(numPs);
+    numParticles = numPs;
+    grid.init(x, y);
+}
+
 void Environment::generateNodes()
 {
 	int x, y;
@@ -17,7 +29,8 @@ void Environment::generateNodes()
 			b = 0.2f + rand()%30/100.0f;
 			a.setRGBA(r, g, b, 1.0f);
 			a.setForce(forceX + rand()%100/1000.0f - 0.055f, forceY + rand()%100/1000.0f - 0.055f); //, rand()%100/1000.0f - 0.055f);
-			grid[x][y] = a;
+            //a.setForce(0.02, 0.02);
+			grid.grid[x][y] = a;
 			//forceY += 0.002f;
 		}
 		//forceX += 0.002f;
@@ -33,7 +46,9 @@ void Environment::generateParticles()
 		Particle a;
 		xPos = (float)(rand()%(xSize*100)) / 100.0f;
 		yPos = (float)(rand()%(ySize*100)) / 100.0f;
-		a.setPosition(xPos, yPos);
+		//xPos = rand()%xSize;
+        //yPos = rand()%ySize;
+        a.setPosition(xPos, yPos);
 
 		xVelo = (rand()%10)/1000.0f - 0.0055f;
 		yVelo = (rand()%10)/1000.0f - 0.0055f;

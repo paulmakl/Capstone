@@ -14,6 +14,9 @@
 #include <windows.h>
 #endif
 
+#define xWidth 64
+#define yWidth 64 // For now, keep xSize and ySize the same!
+#define Particles 10000
 #include "Switch.h"
 
 /*
@@ -21,7 +24,7 @@
  */
 int main(int argc, char** argv)
 {
-   	Switch::init(argc, argv);
+    Switch x(xWidth, yWidth, Particles, argc, argv);
    	glutMainLoop();
 	return 0;
 };
