@@ -7,21 +7,25 @@
 #include "vectors.h"
 #include <math.h>
 #include <cstdlib>
+#include <vector>
 
-#define xSize 32
-#define ySize 32 // For now, keep xSize and ySize the same!
-#define numParticles 1000
 #define numShapes 1
 
 class Environment{
 public:
-	Node grid[64][64];
+    int xSize;
+    int ySize;
+    int numParticles;
+	//Node grid[64][64];
+    
+    Environment();
 	void generateNodes();
-
-    Particle particles[1000];
+    Grid grid;
+    void init(int x, int y, int numPs);
+    //Particle particles[1000];
+    std::vector<Particle> particles;
     void generateParticles();
 
     Shape shapes[1];
 };
-
 #endif
