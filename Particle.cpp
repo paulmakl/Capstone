@@ -10,6 +10,9 @@ void Particle::setPosition(float x, float y)
 {
     position.x = x;
     position.y = y;
+    boxID.x = floor(x);
+    boxID.y = floor(y);
+    
 }
 
 void Particle::setVelocity(float x, float y)

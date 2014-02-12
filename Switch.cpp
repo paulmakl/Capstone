@@ -82,7 +82,6 @@ void Switch::display(void)
 
 	glFlush();
 	glutSwapBuffers();
-	// TODO: The method specified must be static, but this will require to make a whole lot of stuff static.
 	glutTimerFunc(50, timer, 0);
 }
 //>>>>>>> 19edcd17071ef4e2530151086b0ef76d8c4cc3f7

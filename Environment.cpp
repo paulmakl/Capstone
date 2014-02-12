@@ -72,3 +72,7 @@ void Environment::generateShapes()
 		shapes[i] = b;
 	}
 }
+
+void Environment::sortParticles(){
+    
+}

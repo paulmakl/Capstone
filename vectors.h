@@ -22,4 +22,9 @@ struct Vec4
 {
 	float r, g, b, a;
 };
+
+struct int2
+{
+    int x, y;
+};
 #endif /* VECTORS_H_ */

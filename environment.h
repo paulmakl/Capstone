@@ -31,5 +31,7 @@ public:
 	Cube shapes[numShapes];
 
 	void generateShapes();
+    
+    void sortParticles();
 };
 #endif
