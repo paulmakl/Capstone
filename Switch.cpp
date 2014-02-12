@@ -15,13 +15,13 @@ Switch::Switch(float x, float y, int numPs, int argc, char** argv)
     
     glutInit(&argc, argv); // Initialize GLUT
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowSize(720, 720); // Set the window's initial width & height
+    glutInitWindowSize(pixels, pixels); // Set the window's initial width & height
     glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
     glutCreateWindow("Snow Tiem"); // Create a window with the given title
     
     //glutIdleFunc(idle); // Method called when we are idle.
     
-    srand(time(NULL)); // Turn this off if you want a random value uniform across all simulations.
+    //srand(time(NULL)); // Turn this off if you want a random value uniform across all simulations.
     
     env.generateNodes();
     env.generateParticles();
