@@ -10,7 +10,7 @@
 
 class Grid{
     public:
-        std::vector<std::vector<Node>> grid;
+        std::vector<std::vector<Node> > grid;
         void init(float a, float b);
 };
 
