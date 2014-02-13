@@ -39,30 +39,6 @@ void Switch::timer(int id)
 
 void Switch::display(void)
 {
-/*<<<<<<< HEAD
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
-    glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
-    
-    phys.updatePositions();
-    
-    glPushMatrix();
-    
-    draw.displayGrid();
-    draw.displayParticles();
-    
-    glTranslatef(env.xSize/2.0f, env.ySize/2.0f, 0.0f);
-    
-    glColor3f(0.5f, 0.5f, 0.5f);
-    
-    glPopMatrix();
-    
-    glFlush();
-    glutSwapBuffers();
-    
-    glutTimerFunc(50, Switch::timer, 0);
-    disps++;
-}
-=======*/
 	//glClearDepth(GL_DEPTH_TEST);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
