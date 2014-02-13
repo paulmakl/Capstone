@@ -73,6 +73,40 @@ void Environment::generateShapes()
 	}
 }
 
-void Environment::sortParticles(){
-    
+int Environment::carlSort(int value, int start)
+{
+	return 0;
+}
+
+void Environment::shakerSort(int start, int end)
+{
+
+}
+
+void Environment::sortParticles()
+{
+	int startIndex = 0; // The index of the start of the current values.
+	int endIndex = 0; // The index of the end of the current values.
+
+	for(int x = 0; x < xSize; x++)
+	{
+		endIndex = carlSort(x, startIndex); // carlSort will return the last index of the current x-values.
+		shakerSort(startIndex, endIndex);
+
+		int curX = 0;
+		int lastX = 0;
+		int startIndex = 0;
+		int counter = 0;
+		while(counter < numParticles)
+		{
+			curX = particles[counter].boxID.x;
+			if(curX != lastX)
+			{
+				lastX = curX;
+				shakerSort(startIndex, counter-1);
+				startIndex = counter;
+			}
+			counter++;
+		}
+	}
 }

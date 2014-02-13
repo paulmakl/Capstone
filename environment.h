@@ -32,6 +32,8 @@ public:
 
 	void generateShapes();
     
+	int carlSort(int value, int start);
+	void shakerSort(int start, int end);
     void sortParticles();
 };
 #endif
