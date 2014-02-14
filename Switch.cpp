@@ -44,6 +44,7 @@ void Switch::display(void)
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
 
 	//phys.updateGridForces(); // Reset the grid velocities and extrapolate particles forces to the grid.
+	env.sortParticles();
 	phys.updateParticlePositions();
 	phys.updateShapePositions();
 	phys.checkEulerianCollisions();
