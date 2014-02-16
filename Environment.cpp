@@ -76,19 +76,15 @@ void Environment::generateShapes()
 int Environment::carlSort(int value, int start)
 {
 	int insert = start;
-	Particle temp;
-
 	for(int i = start; i < numParticles; i++)
 	{
 		if(particles[i].boxID.x == value)
 		{
-			temp = particles[i];
-			particles[i] = particles[insert];
-			particles[insert] = temp;
+			std::swap(particles[i], particles[insert]);
 			insert++;
 		}
 	}
-	return 0;
+	return insert;
 }
 
 void Environment::shakerSort(int start, int end)
@@ -102,9 +98,10 @@ void Environment::shakerSort(int start, int end)
 		{
 			if(particles[i-1].boxID.y > particles[i].boxID.y)
 			{
-				temp = particles[i-1];
+				/*temp = particles[i-1];
 				particles[i-1] = particles[i];
-				particles[i] = temp;
+				particles[i] = temp;*/
+				std::swap(particles[i], particles[i-1]);
 				exchange = true;
 			}
 		}
@@ -112,9 +109,10 @@ void Environment::shakerSort(int start, int end)
 		{
 			if(particles[i-1].boxID.y > particles[i].boxID.y)
 			{
-				temp = particles[i-1];
+				/*temp = particles[i-1];
 				particles[i-1] = particles[i];
-				particles[i] = temp;
+				particles[i] = temp;*/
+				std::swap(particles[i], particles[i-1]);
 				exchange = true;
 			}
 		}
@@ -129,7 +127,7 @@ void Environment::sortParticles()
 	for(int x = 0; x < xSize; x++)
 	{
 		endIndex = carlSort(x, startIndex); // carlSort will return the last index of the current x-values.
-		//shakerSort(startIndex, endIndex);
+		shakerSort(startIndex, endIndex);
 		startIndex = endIndex + 1;
 	}
 }
