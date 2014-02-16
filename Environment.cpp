@@ -1,15 +1,15 @@
 #include "Environment.h"
 
 Environment::Environment(){
-    
+
 }
 
 void Environment::init(int x, int y, int numPs){
-    xSize = x;
-    ySize = y;
-    particles.resize(numPs);
-    numParticles = numPs;
-    grid.init(x, y);
+	xSize = x;
+	ySize = y;
+	particles.resize(numPs);
+	numParticles = numPs;
+	grid.init(x, y);
 }
 
 void Environment::generateNodes()
@@ -29,7 +29,7 @@ void Environment::generateNodes()
 			b = 0.2f + rand()%30/100.0f;
 			a.setRGBA(r, g, b, 1.0f);
 			a.setForce(forceX + rand()%100/1000.0f - 0.055f, forceY + rand()%100/1000.0f - 0.055f); //, rand()%100/1000.0f - 0.055f);
-            //a.setForce(0.02, 0.02);
+			//a.setForce(0.02, 0.02);
 			grid.grid[x][y] = a;
 			//forceY += 0.002f;
 		}
@@ -47,8 +47,8 @@ void Environment::generateParticles()
 		xPos = (float)(rand()%(xSize*100)) / 100.0f;
 		yPos = (float)(rand()%(ySize*100)) / 100.0f;
 		//xPos = rand()%xSize;
-        //yPos = rand()%ySize;
-        a.setPosition(xPos, yPos);
+		//yPos = rand()%ySize;
+		a.setPosition(xPos, yPos);
 
 		xVelo = (rand()%10)/1000.0f - 0.0055f;
 		yVelo = (rand()%10)/1000.0f - 0.0055f;
@@ -75,36 +75,48 @@ void Environment::generateShapes()
 
 int Environment::carlSort(int value, int start)
 {
-
-	return 0;
+	int insert = start;
+	for(int i = start; i < numParticles; i++)
+	{
+		if(particles[i].boxID.x == value)
+		{
+			std::swap(particles[i], particles[insert]);
+			insert++;
+		}
+	}
+	return insert;
 }
 
 void Environment::shakerSort(int start, int end)
 {
-	/*procedure cocktailSort( A : list of sortable items ) defined as:
-	  do
-	    swapped := false
-	    for each i in 0 to length( A ) - 2 do:
-	      if A[ i ] > A[ i + 1 ] then // test whether the two elements are in the wrong order
-	        swap( A[ i ], A[ i + 1 ] ) // let the two elements change places
-	        swapped := true
-	      end if
-	    end for
-	    if swapped = false then
-	      // we can exit the outer loop here if no swaps occurred.
-	      break do-while loop
-	    end if
-	    swapped := false
-	    for each i in length( A ) - 2 to 0 do:
-	      if A[ i ] > A[ i + 1 ] then
-	        swap( A[ i ], A[ i + 1 ] )
-	        swapped := true
-	      end if
-	    end for
-	  while swapped // if no elements have been swapped, then the list is sorted
-	end procedure*/
-
-
+	bool exchange;
+	Particle temp;
+	do
+	{
+		exchange = false;
+		for(int i = end-1; i > start; i--)
+		{
+			if(particles[i-1].boxID.y > particles[i].boxID.y)
+			{
+				/*temp = particles[i-1];
+				particles[i-1] = particles[i];
+				particles[i] = temp;*/
+				std::swap(particles[i], particles[i-1]);
+				exchange = true;
+			}
+		}
+		for(int i = start + 1; i < end; i++)
+		{
+			if(particles[i-1].boxID.y > particles[i].boxID.y)
+			{
+				/*temp = particles[i-1];
+				particles[i-1] = particles[i];
+				particles[i] = temp;*/
+				std::swap(particles[i], particles[i-1]);
+				exchange = true;
+			}
+		}
+	} while(exchange);
 }
 
 void Environment::sortParticles()

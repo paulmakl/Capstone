@@ -26,15 +26,20 @@ void Draw::displayParticles()
 {
 	glPointSize(1.0);
 	Vec2 position, velocity;
-	glColor3f(1.0f, 1.0f, 1.0f);
+	//glColor3f(1.0f, 1.0f, 1.0f);
+	float color = 1.0f;
 	glBegin(GL_POINTS);
 
 	for(int i = 0; i < env -> numParticles; i++)
 	{
 		Particle* cur;
 		cur = &env->particles[i];
+
+		// NOTE: Delete the line below to fix the color.
+		color -= 0.0001f;
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
+		glColor3f(color, color, color);
 		glVertex3f(position.x, position.y, 0);
 	}
 	glEnd();
@@ -43,7 +48,7 @@ void Draw::displayParticles()
 void Draw::displayShapes()
 {
 	Vec3 position;
-	float length;
+
 	for(int i = 0; i < numShapes; i++)
 	{
 		Cube* cur;
