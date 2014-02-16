@@ -148,6 +148,5 @@ void Physics::checkEulerianCollisions()
 				env->grid.grid[x][y].setRGBA(1.0f, 0.0f, 0.0f, 1.0f);
 			}
 		}
-//>>>>>>> 19edcd17071ef4e2530151086b0ef76d8c4cc3f7
 	}
 }
