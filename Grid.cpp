@@ -18,7 +18,7 @@ void Grid::init(float xSize, float ySize){
 		for(y = 0; y < ySize; y++)
 		{
 			Node a;
-            a = Configs::random_config_nodes(x,y);
+            a = Configs::up_nodes(x,y);
 			grid[x][y] = a;
 		}
 	}

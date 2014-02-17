@@ -22,18 +22,57 @@ Vec2 Physics::extrapolate(Vec2 velocity, float offset)
 
 void Physics::updateGridForces()
 {
+    int index = 0;
+    float xOffset, yOffset;
+    Vec2 position, velocity, newForce, xHighForce, xLowForce;
 	// First reset all nodes to have no forces.
-	for(int x = 0; x < env -> xSize; x++)
+	for(int x = 0; x < env -> xSize-1; x++)
 	{
-		for(int y = 0; y < env -> ySize; y++)
+		for(int y = 0; y < env -> ySize-1; y++)
 		{
-			env->grid.grid[x][y].setForce(0.0f, 0.0f);
+            Particle* cur = env -> particles.getParticle(index);
+            
+            while (cur -> boxID.x == x && cur -> boxID.y == y) {
+                cur = env -> particles.getParticle(index);
+                position = cur -> getPosition();
+                velocity = cur -> getVelocity();
+                
+                //This is the distance from the higher x value;
+                xOffset = x+1 - position.x;
+                yOffset = y+1 - position.y;
+                
+                xHighForce = extrapolate(velocity, 1-xOffset);
+                xLowForce = extrapolate(velocity, xOffset);
+                
+                Node * node = &env -> grid.grid[x][y];
+                newForce = extrapolate(xLowForce, yOffset);
+                node -> incForce(newForce.x, newForce.y);
+                node -> incParticlesNearNode();
+                
+                node = &env -> grid.grid[x][y + 1];
+                newForce = extrapolate(xLowForce, 1 - yOffset);
+                node -> incForce(newForce.x, newForce.y);
+                node -> incParticlesNearNode();
+                
+                node = &env -> grid.grid[x + 1][y];
+                newForce = extrapolate(xLowForce, yOffset);
+                node -> incForce(newForce.x, newForce.y);
+                node -> incParticlesNearNode();
+                
+                node = &env -> grid.grid[x + 1][y + 1];
+                newForce = extrapolate(xLowForce, 1 - yOffset);
+                node -> incForce(newForce.x, newForce.y);
+                node -> incParticlesNearNode();
+                
+                index++;
+                
+            }
 		}
 	}
-	Vec2 position, velocity, newForce;
+	//Vec2 position, velocity, newForce;
 
 	//Extrapolate particle movement to the nodes.
-	for(int i = 0; i < env->numParticles; i++)
+	/*for(int i = 0; i < env->numParticles; i++)
 	{
 		Particle* cur;
 		cur = env->particles.getParticle(i);
@@ -68,7 +107,7 @@ void Physics::updateGridForces()
 		node = &env->grid.grid[highX][highY];
 		newForce = extrapolate(xHighForce, (yOffset));
 		node -> setForce(newForce.x, newForce.y);
-	}
+	}*/
 }
 
 void Physics::updateParticlePositions()
@@ -86,16 +125,16 @@ void Physics::updateParticlePositions()
 		int lowY = fmax( floor(position.y), 0);
 		int highY = fmin( ceil(position.y), env -> ySize - 1 );
 
-		Vec2* downLeftForce = &env->grid.grid[lowX][lowY].force;
-		Vec2* downRightForce = &env->grid.grid[highX][lowY].force;
-		Vec2* upLeftForce = &env->grid.grid[lowX][highY].force;
-		Vec2* upRightForce = &env->grid.grid[highX][highY].force;
+		Vec2 downLeftForce = env->grid.grid[lowX][lowY].getForce();
+		Vec2 downRightForce = env->grid.grid[highX][lowY].getForce();
+		Vec2 upLeftForce = env->grid.grid[lowX][highY].getForce();
+		Vec2 upRightForce = env->grid.grid[highX][highY].getForce();
 
 		float xOffset = highX - position.x;
 		float yOffset = highY - position.y;
 
-		Vec2 r1 = interpolate(downLeftForce, downRightForce, xOffset);
-		Vec2 r2 = interpolate(upLeftForce, upRightForce, xOffset);
+		Vec2 r1 = interpolate(&downLeftForce, &downRightForce, xOffset);
+		Vec2 r2 = interpolate(&upLeftForce, &upRightForce, xOffset);
 		velocity = interpolate(&r1, &r2, yOffset);
 
 		if(position.x + velocity.x <= 0 || position.x + velocity.x >= env -> xSize)
@@ -145,3 +184,13 @@ void Physics::checkEulerianCollisions()
 		}
 	}
 }
+
+void Physics::resetNodes(){
+    for (int i = 0; i < env -> xSize; i++) {
+        for (int j = 0; j < env -> ySize; j++) {
+            env -> grid.grid[i][j].reset();
+        }
+    }
+}
+
+

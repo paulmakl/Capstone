@@ -19,13 +19,6 @@ Switch::Switch(float x, float y, int numPs, int argc, char** argv)
     glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
     glutCreateWindow("Snow Tiem"); // Create a window with the given title
     
-    //glutIdleFunc(idle); // Method called when we are idle.
-    
-
-    //env.generateNodes();
-    //env.generateParticles();
-    //env.generateShapes();
-    
     glutDisplayFunc( display ); // Register display callback handler for window re-paint
     
     glOrtho(0.0f , env.xSize, 0.0f, env.ySize, 30.0, -10.0);
@@ -42,11 +35,11 @@ void Switch::display(void)
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
 
-	//phys.updateGridForces(); // Reset the grid velocities and extrapolate particles forces to the grid.
-	env.sortParticles();
+    env.sortParticles();
+	phys.updateGridForces(); // Reset the grid velocities and extrapolate particles forces to the grid.
 	phys.updateParticlePositions();
-	phys.updateShapePositions();
-	phys.checkEulerianCollisions();
+	//phys.updateShapePositions();
+	//phys.checkEulerianCollisions();
 
 	glPushMatrix();
 

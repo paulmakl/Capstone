@@ -13,6 +13,7 @@ public:
     static Node random_config_nodes(int x, int y);
     static Node towards_center_nodes(int x, int y, int ySize);
     static Node towards_center_2_nodes(int x, int y, int ySize);
+    static Node up_nodes(int x, int y);
 };
 
 #endif

@@ -7,25 +7,44 @@
 #include "Node.h"
 
 void Node::setForce(float x, float y)
-	{
-		force.x = x;
-		force.y = y;
-	}
+{
+    force.x = x;
+    force.y = y;
+}
 
-Vec2 Node::getForce(float x, float y)
-	{
-		return force;
-	}
+void Node::incForce(float x, float y)
+{
+    force.x += x;
+    force.y += y;
+}
+
+void Node::incParticlesNearNode(){
+    particles_near_node++;
+}
+
+Vec2 Node::getForce()
+{
+    Vec2 ret;
+    ret.x = force.x / particles_near_node;
+    ret.y = force.y/ particles_near_node;
+    return ret;
+}
 
 void Node::setRGBA(float r, float g, float b, float a)
-	{
-		color.r = r;
-		color.g = g;
-		color.b = b;
-		color.a = 1.0f;
-	}
+{
+    color.r = r;
+    color.g = g;
+    color.b = b;
+    color.a = 1.0f;
+}
 
 Vec4 Node::getRGBA()
 {
     return color;
+}
+
+void Node::reset()
+{
+    particles_near_node = 0;
+    setForce(0.0f, 0.0f);
 }

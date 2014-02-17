@@ -15,6 +15,7 @@ public:
     void updateParticlePositions();
     void updateShapePositions();
     void checkEulerianCollisions();
+    void resetNodes();
 };
 
 #endif
