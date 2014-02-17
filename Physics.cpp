@@ -36,7 +36,7 @@ void Physics::updateGridForces()
 	for(int i = 0; i < env->numParticles; i++)
 	{
 		Particle* cur;
-		cur = &env->particles[i];
+		cur = env->particles.getParticle(i);
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
 
@@ -77,7 +77,7 @@ void Physics::updateParticlePositions()
 	for(int i = 0; i < env -> numParticles; i++)
 	{
 		Particle* cur;
-		cur = &env->particles[i];
+		cur = env->particles.getParticle(i);
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
 

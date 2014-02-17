@@ -33,13 +33,16 @@ void Draw::displayParticles()
 	for(int i = 0; i < env -> numParticles; i++)
 	{
 		Particle* cur;
-		cur = &env->particles[i];
+		cur = env->particles.getParticle(i);
 
 		// NOTE: Delete the line below to fix the color.
-		color -= 0.0001f;
+		//color -= 0.0001f;
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
-		glColor3f(color, color, color);
+        float r = cur -> getColor().x;
+        float g = cur -> getColor().y;
+        float b = cur -> getColor().z;
+		glColor3f(r, g, b);
 		glVertex3f(position.x, position.y, 0);
 	}
 	glEnd();

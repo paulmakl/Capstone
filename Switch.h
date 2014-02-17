@@ -27,6 +27,6 @@ public:
     void init(float sizeX, float sizeY, int argc, char** argv);
     static void display();
     static void timer(int id);
-    // void display();
+
 };
 #endif

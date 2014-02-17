@@ -26,6 +26,13 @@ void Particle::setMass(float newMass)
 	mass = newMass;
 }
 
+void Particle::setColor(float r, float g, float b)
+{
+    color.x = r;
+    color.y = g;
+    color.z = b;
+}
+
 Vec2 Particle::getVelocity()
 {
     return velocity;
@@ -34,6 +41,11 @@ Vec2 Particle::getVelocity()
 Vec2 Particle::getPosition()
 {
     return position;
+}
+
+Vec3 Particle::getColor()
+{
+    return color;
 }
 
 float Particle::getMass()

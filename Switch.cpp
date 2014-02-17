@@ -24,7 +24,7 @@ Switch::Switch(float x, float y, int numPs, int argc, char** argv)
     //srand(time(NULL)); // Turn this off if you want a random value uniform across all simulations.
     
     env.generateNodes();
-    env.generateParticles();
+    //env.generateParticles();
     //env.generateShapes();
     
     glutDisplayFunc( display ); // Register display callback handler for window re-paint
@@ -61,4 +61,3 @@ void Switch::display(void)
 	glutSwapBuffers();
 	glutTimerFunc(50, timer, 0);
 }
-//>>>>>>> 19edcd17071ef4e2530151086b0ef76d8c4cc3f7
