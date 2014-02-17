@@ -1,5 +1,5 @@
 #include "Switch.h"
-
+#include <iostream>
 Environment env;
 Physics phys;
 Draw draw;
@@ -21,9 +21,8 @@ Switch::Switch(float x, float y, int numPs, int argc, char** argv)
     
     //glutIdleFunc(idle); // Method called when we are idle.
     
-    //srand(time(NULL)); // Turn this off if you want a random value uniform across all simulations.
-    
-    env.generateNodes();
+
+    //env.generateNodes();
     //env.generateParticles();
     //env.generateShapes();
     
@@ -60,4 +59,6 @@ void Switch::display(void)
 	glFlush();
 	glutSwapBuffers();
 	glutTimerFunc(50, timer, 0);
+    //std::cout << disps << " ";
+    //disps++;
 }

@@ -2,6 +2,7 @@
 #define GRID_H_
 
 #include "Node.h"
+#include "Configs.h"
 #include <math.h>
 #include <cstdlib>
 #include <vector>

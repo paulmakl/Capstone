@@ -2,6 +2,7 @@
 #define PARTICLECOLLECTION_H_
 
 #include "Particle.h"
+#include "Configs.h"
 #include <math.h>
 #include <cstdlib>
 #include <vector>

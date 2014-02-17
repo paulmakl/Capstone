@@ -3,7 +3,6 @@
 
 #include "Grid.h"
 #include "ParticleCollection.h"
-#include "Particle.h"
 #include "Shape.h"
 #include "vectors.h"
 #include "Cube.h"

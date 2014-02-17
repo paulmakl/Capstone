@@ -10,15 +10,7 @@ void ParticleCollection::init(float nparticles, int xSize, int ySize){
 	for(int i = 0; i < numParticles; i++)
 	{
 		Particle a;
-		xPos = (float)(rand()%(xSize*100)) / 100.0f;
-		yPos = (float)(rand()%(ySize*100)) / 100.0f;
-        
-		a.setPosition(xPos, yPos);
-        
-		xVelo = (rand()%10)/1000.0f - 0.0055f;
-		yVelo = (rand()%10)/1000.0f - 0.0055f;
-		a.setVelocity(xVelo, yVelo);
-        a.setColor( 1.0f, 0.0f, 0.0f );
+        a = Configs::random_confic_particles(i, xSize, ySize);
 		particles[i] = a;
 	}
 }
