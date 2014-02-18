@@ -21,7 +21,7 @@ public:
     Particle* getParticle(int index);
     
 private:
-    int gridwitdh;
+    int xSize;
     int numParticles;
     std::vector<Particle> particles;
     int carlSort(int value, int start);

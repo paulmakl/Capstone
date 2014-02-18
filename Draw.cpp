@@ -36,7 +36,7 @@ void Draw::displayParticles()
 		cur = env->particles.getParticle(i);
 
 		// NOTE: Delete the line below to fix the color.
-		//color -= 0.0001f;
+		color -= 0.0001f;
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
         float r = cur -> getColor().x;

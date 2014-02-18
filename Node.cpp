@@ -25,8 +25,15 @@ void Node::incParticlesNearNode(){
 Vec2 Node::getForce()
 {
     Vec2 ret;
-    ret.x = force.x;// particles_near_node;
-    ret.y = force.y;// particles_near_node;
+    if(force.x == 0)
+    	ret.x = 0.0f;
+    else
+    	ret.x = force.x/ particles_near_node;
+    if(force.y == 0)
+    	ret.y = 0.0f;
+    else
+    	ret.y = force.y/ particles_near_node;
+
     return ret;
 }
 

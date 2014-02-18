@@ -6,6 +6,7 @@
 void ParticleCollection::init(float nparticles, int xSize, int ySize){
     numParticles = nparticles;
     particles.resize(numParticles);
+    this->xSize = xSize;
     float xVelo, yVelo, xPos, yPos;
 	for(int i = 0; i < numParticles; i++)
 	{
@@ -53,9 +54,6 @@ void ParticleCollection::shakerSort(int start, int end)
 		{
 			if(particles[i-1].boxID.y > particles[i].boxID.y)
 			{
-				/*temp = particles[i-1];
-                 particles[i-1] = particles[i];
-                 particles[i] = temp;*/
 				std::swap(particles[i], particles[i-1]);
 				exchange = true;
 			}
@@ -64,9 +62,6 @@ void ParticleCollection::shakerSort(int start, int end)
 		{
 			if(particles[i-1].boxID.y > particles[i].boxID.y)
 			{
-				/*temp = particles[i-1];
-                 particles[i-1] = particles[i];
-                 particles[i] = temp;*/
 				std::swap(particles[i], particles[i-1]);
 				exchange = true;
 			}
@@ -79,10 +74,10 @@ void ParticleCollection::sortParticles()
 	int startIndex = 0; // The index of the start of the current values.
 	int endIndex = 0; // The index of the end of the current values.
     
-	for(int x = 0; x < gridwitdh; x++)
+	for(int x = 0; x < xSize; x++)
 	{
 		endIndex = carlSort(x, startIndex); // carlSort will return the last index of the current x-values.
 		shakerSort(startIndex, endIndex);
-		startIndex = endIndex + 1;
+		startIndex = endIndex;
 	}
 }
