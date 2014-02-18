@@ -6,7 +6,7 @@ void Grid::init(float xSize, float ySize){
     for (int i = 0; i < grid.size(); i++) {
         grid[i].resize(ySize);
     }
-    srand (time(NULL)); // Turn this off if you want a random value uniform across all simulations.
+    //srand (time(NULL)); // Turn this off if you want a random value uniform across all simulations.
 
     int x, y;
 	//float r, g, b;

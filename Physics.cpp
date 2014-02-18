@@ -72,7 +72,7 @@ void Physics::updateGridForces()
             }
 		}
 	}
-    std::cout << "\n";
+ //   std::cout << "\n";
 }
 
 void Physics::updateParticlePositions()
@@ -95,14 +95,14 @@ void Physics::updateParticlePositions()
 		Vec2 upLeftForce = env->grid.grid[lowX][highY].getForce();
 		Vec2 upRightForce = env->grid.grid[highX][highY].getForce();
         
-        std::cout << downLeftForce.x << " :: ";
-        std::cout << downRightForce.x << " :: ";
-        std::cout << upLeftForce.x << " :: ";
-        std::cout << upRightForce.x << " :: ";
+//        std::cout << downLeftForce.x << " :: ";
+//        std::cout << downRightForce.x << " :: ";
+//        std::cout << upLeftForce.x << " :: ";
+//        std::cout << upRightForce.x << " :: ";
 
 		float xOffset = highX - position.x;
 		float yOffset = highY - position.y;
-        std::cout << xOffset << " " << yOffset;
+     //   std::cout << xOffset << " " << yOffset;
 
 		Vec2 r1 = interpolate(&downLeftForce, &downRightForce, xOffset);
 		Vec2 r2 = interpolate(&upLeftForce, &upRightForce, xOffset);

@@ -59,7 +59,7 @@ Node Configs::dead_config_nodes(){
 /*
  * Particles
  */
-Particle Configs::random_confic_particles(int x, int xSize, int ySize){
+Particle Configs::random_confic_particles(int xSize, int ySize){
     Particle a;
     float xPos = (float)(rand()%(xSize*100)) / 100.0f;
     float yPos = (float)(rand()%(ySize*100)) / 100.0f;
