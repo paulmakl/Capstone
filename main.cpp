@@ -14,9 +14,9 @@
 #include <windows.h>
 #endif
 
-#define xWidth 64
-#define yWidth 64 // For now, keep xSize and ySize the same!
-#define Particles 40000
+#define xWidth 2
+#define yWidth 2 // For now, keep xSize and ySize the same!
+#define Particles 1
 #include "Switch.h"
 
 /*

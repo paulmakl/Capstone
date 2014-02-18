@@ -18,13 +18,15 @@ public:
     int xSize;
     int ySize;
     int numParticles;
+    ParticleCollection particles;
+    Grid grid;
     
     Environment();
 	void generateNodes();
-    Grid grid;
+    
     void init(int x, int y, int numPs);
 
-    ParticleCollection particles;
+    
     void generateParticles();
 
 	Cube shapes[numShapes];

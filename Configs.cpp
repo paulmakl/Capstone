@@ -45,6 +45,13 @@ Node Configs::towards_center_2_nodes(int x, int y, int ySize){
 Node Configs::up_nodes(int x, int y){
     Node a;
     a.setRGBA(1.0f, 1.0f, 0.0f, 1.0f);
+    a.setForce(0.0f, 1.0f);
+    return a;
+}
+
+Node Configs::dead_config_nodes(){
+    Node a;
+    a.setRGBA(1.0f, 1.0f, 0.0f, 1.0f);
     a.setForce(0.0f, 0.0f);
     return a;
 }
@@ -65,3 +72,41 @@ Particle Configs::random_confic_particles(int x, int xSize, int ySize){
     a.setColor( 1.0f, 0.0f, 0.0f );
     return a;
 }
+
+Particle Configs::up_config_particles(int xSize, int ySize){
+    Particle a;
+    float xPos = 0.1f;
+    float yPos = 0.1f;
+    
+    a.setPosition(xPos, yPos);
+    a.setVelocity(0.0f, 0.2f);
+    a.setColor(0.1f, 1.0f, 1.0f);
+    return a;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

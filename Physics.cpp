@@ -1,4 +1,5 @@
 #include "Physics.h" 
+#include <iostream>
 
 void Physics::init(Environment* envPointer){
 	env = envPointer;
@@ -64,50 +65,14 @@ void Physics::updateGridForces()
                 node -> incForce(newForce.x, newForce.y);
                 node -> incParticlesNearNode();
                 
+                
+                
                 index++;
                 
             }
 		}
 	}
-	//Vec2 position, velocity, newForce;
-
-	//Extrapolate particle movement to the nodes.
-	/*for(int i = 0; i < env->numParticles; i++)
-	{
-		Particle* cur;
-		cur = env->particles.getParticle(i);
-		position = cur -> getPosition();
-		velocity = cur -> getVelocity();
-
-		int lowX = floor(position.x);
-		int highX = ceil(position.x);
-		int lowY = floor(position.y);
-		int highY = ceil(position.y);
-
-		float xOffset = highX - position.x;
-		float yOffset = highY - position.y;
-
-		Vec2 xHighForce = extrapolate(velocity, xOffset);
-		Vec2 xLowForce = extrapolate(velocity, (1-xOffset));
-
-		Node* node;
-
-		node = &env->grid.grid[lowX][lowY];
-		newForce = extrapolate(xLowForce, (1-yOffset));
-		node -> setForce(newForce.x, newForce.y);
-
-		node = &env->grid.grid[lowX][highY];
-		newForce = extrapolate(xLowForce, yOffset);
-		node -> setForce(newForce.x, newForce.y);
-
-		node = &env->grid.grid[highX][lowY];
-		newForce = extrapolate(xHighForce, (1-yOffset));
-		node -> setForce(newForce.x, newForce.y);
-
-		node = &env->grid.grid[highX][highY];
-		newForce = extrapolate(xHighForce, (yOffset));
-		node -> setForce(newForce.x, newForce.y);
-	}*/
+    std::cout << "\n";
 }
 
 void Physics::updateParticlePositions()
@@ -129,9 +94,15 @@ void Physics::updateParticlePositions()
 		Vec2 downRightForce = env->grid.grid[highX][lowY].getForce();
 		Vec2 upLeftForce = env->grid.grid[lowX][highY].getForce();
 		Vec2 upRightForce = env->grid.grid[highX][highY].getForce();
+        
+        std::cout << downLeftForce.x << " :: ";
+        std::cout << downRightForce.x << " :: ";
+        std::cout << upLeftForce.x << " :: ";
+        std::cout << upRightForce.x << " :: ";
 
 		float xOffset = highX - position.x;
 		float yOffset = highY - position.y;
+        std::cout << xOffset << " " << yOffset;
 
 		Vec2 r1 = interpolate(&downLeftForce, &downRightForce, xOffset);
 		Vec2 r2 = interpolate(&upLeftForce, &upRightForce, xOffset);
@@ -145,6 +116,7 @@ void Physics::updateParticlePositions()
 		cur -> setPosition(position.x + velocity.x, position.y + velocity.y);
 		//cur -> setVelocity((velocity.x + position.x)/2.0f, (velocity.y + position.y)/2.0f);
 		cur -> setVelocity(velocity.x, velocity.y);
+        
 	}
 }
 
