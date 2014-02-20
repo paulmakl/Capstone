@@ -13,6 +13,8 @@ public:
     Vec2 extrapolate(Vec2 velocity, float offset);
     void updateGridForces();
     void updateParticlePositions();
+    void addRandomVelocity();
+
     void updateShapePositions();
     void checkEulerianCollisions();
     void resetNodes();

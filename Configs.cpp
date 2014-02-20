@@ -52,7 +52,7 @@ Node Configs::up_nodes(int x, int y){
 Node Configs::dead_config_nodes(){
     Node a;
     a.setRGBA(0.3f, 0.3f, 0.3f, 1.0f);
-    a.setForce(0.0f, 0.1f);
+    a.setForce(0.0f, 0.0f);
     return a;
 }
 
@@ -61,13 +61,13 @@ Node Configs::dead_config_nodes(){
  */
 Particle Configs::random_confic_particles(int xSize, int ySize){
     Particle a;
-    float xPos = (float)(rand()%(xSize*100)) / 100.0f;
-    float yPos = (float)(rand()%(ySize*100)) / 100.0f;
+    float xPos = (float)((rand()%(xSize*50)) / 100.0f) + xSize/4.0f;
+    float yPos = (float)((rand()%(ySize*50)) / 100.0f) + ySize/4.0f;
     
     a.setPosition(xPos, yPos);
     
-    float xVelo = (rand()%1000)/1000.0f;
-    float yVelo = (rand()%1000)/1000.0f;
+    float xVelo = (rand()%100)/10000.0f;
+    float yVelo = (rand()%100)/10000.0f;
     a.setVelocity(xVelo, yVelo);
     a.setColor( 0.1f, 1.0f, 1.0f );
     return a;

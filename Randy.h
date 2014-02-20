@@ -1,5 +1,5 @@
-#ifndef RANDOMHELPER_H_
-#define RANDOMHELPER_H_
+#ifndef RANDY_H_
+#define RANDY_H_
 
 #include <math.h>
 #include <cstdlib>

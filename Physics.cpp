@@ -16,8 +16,8 @@ Vec2 Physics::interpolate(Vec2* a, Vec2* b, float offset)
 Vec2 Physics::extrapolate(Vec2 velocity, float offset)
 {
 	Vec2 ret;
-	ret.x = velocity.x * offset;
-	ret.y = velocity.y * offset;
+	ret.x = velocity.x * 2 * offset;
+	ret.y = velocity.y * 2 * offset;
 	return ret;
 }
 
@@ -32,8 +32,6 @@ void Physics::updateGridForces()
 		for(int y = 0; y < env -> ySize-1; y++)
 		{
             Particle* cur = env -> particles.getParticle(index);
-            //Node* a = &env -> grid.grid[x][y];
-            //a -> incForce(0.0f, 0.0f);
 
             while (cur -> boxID.x == x && cur -> boxID.y == y)
             {
@@ -42,8 +40,8 @@ void Physics::updateGridForces()
                 velocity = cur -> getVelocity();
                 
                 //This is the distance from the higher x value;
-                xOffset = x+1 - position.x;
-                yOffset = y+1 - position.y;
+                xOffset = (x+1) - position.x;
+                yOffset = (y+1) - position.y;
                 
                 xHighForce = extrapolate(velocity, 1-xOffset);
                 xLowForce = extrapolate(velocity, xOffset);
@@ -84,9 +82,6 @@ void Physics::updateParticlePositions()
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
 
-		if(i == 10)
-		std::cout << velocity.x << " " << velocity.y << " \n";
-
 		int lowX = fmax( floor(position.x), 0);
 		int highX = fmin(ceil(position.x), env -> xSize - 1);
 		int lowY = fmax( floor(position.y), 0);
@@ -97,9 +92,6 @@ void Physics::updateParticlePositions()
 		Vec2 upLeftForce = env->grid.grid[lowX][highY].getForce();
 		Vec2 upRightForce = env->grid.grid[highX][highY].getForce();
 
-		if(i == 10)
-			std::cout << downLeftForce.x << " " << downLeftForce.y << " SECOND \n";
-
 		float xOffset = highX - position.x;
 		float yOffset = highY - position.y;
 
@@ -107,8 +99,11 @@ void Physics::updateParticlePositions()
 		Vec2 r2 = interpolate(&upLeftForce, &upRightForce, xOffset);
 		velocity = interpolate(&r1, &r2, yOffset);
 
-		if(i == 10)
-				std::cout << velocity.x << " " << velocity.y << " SECOND \n";
+		//velocity.x *= 3.8f;
+		//velocity.y *= 3.8f;
+
+		if(i == 300)
+			std::cout << velocity.x << ", "<< velocity.y <<"\n";
 
 		if(position.x + velocity.x <= 0 || position.x + velocity.x >= env -> xSize)
 			velocity.x = 0;//-velocity.x;
@@ -119,6 +114,20 @@ void Physics::updateParticlePositions()
 		//cur -> setVelocity((velocity.x + position.x)/2.0f, (velocity.y + position.y)/2.0f);
 		cur -> setVelocity(velocity.x, velocity.y);
 
+	}
+}
+
+void Physics::addRandomVelocity()
+{
+	Particle* cur;
+	for(int i = 0; i < env -> numParticles; i++)
+	{
+		cur = env->particles.getParticle(i);
+		Vec2 velocity = cur-> getVelocity();
+		velocity.x += (rand()%100)/10000.0f - 0.0054f;
+		velocity.y += (rand()%100)/10000.0f - 0.0054f;
+
+		cur->setVelocity(velocity.x, velocity.y);
 	}
 }
 

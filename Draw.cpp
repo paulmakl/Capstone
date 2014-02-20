@@ -13,8 +13,9 @@ void Draw::displayGrid()
 	{
 		for(int y = 0; y < env -> ySize; y++)
 		{
-			Node cur = env->grid.grid[x][y];
-			color = cur.getRGBA();
+			Node* cur = &env->grid.grid[x][y];
+			cur -> setForceColor();
+			color = cur -> getRGBA();
 			glColor3f(color.r, color.g, color.b);
 			glVertex3f(x, y, 0);
 		}
