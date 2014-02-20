@@ -3,6 +3,7 @@
 
 #include "Node.h"
 #include "Particle.h"
+#include "Randy.h"
 #include <math.h>
 #include <cstdlib>
 
@@ -10,6 +11,7 @@ class Configs{
 public:
     static Particle random_confic_particles(int xSize, int ySize);
     static Particle up_config_particles(int xSize, int ySize);
+    static Particle up_config_2_particles(int xSize, int ySize);
     
     static Node random_config_nodes(int x, int y);
     static Node towards_center_nodes(int x, int y, int ySize);

@@ -51,8 +51,8 @@ Node Configs::up_nodes(int x, int y){
 
 Node Configs::dead_config_nodes(){
     Node a;
-    a.setRGBA(0.3f, 0.3f, 0.3f, 1.0f);
-    a.setForce(0.0f, 0.1f);
+    a.setRGBA(0.0f, 0.0f, 0.0f, 1.0f);
+    a.setForce(0.0f, 0.0f);
     return a;
 }
 
@@ -61,13 +61,13 @@ Node Configs::dead_config_nodes(){
  */
 Particle Configs::random_confic_particles(int xSize, int ySize){
     Particle a;
-    float xPos = (float)(rand()%(xSize*100)) / 100.0f;
-    float yPos = (float)(rand()%(ySize*100)) / 100.0f;
+    float xPos = Randy::randf(0, xSize/2) + xSize/4;
+    float yPos = Randy::randf(0, xSize/2) + xSize/4;
     
     a.setPosition(xPos, yPos);
     
-    float xVelo = (rand()%1000)/1000.0f;
-    float yVelo = (rand()%1000)/1000.0f;
+    float xVelo = Randy::randf(-0.3, 0.3);
+    float yVelo = Randy::randf(-0.3, 0.3);
     a.setVelocity(xVelo, yVelo);
     a.setColor( 0.1f, 1.0f, 1.0f );
     return a;
@@ -79,7 +79,18 @@ Particle Configs::up_config_particles(int xSize, int ySize){
     float yPos = 0.1f;
     
     a.setPosition(xPos, yPos);
-    a.setVelocity(0.0f, 0.02f);
+    a.setVelocity(0.2f, 0.0f);
+    a.setColor(0.1f, 1.0f, 1.0f);
+    return a;
+}
+
+Particle Configs::up_config_2_particles(int xSize, int ySize){
+    Particle a;
+    float xPos = Randy::randf(1, xSize - 2);
+    float yPos = Randy::randf(1, ySize - 2);
+    
+    a.setPosition(xPos, yPos);
+    a.setVelocity(0.2f, 0.2f);
     a.setColor(0.1f, 1.0f, 1.0f);
     return a;
 }

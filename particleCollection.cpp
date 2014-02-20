@@ -7,7 +7,6 @@ void ParticleCollection::init(float nparticles, int xSize, int ySize){
     numParticles = nparticles;
     particles.resize(numParticles);
     this->xSize = xSize;
-    float xVelo, yVelo, xPos, yPos;
 	for(int i = 0; i < numParticles; i++)
 	{
 		Particle a;

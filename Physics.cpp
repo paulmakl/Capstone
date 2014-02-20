@@ -10,14 +10,16 @@ Vec2 Physics::interpolate(Vec2* a, Vec2* b, float offset)
 	Vec2 ret;
 	ret.x = offset*a->x + (1-offset)*b->x;
 	ret.y = offset*a->y + (1-offset)*b->y;
+    //ret.x = a->x + b->x;
+	//ret.y = a->y + b->y;
 	return ret;
 }
 
 Vec2 Physics::extrapolate(Vec2 velocity, float offset)
 {
 	Vec2 ret;
-	ret.x = velocity.x * offset;
-	ret.y = velocity.y * offset;
+	ret.x = velocity.x * 2 * offset;
+	ret.y = velocity.y * 2 * offset;
 	return ret;
 }
 
@@ -83,10 +85,6 @@ void Physics::updateParticlePositions()
 		cur = env->particles.getParticle(i);
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
-
-		if(i == 10)
-		std::cout << velocity.x << " " << velocity.y << " \n";
-
 		int lowX = fmax( floor(position.x), 0);
 		int highX = fmin(ceil(position.x), env -> xSize - 1);
 		int lowY = fmax( floor(position.y), 0);
@@ -97,19 +95,13 @@ void Physics::updateParticlePositions()
 		Vec2 upLeftForce = env->grid.grid[lowX][highY].getForce();
 		Vec2 upRightForce = env->grid.grid[highX][highY].getForce();
 
-		if(i == 10)
-			std::cout << downLeftForce.x << " " << downLeftForce.y << " SECOND \n";
-
 		float xOffset = highX - position.x;
 		float yOffset = highY - position.y;
 
 		Vec2 r1 = interpolate(&downLeftForce, &downRightForce, xOffset);
 		Vec2 r2 = interpolate(&upLeftForce, &upRightForce, xOffset);
 		velocity = interpolate(&r1, &r2, yOffset);
-
-		if(i == 10)
-				std::cout << velocity.x << " " << velocity.y << " SECOND \n";
-
+        
 		if(position.x + velocity.x <= 0 || position.x + velocity.x >= env -> xSize)
 			velocity.x = 0;//-velocity.x;
 		if(position.y + velocity.y <= 0 || position.y  + velocity.y >= env -> ySize)
