@@ -18,8 +18,8 @@ Vec2 Physics::interpolate(Vec2* a, Vec2* b, float offset)
 Vec2 Physics::extrapolate(Vec2 velocity, float offset)
 {
 	Vec2 ret;
-	ret.x = velocity.x * 2 * offset;
-	ret.y = velocity.y * 2 * offset;
+	ret.x = velocity.x;
+	ret.y = velocity.y;
 	return ret;
 }
 
@@ -108,9 +108,9 @@ void Physics::updateParticlePositions()
 			std::cout << velocity.x << ", "<< velocity.y <<"\n";
 
 		if(position.x + velocity.x <= 0 || position.x + velocity.x >= env -> xSize)
-			velocity.x = 0;//-velocity.x;
+			velocity.x = -velocity.x;
 		if(position.y + velocity.y <= 0 || position.y  + velocity.y >= env -> ySize)
-			velocity.y = 0;//-velocity.y;
+			velocity.y = -velocity.y;
 
 		cur -> setPosition(position.x + velocity.x, position.y + velocity.y);
 		//cur -> setVelocity((velocity.x + position.x)/2.0f, (velocity.y + position.y)/2.0f);
@@ -128,6 +128,19 @@ void Physics::addRandomVelocity()
 		Vec2 velocity = cur-> getVelocity();
 		velocity.x += (rand()%100)/10000.0f - 0.0054f;
 		velocity.y += (rand()%100)/10000.0f - 0.0054f;
+
+		cur->setVelocity(velocity.x, velocity.y);
+	}
+}
+
+void Physics::gravity()
+{
+	Particle* cur;
+	for(int i = 0; i < env -> numParticles; i++)
+	{
+		cur = env->particles.getParticle(i);
+		Vec2 velocity = cur-> getVelocity();
+		velocity.y -= force_gravity;
 
 		cur->setVelocity(velocity.x, velocity.y);
 	}

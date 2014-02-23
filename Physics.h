@@ -3,7 +3,10 @@
 
 #include "Environment.h"
 
-class Physics{
+#define force_gravity 0.01f;
+
+class Physics
+{
 public:
     Environment* env;
     
@@ -14,6 +17,7 @@ public:
     void updateGridForces();
     void updateParticlePositions();
     void addRandomVelocity();
+    void gravity();
 
     void updateShapePositions();
     void checkEulerianCollisions();
