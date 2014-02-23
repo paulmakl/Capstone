@@ -15,19 +15,11 @@ Vec2 Physics::interpolate(Vec2* a, Vec2* b, float offset)
 	return ret;
 }
 
-Vec2 Physics::fullInterpolate(Vec2* a, Vec2* b, Vec2* p){
-    Vec2 ret;
-    
-    
-    
-    return ret;
-}
-
 Vec2 Physics::extrapolate(Vec2 velocity, float offset)
 {
 	Vec2 ret;
-	ret.x = velocity.x * 2 * offset;
-	ret.y = velocity.y * 2 * offset;
+	ret.x = velocity.x * offset;
+	ret.y = velocity.y * offset;
 	return ret;
 }
 
@@ -42,7 +34,7 @@ void Physics::updateGridForces()
 		for(int y = 0; y < env -> ySize-1; y++)
 		{
             Particle* cur = env -> particles.getParticle(index);
-
+            int i = 0;
             while (cur -> boxID.x == x && cur -> boxID.y == y)
             {
                 cur = env -> particles.getParticle(index);
@@ -52,7 +44,9 @@ void Physics::updateGridForces()
                 //This is the distance from the higher x value;
                 xOffset = (x+1) - position.x;
                 yOffset = (y+1) - position.y;
-                
+                //std::cout << xOffset << " :: " << yOffset << "\n";
+                std::cout << i << "\n";
+                i++;
                 xHighForce = extrapolate(velocity, 1-xOffset);
                 xLowForce = extrapolate(velocity, xOffset);
                 
@@ -113,7 +107,7 @@ void Physics::updateParticlePositions()
 		velocity.y *= 3.8f;
 
 		if(i == 300)
-			std::cout << velocity.x << ", "<< velocity.y <<"\n";
+			//std::cout << velocity.x << ", "<< velocity.y <<"\n";
 
 		if(position.x + velocity.x <= 0 || position.x + velocity.x >= env -> xSize)
 			velocity.x = 0;//-velocity.x;
