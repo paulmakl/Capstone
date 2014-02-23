@@ -61,8 +61,8 @@ Node Configs::dead_config_nodes(){
  */
 Particle Configs::random_confic_particles(int xSize, int ySize){
     Particle a;
-    float xPos = Randy::randf(0, xSize/2) + xSize/4;
-    float yPos = Randy::randf(0, xSize/2) + xSize/4;
+    float xPos = Randy::randf(0, xSize/1.2) + xSize/10;
+    float yPos = Randy::randf(0, xSize/1.2) + xSize/10;
     
     a.setPosition(xPos, yPos);
     
