@@ -15,6 +15,14 @@ Vec2 Physics::interpolate(Vec2* a, Vec2* b, float offset)
 	return ret;
 }
 
+Vec2 Physics::fullInterpolate(Vec2* a, Vec2* b, Vec2* p){
+    Vec2 ret;
+    
+    
+    
+    return ret;
+}
+
 Vec2 Physics::extrapolate(Vec2 velocity, float offset)
 {
 	Vec2 ret;
@@ -101,8 +109,8 @@ void Physics::updateParticlePositions()
 		Vec2 r2 = interpolate(&upLeftForce, &upRightForce, xOffset);
 		velocity = interpolate(&r1, &r2, yOffset);
 
-		//velocity.x *= 3.8f;
-		//velocity.y *= 3.8f;
+		velocity.x *= 3.8f;
+		velocity.y *= 3.8f;
 
 		if(i == 300)
 			std::cout << velocity.x << ", "<< velocity.y <<"\n";
