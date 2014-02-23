@@ -68,6 +68,7 @@ Particle Configs::random_confic_particles(int xSize, int ySize){
     
     float xVelo = Randy::randf(-0.3, 0.3);
     float yVelo = Randy::randf(-0.3, 0.3);
+
     a.setVelocity(xVelo, yVelo);
     a.setColor( 0.1f, 1.0f, 1.0f );
     return a;

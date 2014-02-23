@@ -21,7 +21,7 @@ Switch::Switch(float x, float y, int numPs, int argc, char** argv)
     
     glutDisplayFunc( display ); // Register display callback handler for window re-paint
     
-    glOrtho(-1.0f , env.xSize, -1.0f, env.ySize, 30.0, -10.0);
+    glOrtho(-0.1f , env.xSize + 1.0f, -0.1f, env.ySize + 1.0f, 30.0, -10.0);
 }
 
 void Switch::timer(int id)
@@ -36,16 +36,26 @@ void Switch::display(void)
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
 
     phys.resetNodes();
+
+	// Reset all nodes to have clean forces.
+    phys.resetNodes();
+
+    // Sorts all particles to group them together by boxID.
     env.sortParticles();
-	phys.updateGridForces(); // Reset the grid velocities and extrapolate particles forces to the grid.
+
+    // Extrapolate particles forces to the grid.
+	//phys.addRandomVelocity();
+    phys.updateGridForces();
+
+	// Interpolate forces from the grid to the particles
 	phys.updateParticlePositions();
-	phys.updateShapePositions();
+	//phys.updateShapePositions();
 	//phys.checkEulerianCollisions();
 
 	glPushMatrix();
 
-	draw.displayGrid();
 	draw.displayParticles();
+	draw.displayGrid();
 	draw.displayShapes();
 
 	glPopMatrix();
