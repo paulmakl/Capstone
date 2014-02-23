@@ -51,7 +51,7 @@ Node Configs::up_nodes(int x, int y){
 
 Node Configs::dead_config_nodes(){
     Node a;
-    a.setRGBA(0.0f, 0.0f, 0.0f, 1.0f);
+    a.setRGBA(0.0f, 0.5f, 0.0f, 1.0f);
     a.setForce(0.0f, 0.0f);
     return a;
 }
@@ -61,8 +61,8 @@ Node Configs::dead_config_nodes(){
  */
 Particle Configs::random_confic_particles(int xSize, int ySize){
     Particle a;
-    float xPos = Randy::randf(0, xSize/1.2) + xSize/10;
-    float yPos = Randy::randf(0, xSize/1.2) + xSize/10;
+    float xPos = Randy::randf(0, xSize/2.0f) + xSize/4.0f;
+    float yPos = Randy::randf(0, xSize/2.0f) + xSize/4.0f;
     
     a.setPosition(xPos, yPos);
     
@@ -71,6 +71,7 @@ Particle Configs::random_confic_particles(int xSize, int ySize){
 
     a.setVelocity(xVelo, yVelo);
     a.setColor( 0.1f, 1.0f, 1.0f );
+    a.setMass(Randy::randf(0.01f, 0.99f)); // 1 = maximum inertia, 0 = no intertia
     return a;
 }
 

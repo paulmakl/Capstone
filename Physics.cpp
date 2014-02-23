@@ -29,7 +29,6 @@ void Physics::updateGridForces()
     float xOffset, yOffset; // The distance between the particle at 'index'
                             // the upper xnode and upper ynode
     Vec2 position, velocity, newForce, xHighForce, xLowForce;
-
     // Go through every valid box on the grid.
     // A box is vaid if the lower left corner is between
     // 0 and size - 1.
@@ -39,12 +38,11 @@ void Physics::updateGridForces()
 		{
             // Get the particle to check the boxID the first run-through.
             Particle* cur = env -> particles.getParticle(index);
-
             // While we are in the same box...
             while (cur -> boxID.x == x && cur -> boxID.y == y)
             {
                 // Get values for the current particle.
-                cur = env -> particles.getParticle(index);
+                
                 position = cur -> getPosition();
                 velocity = cur -> getVelocity();
                 
@@ -80,7 +78,15 @@ void Physics::updateGridForces()
                 node -> incForce(newForce.x, newForce.y);
                 node -> incParticlesNearNode();
                 
+                if(env -> numParticles > index)
+                {
                 index++; // Increment the index to move to the next particle.
+                cur = env -> particles.getParticle(index);
+                }
+                else
+                {
+                    break;
+                }
             }
 		}
 	}
@@ -88,7 +94,7 @@ void Physics::updateGridForces()
 
 void Physics::updateParticlePositions()
 {
-	Vec2 position, velocity;
+	Vec2 position, velocity, newVelocity;
 	for(int i = 0; i < env -> numParticles; i++)
 	{
 		Particle* cur;
@@ -111,19 +117,25 @@ void Physics::updateParticlePositions()
 
 		Vec2 r1 = interpolate(&downLeftForce, &downRightForce, xOffset);
 		Vec2 r2 = interpolate(&upLeftForce, &upRightForce, xOffset);
-		velocity = interpolate(&r1, &r2, yOffset);
+		newVelocity = interpolate(&r1, &r2, yOffset);
 
-		//velocity.x *= 3.8f;
-		//velocity.y *= 3.8f;
 
-		if(position.x + velocity.x <= 0 || position.x + velocity.x >= env -> xSize)
-			velocity.x = -velocity.x;
-		if(position.y + velocity.y <= 0 || position.y  + velocity.y >= env -> ySize)
-			velocity.y = -velocity.y;
+		// Apply particle's mass to maintain momentum.
+		float mass = cur -> getMass();
+		newVelocity.x = (newVelocity.x*(1.0f - mass) + (velocity.x * mass));
+		newVelocity.y = (newVelocity.y*(1.0f - mass) + (velocity.y * mass));
 
-		cur -> setPosition(position.x + velocity.x, position.y + velocity.y);
+		//if(i == 300)
+		//	std::cout << newVelocity.x << ", "<< velocity.y <<"\n";
+
+		if(position.x + newVelocity.x <= 0 || position.x + newVelocity.x >= env -> xSize)
+			newVelocity.x = -newVelocity.x;
+		if(position.y + newVelocity.y <= 0 || position.y  + newVelocity.y >= env -> ySize)
+			newVelocity.y = -newVelocity.y;
+
+		cur -> setPosition(position.x + newVelocity.x, position.y + newVelocity.y);
 		//cur -> setVelocity((velocity.x + position.x)/2.0f, (velocity.y + position.y)/2.0f);
-		cur -> setVelocity(velocity.x, velocity.y);
+		cur -> setVelocity(newVelocity.x, newVelocity.y);
 
 	}
 }
@@ -149,7 +161,7 @@ void Physics::gravity()
 	{
 		cur = env->particles.getParticle(i);
 		Vec2 velocity = cur-> getVelocity();
-		velocity.y -= force_gravity;
+		velocity.y -= (2.0f - cur -> getMass()) * force_gravity;
 
 		cur->setVelocity(velocity.x, velocity.y);
 	}
