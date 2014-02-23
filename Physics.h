@@ -14,6 +14,11 @@ public:
     
     Vec2 interpolate(Vec2* a, Vec2* b, float offset);
     Vec2 extrapolate(Vec2 velocity, float offset);
+    
+    /*
+     * This function requires that the environment's 
+     * list of particles is sorted.
+     */
     void updateGridForces();
     void updateParticlePositions();
     void addRandomVelocity();

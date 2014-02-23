@@ -19,11 +19,11 @@ public:
     void init2(float nparticles, int xSize, int ySize);
     void sortParticles();
     Particle* getParticle(int index);
-    
+    std::vector<Particle> particles;
 private:
     int xSize;
     int numParticles;
-    std::vector<Particle> particles;
+    
     int carlSort(int value, int start);
     void shakerSort(int start, int end);
 };

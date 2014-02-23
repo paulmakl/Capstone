@@ -12,6 +12,8 @@ public:
     static Particle random_confic_particles(int xSize, int ySize);
     static Particle up_config_particles(int xSize, int ySize);
     static Particle up_config_2_particles(int xSize, int ySize);
+    static Particle test_config_particles();
+    
     
     static Node random_config_nodes(int x, int y);
     static Node towards_center_nodes(int x, int y, int ySize);
