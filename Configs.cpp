@@ -96,6 +96,16 @@ Particle Configs::up_config_2_particles(int xSize, int ySize){
     return a;
 }
 
+Particle Configs::test_config_particles(){
+    Particle a;
+    float xPos = 0;
+    float yPos = 0;
+    
+    a.setPosition(xPos, yPos);
+    a.setVelocity(0.2f, 0.2f);
+    a.setColor(0.1f, 1.0f, 1.0f);
+    return a;
+}
 
 
 
