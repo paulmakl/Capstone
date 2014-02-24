@@ -45,7 +45,6 @@ int ParticleCollection::carlSort(int value, int start)
 void ParticleCollection::shakerSort(int start, int end)
 {
 	bool exchange;
-	Particle temp;
 	do
 	{
 		exchange = false;

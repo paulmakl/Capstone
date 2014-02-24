@@ -3,7 +3,7 @@
 
 #include "Environment.h"
 
-#define force_gravity 0.001f;
+#define force_gravity 0.01f;
 
 class Physics
 {
