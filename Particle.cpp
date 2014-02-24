@@ -12,7 +12,6 @@ void Particle::setPosition(float x, float y)
     position.y = y;
     boxID.x = floor(x);
     boxID.y = floor(y);
-    
 }
 
 void Particle::setVelocity(float x, float y)
@@ -24,6 +23,11 @@ void Particle::setVelocity(float x, float y)
 void Particle::setMass(float newMass)
 {
 	mass = newMass;
+}
+
+void Particle:: setVolume(float newVolume)
+{
+	volume = newVolume;
 }
 
 void Particle::setColor(float r, float g, float b)
@@ -51,6 +55,11 @@ Vec3 Particle::getColor()
 float Particle::getMass()
 {
 	return mass;
+}
+
+float Particle::getVolume()
+{
+	return volume;
 }
 
 
