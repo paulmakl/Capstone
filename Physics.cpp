@@ -128,9 +128,9 @@ void Physics::updateParticlePositions()
 		//if(i == 300)
 		//	std::cout << newVelocity.x << ", "<< velocity.y <<"\n";
 
-		if(position.x + newVelocity.x <= 0 || position.x + newVelocity.x >= env -> xSize)
+		if(position.x + newVelocity.x <= 0 || position.x + newVelocity.x >= env -> xSize - 1)
 			newVelocity.x = -newVelocity.x;
-		if(position.y + newVelocity.y <= 0 || position.y  + newVelocity.y >= env -> ySize)
+		if(position.y + newVelocity.y <= 0 || position.y  + newVelocity.y >= env -> ySize - 1)
 			newVelocity.y = -newVelocity.y;
 
 		cur -> setPosition(position.x + newVelocity.x, position.y + newVelocity.y);
