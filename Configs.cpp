@@ -71,7 +71,7 @@ Particle Configs::random_confic_particles(int xSize, int ySize){
 
     a.setVelocity(xVelo, yVelo);
     a.setColor( 0.1f, 1.0f, 1.0f );
-    a.setMass(Randy::randf(0.01f, 0.99f)); // 1 = maximum inertia, 0 = no intertia
+    a.setMass(Randy::randf(0.1f, 0.9f)); // 1 = maximum inertia, 0 = no intertia
     return a;
 }
 
@@ -88,11 +88,14 @@ Particle Configs::up_config_particles(int xSize, int ySize){
 
 Particle Configs::up_config_2_particles(int xSize, int ySize){
     Particle a;
-    float xPos = Randy::randf(1, xSize - 2);
-    float yPos = Randy::randf(1, ySize - 2);
+    float xPos = Randy::randf(0, xSize/2.0f) + xSize/4.0f;
+    float yPos = Randy::randf(0, xSize/2.0f) + xSize/4.0f;
+    
+    float xVelo = Randy::randf(-2, 2);
+    float yVelo = Randy::randf(-0.1, 0.6);
     
     a.setPosition(xPos, yPos);
-    a.setVelocity(0.2f, 0.2f);
+    a.setVelocity(xVelo, yVelo);
     a.setColor(0.1f, 1.0f, 1.0f);
     return a;
 }

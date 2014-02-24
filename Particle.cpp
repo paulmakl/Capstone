@@ -53,3 +53,11 @@ float Particle::getMass()
 	return mass;
 }
 
+
+void Particle::moveFromVelocity()
+{
+    position.x += velocity.x;
+    position.y += velocity.y;
+    boxID.x = floor(position.x);
+    boxID.y = floor(position.y);
+}

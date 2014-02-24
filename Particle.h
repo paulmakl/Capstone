@@ -26,6 +26,12 @@ public:
     void setMass(float newMass);
     void setColor(float r, float g, float b);
     
+    /*
+     * Moves the particle forward based on 
+     * it's current velocity.
+     */
+    void moveFromVelocity();
+    
     Vec2 getVelocity();
 	Vec2 getPosition();
     Vec3 getColor();

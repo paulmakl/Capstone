@@ -20,7 +20,28 @@ public:
      * list of particles is sorted.
      */
     void updateGridForces();
+    
+
+    /*
+     * Update the velocities of each particle
+     * based on the grid forces in their surrounding
+     * boxes.
+     */
+    void updateParticleVelocities();
+    
+    /*
+     * Checks for collisions between
+     * particles in the same box
+     */
+    void checkParticleCollisions();
+    
+    /*
+     * Based on the grid forces and each
+     * particles inherent velocity,
+     * update the positions of all particles
+     */
     void updateParticlePositions();
+    
     void addRandomVelocity();
     void gravity();
 

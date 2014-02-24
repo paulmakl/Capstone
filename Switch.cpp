@@ -47,7 +47,10 @@ void Switch::display(void)
 	phys.gravity();
     phys.updateGridForces();
 
+    
 	// Interpolate forces from the grid to the particles
+    phys.updateParticleVelocities();
+    phys.checkParticleCollisions();
 	phys.updateParticlePositions();
 	//phys.updateShapePositions();
 	//phys.checkEulerianCollisions();

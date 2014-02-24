@@ -92,51 +92,68 @@ void Physics::updateGridForces()
 	}
 }
 
-void Physics::updateParticlePositions()
+
+void Physics::updateParticleVelocities()
 {
-	Vec2 position, velocity, newVelocity;
+    Vec2 position, velocity, newVelocity;
 	for(int i = 0; i < env -> numParticles; i++)
 	{
 		Particle* cur;
 		cur = env->particles.getParticle(i);
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
-
+        
 		int lowX = fmax( floor(position.x), 0);
 		int highX = fmin(ceil(position.x), env -> xSize - 1);
 		int lowY = fmax( floor(position.y), 0);
 		int highY = fmin( ceil(position.y), env -> ySize - 1 );
-
+        
 		Vec2 downLeftForce = env->grid.grid[lowX][lowY].getForce();
 		Vec2 downRightForce = env->grid.grid[highX][lowY].getForce();
 		Vec2 upLeftForce = env->grid.grid[lowX][highY].getForce();
 		Vec2 upRightForce = env->grid.grid[highX][highY].getForce();
-
+        
 		float xOffset = highX - position.x;
 		float yOffset = highY - position.y;
-
+        
 		Vec2 r1 = interpolate(&downLeftForce, &downRightForce, xOffset);
 		Vec2 r2 = interpolate(&upLeftForce, &upRightForce, xOffset);
 		newVelocity = interpolate(&r1, &r2, yOffset);
-
-
+        
+        
 		// Apply particle's mass to maintain momentum.
 		float mass = cur -> getMass();
 		newVelocity.x = (newVelocity.x*(1.0f - mass) + (velocity.x * mass));
 		newVelocity.y = (newVelocity.y*(1.0f - mass) + (velocity.y * mass));
-
+        
 		//if(i == 300)
 		//	std::cout << newVelocity.x << ", "<< velocity.y <<"\n";
-
+        
 		if(position.x + newVelocity.x <= 0 || position.x + newVelocity.x >= env -> xSize - 1)
 			newVelocity.x = -newVelocity.x;
 		if(position.y + newVelocity.y <= 0 || position.y  + newVelocity.y >= env -> ySize - 1)
 			newVelocity.y = -newVelocity.y;
-
-		cur -> setPosition(position.x + newVelocity.x, position.y + newVelocity.y);
+        
+		//cur -> setPosition(position.x + newVelocity.x, position.y + newVelocity.y);
 		//cur -> setVelocity((velocity.x + position.x)/2.0f, (velocity.y + position.y)/2.0f);
 		cur -> setVelocity(newVelocity.x, newVelocity.y);
+        
+	}
+}
 
+void Physics::checkParticleCollisions(){
+    
+}
+
+void Physics::updateParticlePositions()
+{
+    Vec2 position, velocity, newVelocity;
+	for(int i = 0; i < env -> numParticles; i++)
+	{
+		Particle* cur;
+		cur = env->particles.getParticle(i);
+        cur -> moveFromVelocity();
+        
 	}
 }
 
