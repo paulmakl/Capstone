@@ -10,7 +10,7 @@ void ParticleCollection::init(float nparticles, int xSize, int ySize){
 	for(int i = 0; i < numParticles; i++)
 	{
 		Particle a;
-        a = Configs::random_confic_particles(xSize, ySize);
+        a = Configs::up_config_2_particles(xSize, ySize);
 		particles[i] = a;
 	}
 }
