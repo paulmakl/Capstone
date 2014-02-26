@@ -20,7 +20,6 @@ public:
      * list of particles is sorted.
      */
     void updateGridForces();
-    
 
     /*
      * Update the velocities of each particle

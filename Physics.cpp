@@ -10,7 +10,7 @@ Vec2 Physics::interpolate(Vec2* a, Vec2* b, float offset)
 	Vec2 ret;
 	ret.x = offset*a->x + (1-offset)*b->x;
 	ret.y = offset*a->y + (1-offset)*b->y;
-    //ret.x = a->x + b->x;
+	//ret.x = a->x + b->x;
 	//ret.y = a->y + b->y;
 	return ret;
 }
@@ -25,69 +25,70 @@ Vec2 Physics::extrapolate(Vec2 velocity, float offset)
 
 void Physics::updateGridForces()
 {
-    int index = 0; // The index of the current particle
-    float xOffset, yOffset; // The distance between the particle at 'index'
-                            // the upper xnode and upper ynode
-    Vec2 position, velocity, newForce, xHighForce, xLowForce;
-    // Go through every valid box on the grid.
-    // A box is vaid if the lower left corner is between
-    // 0 and size - 1.
+	int index = 0; // The index of the current particle
+	float xOffset, yOffset; // The distance between the particle at 'index'
+	// the upper xnode and upper ynode
+	Vec2 position, velocity, newForce, xHighForce, xLowForce;
+	// Go through every valid box on the grid.
+	// A box is vaid if the lower left corner is between
+	// 0 and size - 1.
 	for(int x = 0; x < env -> xSize-1; x++)
 	{
 		for(int y = 0; y < env -> ySize-1; y++)
 		{
-            // Get the particle to check the boxID the first run-through.
-            Particle* cur = env -> particles.getParticle(index);
-            // While we are in the same box...
-            while (cur -> boxID.x == x && cur -> boxID.y == y)
-            {
-                // Get values for the current particle.
-                
-                position = cur -> getPosition();
-                velocity = cur -> getVelocity();
-                
-                // Set the offset values based on the upper bounds of the box.
-                xOffset = (x+1) - position.x;
-                yOffset = (y+1) - position.y;
-                
-                // Extrapolate the current particles forces along the x-axis.
-                xHighForce = extrapolate(velocity, 1-xOffset);
-                xLowForce = extrapolate(velocity, xOffset);
-                
-                // Extrapolate the force at xLowForce to the bottom left node of boxID.
-                Node * node = &env -> grid.grid[x][y];
-                newForce = extrapolate(xLowForce, yOffset);
-                node -> incForce(newForce.x, newForce.y);
-                node -> incParticlesNearNode();
-                
-                // Extrapolate the force at xLowForce to the upper left node of boxID.
-                node = &env -> grid.grid[x][y + 1];
-                newForce = extrapolate(xLowForce, 1 - yOffset);
-                node -> incForce(newForce.x, newForce.y);
-                node -> incParticlesNearNode();
-                
-                // Extrapolate the force at xHighForce to the upper right node of boxID.
-                node = &env -> grid.grid[x + 1][y];
-                newForce = extrapolate(xLowForce, yOffset);
-                node -> incForce(newForce.x, newForce.y);
-                node -> incParticlesNearNode();
-                
-                // Extrapolate the force at xHighForce to the upper left node of boxID.
-                node = &env -> grid.grid[x + 1][y + 1];
-                newForce = extrapolate(xLowForce, 1 - yOffset);
-                node -> incForce(newForce.x, newForce.y);
-                node -> incParticlesNearNode();
-                
-                if(env -> numParticles > index)
-                {
-                index++; // Increment the index to move to the next particle.
-                cur = env -> particles.getParticle(index);
-                }
-                else
-                {
-                    break;
-                }
-            }
+			// Get the particle to check the boxID the first run-through.
+			Particle* cur = env -> particles.getParticle(index);
+
+			// While we are in the same box...
+			while (cur -> boxID.x == x && cur -> boxID.y == y)
+			{
+				// Get values for the current particle.
+
+				position = cur -> getPosition();
+				velocity = cur -> getVelocity();
+
+				// Set the offset values based on the upper bounds of the box.
+				xOffset = (x+1) - position.x;
+				yOffset = (y+1) - position.y;
+
+				// Extrapolate the current particles forces along the x-axis.
+				xHighForce = extrapolate(velocity, 1-xOffset);
+				xLowForce = extrapolate(velocity, xOffset);
+
+				// Extrapolate the force at xLowForce to the bottom left node of boxID.
+				Node * node = &env -> grid.grid[x][y];
+				newForce = extrapolate(xLowForce, yOffset);
+				node -> incForce(newForce.x, newForce.y);
+				node -> incParticlesNearNode();
+
+				// Extrapolate the force at xLowForce to the upper left node of boxID.
+				node = &env -> grid.grid[x][y + 1];
+				newForce = extrapolate(xLowForce, 1 - yOffset);
+				node -> incForce(newForce.x, newForce.y);
+				node -> incParticlesNearNode();
+
+				// Extrapolate the force at xHighForce to the upper right node of boxID.
+				node = &env -> grid.grid[x + 1][y];
+				newForce = extrapolate(xLowForce, yOffset);
+				node -> incForce(newForce.x, newForce.y);
+				node -> incParticlesNearNode();
+
+				// Extrapolate the force at xHighForce to the upper left node of boxID.
+				node = &env -> grid.grid[x + 1][y + 1];
+				newForce = extrapolate(xLowForce, 1 - yOffset);
+				node -> incForce(newForce.x, newForce.y);
+				node -> incParticlesNearNode();
+
+				if(env -> numParticles > index)
+				{
+					index++; // Increment the index to move to the next particle.
+					cur = env -> particles.getParticle(index);
+				}
+				else
+				{
+					break;
+				}
+			}
 		}
 	}
 }
@@ -95,47 +96,46 @@ void Physics::updateGridForces()
 
 void Physics::updateParticleVelocities()
 {
-    Vec2 position, velocity, newVelocity;
+	Vec2 position, velocity, newVelocity;
 	for(int i = 0; i < env -> numParticles; i++)
 	{
 		Particle* cur;
 		cur = env->particles.getParticle(i);
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
-        
+
 		int lowX = fmax( floor(position.x), 0);
 		int highX = fmin(ceil(position.x), env -> xSize - 1);
 		int lowY = fmax( floor(position.y), 0);
 		int highY = fmin( ceil(position.y), env -> ySize - 1 );
-        
+
 		Vec2 downLeftForce = env->grid.grid[lowX][lowY].getForce();
 		Vec2 downRightForce = env->grid.grid[highX][lowY].getForce();
 		Vec2 upLeftForce = env->grid.grid[lowX][highY].getForce();
 		Vec2 upRightForce = env->grid.grid[highX][highY].getForce();
-        
+
 		float xOffset = highX - position.x;
 		float yOffset = highY - position.y;
-        
+
 		Vec2 r1 = interpolate(&downLeftForce, &downRightForce, xOffset);
 		Vec2 r2 = interpolate(&upLeftForce, &upRightForce, xOffset);
 		newVelocity = interpolate(&r1, &r2, yOffset);
-        
-        
+
+
 		// Apply particle's mass to maintain momentum.
 		float mass = cur -> getMass();
 		newVelocity.x = (newVelocity.x*(1.0f - mass) + (velocity.x * mass));
 		newVelocity.y = (newVelocity.y*(1.0f - mass) + (velocity.y * mass));
-        
+
 		//if(i == 300)
 		//	std::cout << newVelocity.x << ", "<< velocity.y <<"\n";
-        
+
 		if(position.x + newVelocity.x <= 0 || position.x + newVelocity.x >= env -> xSize - 1)
 			newVelocity.x = -newVelocity.x;
 		if(position.y + newVelocity.y <= 0 || position.y  + newVelocity.y >= env -> ySize - 1)
 			newVelocity.y = -newVelocity.y;
-        
 		cur -> setVelocity(newVelocity.x, newVelocity.y);
-        
+
 	}
 }
 
@@ -169,10 +169,9 @@ void Physics::checkParticleCollisions(){
 
 void Physics::updateParticlePositions()
 {
-    Vec2 position, velocity, newVelocity;
+	Particle* cur;
 	for(int i = 0; i < env -> numParticles; i++)
 	{
-		Particle* cur;
 		cur = env->particles.getParticle(i);
         cur -> moveFromVelocity();
 	}
@@ -243,11 +242,11 @@ void Physics::checkEulerianCollisions()
 }
 
 void Physics::resetNodes(){
-    for (int i = 0; i < env -> xSize; i++) {
-        for (int j = 0; j < env -> ySize; j++) {
-            env -> grid.grid[i][j].reset();
-        }
-    }
+	for (int i = 0; i < env -> xSize; i++) {
+		for (int j = 0; j < env -> ySize; j++) {
+			env -> grid.grid[i][j].reset();
+		}
+	}
 }
 
 

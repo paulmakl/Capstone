@@ -2,7 +2,7 @@
  * Particle.cpp
  *
  *  Created on: Feb 3, 2014
- *      Author: Etan and Paul
+ *  Author: Etan and Paul
  */
 
 #pragma once
@@ -10,13 +10,16 @@
 #define PARTICLE_H_
 #include "vectors.h"
 #include <math.h>
+
 class Particle
 {
 public:
     Vec2 position;
     Vec2 velocity;
     Vec3 color;
+
     float mass;
+    float volume;
     
     int2 boxID;
     
@@ -24,6 +27,7 @@ public:
     void setPosition(float x, float y);
     void setVelocity(float x, float y);
     void setMass(float newMass);
+    void setVolume(float newVolume);
     void setColor(float r, float g, float b);
     
     /*
@@ -37,6 +41,7 @@ public:
     Vec3 getColor();
     
 	float getMass();
+	float getVolume();
 };
 
 #endif
