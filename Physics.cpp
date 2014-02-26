@@ -134,15 +134,37 @@ void Physics::updateParticleVelocities()
 		if(position.y + newVelocity.y <= 0 || position.y  + newVelocity.y >= env -> ySize - 1)
 			newVelocity.y = -newVelocity.y;
         
-		//cur -> setPosition(position.x + newVelocity.x, position.y + newVelocity.y);
-		//cur -> setVelocity((velocity.x + position.x)/2.0f, (velocity.y + position.y)/2.0f);
 		cur -> setVelocity(newVelocity.x, newVelocity.y);
         
 	}
 }
 
 void Physics::checkParticleCollisions(){
-    
+    int index = 0; // The index of the current particle
+    for(int x = 0; x < env -> xSize-1; x++)
+	{
+		for(int y = 0; y < env -> ySize-1; y++)
+		{
+            // Get the particle to check the boxID the first run-through.
+            Particle* cur = env -> particles.getParticle(index);
+            // While we are in the same box...
+            while (cur -> boxID.x == x && cur -> boxID.y == y)
+            {
+                
+                
+                
+                if(env -> numParticles > index)
+                {
+                    index++; // Increment the index to move to the next particle.
+                    cur = env -> particles.getParticle(index);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void Physics::updateParticlePositions()
@@ -153,7 +175,6 @@ void Physics::updateParticlePositions()
 		Particle* cur;
 		cur = env->particles.getParticle(i);
         cur -> moveFromVelocity();
-        
 	}
 }
 
