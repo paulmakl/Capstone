@@ -139,7 +139,32 @@ void Physics::updateParticleVelocities()
 	}
 }
 
-void Physics::checkParticleCollisions(){
+void Physics::checkParticleCollisions()
+{
+	/*
+	 * y = mx + b
+	 * y = (velocity.x * x / velocity.y) + b
+	 * y - (velocity.x * x / velocity.y) = b
+	 *
+	 * y1 = m1*x1 + b1
+	 * y2 = m2*x2 + b2
+	 *
+	 * Check if m1 and m2 are equal, exit if true
+	 *
+	 * Calculate x point of intersection
+	 * m1*x1 + b1 = m2*x2 + b2
+	 * (m1-m2)x + b1 = b2
+	 * (m1-m2)x = b2 - b1
+	 * x-intersect = (b2 - b1)/(m1 - m2)
+	 *
+	 * Plug x back in to calculate y
+	 * y-intersect = m1*(b2 - b1)/(m1 - m2) + b1
+	 *
+	 * check if x-intersect is between x1 and (x1 + velocity.x)
+	 * check if y-intersect is between y1 and (y1 + velocity.y)
+	 */
+
+
     int index = 0; // The index of the current particle
     for(int x = 0; x < env -> xSize-1; x++)
 	{
