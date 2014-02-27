@@ -139,31 +139,13 @@ void Physics::updateParticleVelocities()
 	}
 }
 
+float Physics::calculateDistance(Vec2 a, Vec2 b)
+{
+	return pow(a.x - b.x, 2) + pow(a.y - b.y, 2);
+}
+
 void Physics::checkParticleCollisions()
 {
-	/*
-	 * y = mx + b
-	 * y = (velocity.y / velocity.x) * x + b
-	 * (velocity.y / velocity.x) * x - y = b
-	 *
-	 * y1 = m1*x1 + b1
-	 * y2 = m2*x2 + b2
-	 *
-	 * Check if m1 and m2 are equal, exit if true
-	 *
-	 * Calculate x point of intersection
-	 * m1*x + b1 = m2*x + b2
-	 * (m1-m2)x + b1 = b2
-	 * (m1-m2)x = b2 - b1
-	 * x-intersect = (b2 - b1)/(m1 - m2)
-	 *
-	 * Plug x back in to calculate y
-	 * y-intersect = m1*(b2 - b1)/(m1 - m2) + b1
-	 *
-	 * check if x-intersect is between x1 and (x1 + velocity.x)
-	 * check if y-intersect is between y1 and (y1 + velocity.y)
-	 */
-
 	Particle* ballistic; // The particle we are checking to see if it collides with other particles.
 	Particle* target; // The target particle we are checking collision with.
 
@@ -183,31 +165,22 @@ void Physics::checkParticleCollisions()
 			bPosition = ballistic -> getPosition();
 			tPosition = target -> getPosition();
 
-			float b1, b2; // y-Intercepts
-			b1 = ((bVelocity.y / bVelocity.x) * bPosition.x) - bPosition.y;
-			b2 =  ((tVelocity.y / tVelocity.x) * tPosition.x) - tPosition.y;
+			float distanceBetweenParticles = calculateDistance(bPosition, tPosition);
 
-			float m1, m2; // Slopes
-			m1 = bVelocity.y / bVelocity.x;
-			m2 = tVelocity.y / tVelocity.x;
+			Vec2 bNewPosition, tNewPosition;
+			bNewPosition.x = bPosition.x + bVelocity.x;
+			tNewPosition.x = tPosition.x + tVelocity.x;
+			bNewPosition.y = bPosition.y + bVelocity.y;
+			tNewPosition.y = tPosition.y + tVelocity.y;
 
-			if(m1 == m2)
-				break;
 
-			// Calculate the point of intersection
-			float xIntersect = (b2 - b1) / (m1 - m2);
-			float yIntersect = m1 * xIntersect + b1;
+			float bDistance = calculateDistance(bPosition, bNewPosition);
+			float tDistance = calculateDistance(tPosition, tNewPosition);
 
-			if(i == 0)
+			if(distanceBetweenParticles < bDistance + tDistance)
 			{
-				std::cout << xIntersect << " X INTERSECTS Y "<< yIntersect <<"\n";
-				std::cout << bPosition.x << " X POSITION Y "<< bPosition.y <<"\n";
-			}
-
-			if(xIntersect >= bPosition.x - 1.0f && xIntersect < bPosition.x + 1.0f)
-			{
-				if(yIntersect >= bPosition.y - 1.0f && yIntersect < bPosition.y + 1.0f)
-					ballistic -> setColor(1.0f, 0.0f, 0.0f);
+				ballistic -> setColor(1.0f, 0.0f, 0.0f);
+				target -> setColor(1.0f, 0.0f, 0.0f);
 			}
 		}
 	}

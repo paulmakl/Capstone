@@ -28,6 +28,8 @@ public:
      */
     void updateParticleVelocities();
     
+    float calculateDistance(Vec2 a, Vec2 b);
+
     /*
      * Checks for collisions between
      * particles in the same box
