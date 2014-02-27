@@ -71,7 +71,7 @@ Particle Configs::random_confic_particles(int xSize, int ySize){
 
     a.setVelocity(xVelo, yVelo);
     a.setColor( 0.1f, 1.0f, 1.0f );
-    a.setMass(Randy::randf(0.1f, 0.9f)); // 1 = maximum inertia, 0 = no intertia
+    a.setMass(Randy::randf(1.0f, 1.0f)); // 1 = maximum inertia, 0 = no intertia
     return a;
 }
 

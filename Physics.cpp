@@ -143,8 +143,8 @@ void Physics::checkParticleCollisions()
 {
 	/*
 	 * y = mx + b
-	 * y = (velocity.x * x / velocity.y) + b
-	 * y - (velocity.x * x / velocity.y) = b
+	 * y = (velocity.y / velocity.x) * x + b
+	 * (velocity.y / velocity.x) * x - y = b
 	 *
 	 * y1 = m1*x1 + b1
 	 * y2 = m2*x2 + b2
@@ -152,7 +152,7 @@ void Physics::checkParticleCollisions()
 	 * Check if m1 and m2 are equal, exit if true
 	 *
 	 * Calculate x point of intersection
-	 * m1*x1 + b1 = m2*x2 + b2
+	 * m1*x + b1 = m2*x + b2
 	 * (m1-m2)x + b1 = b2
 	 * (m1-m2)x = b2 - b1
 	 * x-intersect = (b2 - b1)/(m1 - m2)
@@ -164,8 +164,55 @@ void Physics::checkParticleCollisions()
 	 * check if y-intersect is between y1 and (y1 + velocity.y)
 	 */
 
+	Particle* ballistic; // The particle we are checking to see if it collides with other particles.
+	Particle* target; // The target particle we are checking collision with.
 
-    int index = 0; // The index of the current particle
+	for(int i = 0; i < env -> numParticles; i++)
+	{
+		ballistic = env -> particles.getParticle(i);
+
+		for(int j = i+1; j <= env -> numParticles; j++)
+		{
+			target = env -> particles.getParticle(j);
+
+			Vec2 bVelocity, tVelocity;
+			bVelocity = ballistic -> getVelocity();
+			tVelocity = target -> getVelocity();
+
+			Vec2 bPosition, tPosition;
+			bPosition = ballistic -> getPosition();
+			tPosition = target -> getPosition();
+
+			float b1, b2; // y-Intercepts
+			b1 = ((bVelocity.y / bVelocity.x) * bPosition.x) - bPosition.y;
+			b2 =  ((tVelocity.y / tVelocity.x) * tPosition.x) - tPosition.y;
+
+			float m1, m2; // Slopes
+			m1 = bVelocity.y / bVelocity.x;
+			m2 = tVelocity.y / tVelocity.x;
+
+			if(m1 == m2)
+				break;
+
+			// Calculate the point of intersection
+			float xIntersect = (b2 - b1) / (m1 - m2);
+			float yIntersect = m1 * xIntersect + b1;
+
+			if(i == 0)
+			{
+				std::cout << xIntersect << " X INTERSECTS Y "<< yIntersect <<"\n";
+				std::cout << bPosition.x << " X POSITION Y "<< bPosition.y <<"\n";
+			}
+
+			if(xIntersect >= bPosition.x - 1.0f && xIntersect < bPosition.x + 1.0f)
+			{
+				if(yIntersect >= bPosition.y - 1.0f && yIntersect < bPosition.y + 1.0f)
+					ballistic -> setColor(1.0f, 0.0f, 0.0f);
+			}
+		}
+	}
+
+	/*int index = 0; // The index of the current particle
     for(int x = 0; x < env -> xSize-1; x++)
 	{
 		for(int y = 0; y < env -> ySize-1; y++)
@@ -175,9 +222,9 @@ void Physics::checkParticleCollisions()
             // While we are in the same box...
             while (cur -> boxID.x == x && cur -> boxID.y == y)
             {
-                
-                
-                
+
+
+
                 if(env -> numParticles > index)
                 {
                     index++; // Increment the index to move to the next particle.
@@ -189,7 +236,7 @@ void Physics::checkParticleCollisions()
                 }
             }
         }
-    }
+    }*/
 }
 
 void Physics::updateParticlePositions()
@@ -198,7 +245,7 @@ void Physics::updateParticlePositions()
 	for(int i = 0; i < env -> numParticles; i++)
 	{
 		cur = env->particles.getParticle(i);
-        cur -> moveFromVelocity();
+		cur -> moveFromVelocity();
 	}
 }
 

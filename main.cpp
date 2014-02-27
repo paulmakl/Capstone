@@ -16,7 +16,7 @@
 
 #define xWidth 64
 #define yWidth 64 // For now, keep xSize and ySize the same!
-#define Particles 10000
+#define Particles 100
 #include "Switch.h"
 #include "Randy.h"
 #include <iostream>
