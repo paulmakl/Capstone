@@ -10,7 +10,6 @@ void Node::setForce(float x, float y)
 {
     force.x = x;
     force.y = y;
-    //this -> setForceColor();
 }
 
 void Node::incForce(float x, float y)

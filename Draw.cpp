@@ -25,7 +25,7 @@ void Draw::displayGrid()
 
 void Draw::displayParticles()
 {
-	glPointSize(2.0);
+	glPointSize(1.0);
 	Vec2 position, velocity;
 	//glColor3f(1.0f, 1.0f, 1.0f);
 	float color = 1.0f;
