@@ -3,6 +3,7 @@
 
 #include "Particle.h"
 #include "Configs.h"
+#include "vectors.h"
 #include <math.h>
 #include <cstdlib>
 #include <vector>
@@ -20,12 +21,14 @@ public:
     void sortParticles();
     Particle* getParticle(int index);
     std::vector<Particle> particles;
-private:
+
     int xSize;
     int numParticles;
     
     int carlSort(int value, int start);
     void shakerSort(int start, int end);
+    int2 getParticlesListIndex(int2 boxID);
+    private:
 };
 
 

@@ -17,7 +17,10 @@ public:
     Vec2 position;
     Vec2 velocity;
     Vec3 color;
-
+    
+    Vec2 nextPosition;
+    int2 nextBoxID;
+    
     float mass;
     float volume;
     

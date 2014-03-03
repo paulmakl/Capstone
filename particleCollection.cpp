@@ -23,6 +23,26 @@ Particle * ParticleCollection::getParticle(int index){
     return &particles[index];
 }
 
+int2 ParticleCollection::getParticlesListIndex(int2 boxID){
+    int2 ret;
+    int i = 0;
+    int j = 0;
+    for (i = 0; i < particles.size(); i++) {
+        if(particles[i].boxID.x == boxID.x && particles[i].boxID.y == boxID.y){
+            ret.x = i;
+            break;
+        }
+    }
+    
+    for (j = i; j < particles.size(); j++){
+        if (particles[j].boxID.y != boxID.y && particles[j].boxID.x != boxID.x) {
+            ret.y = j;
+            break;
+        }
+    }
+    
+    return ret;
+}
 
 /*
  * Sorting Algorithms

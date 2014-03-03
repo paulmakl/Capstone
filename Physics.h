@@ -35,6 +35,7 @@ public:
      * particles in the same box
      */
     void checkParticleCollisions();
+    void checkParticlecollisionsAtIndex(int i, int2 boxID);
     
     /*
      * Based on the grid forces and each
