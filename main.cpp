@@ -21,6 +21,7 @@
 #include "Switch.h"
 #include "Randy.h"
 #include <iostream>
+
 /*
  * Main function
  */
@@ -28,5 +29,6 @@ int main(int argc, char** argv)
 {
     Switch x(xWidth, yWidth, Particles, argc, argv);
    	glutMainLoop();
+
 	return 0;
 };

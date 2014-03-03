@@ -14,15 +14,16 @@
 #include "Physics.h"
 #include "Draw.h"
 #include <iostream>
+
 #ifdef __APPLE__
 #define pixels 720
 #else
-#define pixels 900
+#define pixels 1000
 #endif
 
 class Switch{
 public:
-    
+
     Switch(float x, float y, int numPs, int argc, char** argv);
     void init(float sizeX, float sizeY, int argc, char** argv);
     static void display();

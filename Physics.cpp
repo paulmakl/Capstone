@@ -1,17 +1,16 @@
 #include "Physics.h" 
 #include <iostream>
 
-void Physics::init(Environment* envPointer){
+void Physics::init(Environment* envPointer)
+{
 	env = envPointer;
 }
 
 Vec2 Physics::interpolate(Vec2* a, Vec2* b, float offset)
 {
 	Vec2 ret;
-	ret.x = offset*a->x + (1-offset)*b->x;
-	ret.y = offset*a->y + (1-offset)*b->y;
-	//ret.x = a->x + b->x;
-	//ret.y = a->y + b->y;
+	ret.x = offset*a -> x + (1-offset)*b -> x;
+	ret.y = offset*a -> y + (1-offset)*b -> y;
 	return ret;
 }
 
@@ -61,7 +60,7 @@ void Physics::updateGridForces()
 				xLowForce = extrapolate(momentum, xOffset);
 
 				// Extrapolate the force at xLowForce to the bottom left node of boxID.
-				Node * node = &env -> grid.grid[x][y];
+				Node* node = &env -> grid.grid[x][y];
 				newForce = extrapolate(xLowForce, yOffset);
 				node -> incForce(newForce.x, newForce.y);
 				node -> incParticlesNearNode();
@@ -102,9 +101,9 @@ void Physics::updateGridForces()
 void Physics::updateParticleVelocities()
 {
 	Vec2 position, velocity, newVelocity;
+	Particle* cur;
 	for(int i = 0; i < env -> numParticles; i++)
 	{
-		Particle* cur;
 		cur = env->particles.getParticle(i);
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
