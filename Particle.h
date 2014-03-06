@@ -18,6 +18,8 @@ public:
     Vec2 velocity;
     Vec3 color;
     
+    int name;
+    
     Vec2 nextPosition;
     int2 nextBoxID;
     

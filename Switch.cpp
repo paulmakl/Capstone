@@ -68,7 +68,7 @@ void Switch::display(void)
 	glPushMatrix();
 
 	draw.displayParticles();
-	draw.displayGrid();
+	//draw.displayGrid();
 	//draw.displayShapes();
 
 	frame++;
@@ -77,7 +77,7 @@ void Switch::display(void)
 	// Calculate only if the difference is greater than 1 second.
 	if(curTime - oldTime > 1000)
 	{
-		std::cout << "FPS: " << frame*1000.0f/(curTime - oldTime) << "\n";
+		//std::cout << "FPS: " << frame*1000.0f/(curTime - oldTime) << "\n";
 	//	char unsigned display[] = { 'F','P','S',':', ' ', '\0'};
 	//	glutBitmapString(GLUT_BITMAP_HELVETICA_10, display);
 		oldTime = curTime;

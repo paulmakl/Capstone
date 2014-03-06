@@ -11,7 +11,9 @@ void ParticleCollection::init(float nparticles, int xSize, int ySize){
 	{
 		Particle a;
         a = Configs::random_confic_particles(xSize, ySize);
-		particles[i] = a;
+		//a = Configs::test_config_particles();
+        a.name = i;
+        particles[i] = a;
 	}
 }
 
@@ -41,8 +43,52 @@ int2 ParticleCollection::getParticlesListIndex(int2 boxID){
         }
     }
     
+    
+    
     return ret;
 }
+
+/*
+ * Search Algorithms
+ */
+
+/*
+ * returns an int2 a
+ * a.x is the start of a box in the list of particles
+ * a.y is the end index of the box in the list of particles
+ */
+int2 ParticleCollection::pseudoBinarySearch(int2 boxID){
+    int2 ret;
+    int index = particles.size()/2;
+    int temp = 0;
+    while( index > 0 || index == particles.size() ){
+        if (particles[index].boxID.x == boxID.x) {
+            break;
+        }else if(particles[index].boxID.x > boxID.x){
+            temp = (particles.size() - index) / 2;
+            index = fmin( index + temp, particles.size() );
+        }else{
+            index = fmax( (index-1) / 2, 0 );
+        }
+    }
+    
+    for (int i = index; i >= 0; i--) {
+        if(particles[i].boxID.x != boxID.x && particles[i].boxID.y != boxID.y){
+            ret.x = i;
+            break;
+        }
+    }
+    
+    for (int i = index; i < particles.size(); i++) {
+        if(particles[i].boxID.x != boxID.x && particles[i].boxID.y != boxID.y){
+            ret.y = i;
+            break;
+        }
+    }
+    
+    return ret;
+}
+
 
 /*
  * Sorting Algorithms

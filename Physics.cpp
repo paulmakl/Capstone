@@ -165,9 +165,9 @@ void Physics::checkParticleCollisions()
 	{
         Particle* cur = env -> particles.getParticle(i);
         checkParticlecollisionsAtIndex(i, cur -> boxID);
-        if(cur -> nextBoxID.x != cur -> boxID.x || cur -> nextBoxID.y != cur -> boxID.y){
-            checkParticlecollisionsAtIndex(i, cur -> nextBoxID);
-        }
+        //if(cur -> nextBoxID.x != cur -> boxID.x || cur -> nextBoxID.y != cur -> boxID.y){
+        //    checkParticlecollisionsAtIndex(i, cur -> nextBoxID);
+        //}
 	}
 }
 
@@ -178,47 +178,50 @@ void Physics::checkParticlecollisionsAtIndex(int i, int2 boxID){
     ballistic = env -> particles.getParticle(i);
     
     int2 boxListIndex = env -> particles.getParticlesListIndex(boxID);
+    //int2 boxListIndex = env -> particles.pseudoBinarySearch(boxID);
     //std::cout << boxListIndex.x << " " << boxListIndex.y;
     //for(int j = i+1; j <= env -> numParticles; j++)
     for(int j = boxListIndex.x; j <= boxListIndex.y; j++)
     {
         
         target = env -> particles.getParticle(j);
-        
-        Vec2 bVelocity, tVelocity;
-        bVelocity = ballistic -> getVelocity();
-        tVelocity = target -> getVelocity();
-        
-        Vec2 bPosition, tPosition;
-        bPosition = ballistic -> getPosition();
-        tPosition = target -> getPosition();
-        
-        // Calculate the distance between the ballistic and target particles.
-        float distanceBetweenParticles = calculateDistance(bPosition, tPosition);
-        
-        Vec2 bNewPosition, tNewPosition;
-        bNewPosition.x = bPosition.x + bVelocity.x;
-        tNewPosition.x = tPosition.x + tVelocity.x;
-        bNewPosition.y = bPosition.y + bVelocity.y;
-        tNewPosition.y = tPosition.y + tVelocity.y;
-        
-        float bDistance = calculateDistance(bPosition, bNewPosition);
-        float tDistance = calculateDistance(tPosition, tNewPosition);
-        
-        if(distanceBetweenParticles < bDistance + tDistance)
-        {
-            ballistic -> setColor(1.0f, 0.0f, 0.0f);
-            target -> setColor(1.0f, 0.0f, 0.0f);
+        if(target->name != ballistic->name){
+            Vec2 bVelocity, tVelocity;
+            bVelocity = ballistic -> getVelocity();
+            tVelocity = target -> getVelocity();
             
-            float newX = (bVelocity.x + tVelocity.x)/2;
-            float newY = (bVelocity.y + tVelocity.y)/2;
+            Vec2 bPosition, tPosition;
+            bPosition = ballistic -> getPosition();
+            tPosition = target -> getPosition();
             
-            ballistic -> setVelocity(newX, newY);
-            target -> setVelocity(newX, newY);
+            // Calculate the distance between the ballistic and target particles.
+            float distanceBetweenParticles = calculateDistance(bPosition, tPosition);
             
-            ballistic -> setMass(0.0f);
-            target -> setMass(0.0f);
+            Vec2 bNewPosition, tNewPosition;
+            bNewPosition.x = bPosition.x + bVelocity.x;
+            tNewPosition.x = tPosition.x + tVelocity.x;
+            bNewPosition.y = bPosition.y + bVelocity.y;
+            tNewPosition.y = tPosition.y + tVelocity.y;
+            
+            float bDistance = calculateDistance(bPosition, bNewPosition);
+            float tDistance = calculateDistance(tPosition, tNewPosition);
+            
+            if(distanceBetweenParticles < bDistance + tDistance)
+            {
+                ballistic -> setColor(1.0f, 0.0f, 0.0f);
+                target -> setColor(1.0f, 0.0f, 0.0f);
+                
+                float newX = (bVelocity.x + tVelocity.x)/2;
+                float newY = (bVelocity.y + tVelocity.y)/2;
+                
+                ballistic -> setVelocity(newX, newY);
+                target -> setVelocity(newX, newY);
+                
+                ballistic -> setMass(0.0f);
+                target -> setMass(0.0f);
+            }
         }
+
     }
 }
 

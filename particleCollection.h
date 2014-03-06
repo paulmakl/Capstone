@@ -28,6 +28,8 @@ public:
     int carlSort(int value, int start);
     void shakerSort(int start, int end);
     int2 getParticlesListIndex(int2 boxID);
+    
+    int2 pseudoBinarySearch(int2 boxID);
     private:
 };
 

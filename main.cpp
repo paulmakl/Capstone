@@ -14,12 +14,13 @@
 #include <windows.h>
 #endif
 
-#define xWidth 64
-#define yWidth 64 // For now, keep xSize and ySize the same!
-#define Particles 1000
+#define xWidth 1000
+#define yWidth 1000 // For now, keep xSize and ySize the same!
+#define Particles 5000
 
 #include "Switch.h"
 #include "Randy.h"
+#include "vectors.h"
 #include <iostream>
 
 /*
