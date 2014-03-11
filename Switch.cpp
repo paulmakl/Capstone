@@ -68,7 +68,7 @@ void Switch::display(void)
 	glPushMatrix();
 
 	draw.displayParticles();
-	//draw.displayGrid();
+	draw.displayGrid();
 	//draw.displayShapes();
 
 	frame++;

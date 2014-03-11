@@ -7,6 +7,7 @@
 #include <math.h>
 #include <cstdlib>
 #include <vector>
+#include <iostream>
 
 //using std::vector;
 
@@ -21,6 +22,7 @@ public:
     void sortParticles();
     Particle* getParticle(int index);
     std::vector<Particle> particles;
+    std::vector<std::vector<int>> indexTracker;
 
     int xSize;
     int numParticles;
@@ -30,6 +32,8 @@ public:
     int2 getParticlesListIndex(int2 boxID);
     
     int2 pseudoBinarySearch(int2 boxID);
+    
+    void initializeIndexTracker(int xSize, int ySize);
     private:
 };
 

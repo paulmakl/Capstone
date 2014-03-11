@@ -165,9 +165,9 @@ void Physics::checkParticleCollisions()
 	{
         Particle* cur = env -> particles.getParticle(i);
         checkParticlecollisionsAtIndex(i, cur -> boxID);
-        //if(cur -> nextBoxID.x != cur -> boxID.x || cur -> nextBoxID.y != cur -> boxID.y){
-        //    checkParticlecollisionsAtIndex(i, cur -> nextBoxID);
-        //}
+        if(cur -> nextBoxID.x != cur -> boxID.x || cur -> nextBoxID.y != cur -> boxID.y){
+            checkParticlecollisionsAtIndex(i, cur -> nextBoxID);
+        }
 	}
 }
 
@@ -181,7 +181,7 @@ void Physics::checkParticlecollisionsAtIndex(int i, int2 boxID){
     //int2 boxListIndex = env -> particles.pseudoBinarySearch(boxID);
     //std::cout << boxListIndex.x << " " << boxListIndex.y;
     //for(int j = i+1; j <= env -> numParticles; j++)
-    for(int j = boxListIndex.x; j <= boxListIndex.y; j++)
+    for(int j = boxListIndex.x; j < boxListIndex.y; j++)
     {
         
         target = env -> particles.getParticle(j);

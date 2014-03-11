@@ -15,6 +15,14 @@ void ParticleCollection::init(float nparticles, int xSize, int ySize){
         a.name = i;
         particles[i] = a;
 	}
+    initializeIndexTracker(xSize, ySize);
+}
+
+void ParticleCollection::initializeIndexTracker(int xSize, int ySize){
+    indexTracker.resize(xSize);
+    for (int i = 0; i < ySize; i++) {
+        indexTracker[i].resize(ySize);
+    }
 }
 
 /*
@@ -27,6 +35,8 @@ Particle * ParticleCollection::getParticle(int index){
 
 int2 ParticleCollection::getParticlesListIndex(int2 boxID){
     int2 ret;
+    ret.x = 0;
+    ret.y = 0;
     int i = 0;
     int j = 0;
     for (i = 0; i < particles.size(); i++) {
@@ -38,7 +48,7 @@ int2 ParticleCollection::getParticlesListIndex(int2 boxID){
     
     for (j = i; j < particles.size(); j++){
         if (particles[j].boxID.y != boxID.y && particles[j].boxID.x != boxID.x) {
-            ret.y = j;
+            ret.y = j-1;
             break;
         }
     }
@@ -142,8 +152,10 @@ void ParticleCollection::sortParticles()
 	{
 		endIndex = carlSort(x, startIndex); // carlSort will return the last index of the current x-values.
 		shakerSort(startIndex, endIndex);
-		startIndex = endIndex;
+        startIndex = endIndex;
 	}
+    
+    
 }
 
 
