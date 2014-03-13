@@ -13,11 +13,17 @@ void Draw::displayGrid()
 	{
 		for(int y = 0; y < env -> ySize; y++)
 		{
-			Node * cur = &env->grid.grid[x][y];
-            cur -> setForceColor();
-			color = cur -> getRGBA();
-			glColor3f(color.r, color.g, color.b);
-			glVertex3f(x, y, 0);
+			for(int z = 0; z < env -> zSize; z++)
+			{
+				Node* cur = &env->grid.grid[x][y][z];
+				cur -> setForceColor();
+				color = cur -> getRGBA();
+				float alpha = 0.05f;
+				if(color.r + color.g + color.b > 0.25f)
+					alpha = 1.0f;
+				glColor4f(color.r, color.g, color.b, alpha);
+				glVertex3f(x, y, z);
+			}
 		}
 	}
 	glEnd();
@@ -26,7 +32,8 @@ void Draw::displayGrid()
 void Draw::displayParticles()
 {
 	glPointSize(1.0);
-	Vec2 position, velocity;
+	Vec3 position;
+	Vec2 velocity;
 	//glColor3f(1.0f, 1.0f, 1.0f);
 	float color = 1.0f;
 	glBegin(GL_POINTS);
@@ -40,11 +47,11 @@ void Draw::displayParticles()
 		color -= 0.0001f;
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
-        float r = cur -> getColor().x;
-        float g = cur -> getColor().y;
-        float b = cur -> getColor().z;
+		float r = cur -> getColor().x;
+		float g = cur -> getColor().y;
+		float b = cur -> getColor().z;
 		glColor3f(r, g, b);
-		glVertex3f(position.x, position.y, 0);
+		glVertex3f(position.x, position.y, position.z);
 	}
 	glEnd();
 }

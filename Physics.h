@@ -28,7 +28,7 @@ public:
      */
     void updateParticleVelocities();
     
-    float calculateDistance(Vec2 a, Vec2 b);
+    float calculateDistance(Vec3 a, Vec3 b);
 
     /*
      * Checks for collisions between

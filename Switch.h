@@ -24,7 +24,7 @@
 class Switch{
 public:
 
-    Switch(float x, float y, int numPs, int argc, char** argv);
+    Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, char** argv);
     void init(float sizeX, float sizeY, int argc, char** argv);
     static void display();
     static void timer(int id);

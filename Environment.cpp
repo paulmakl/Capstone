@@ -8,12 +8,13 @@ Environment::Environment(){
 
 }
 
-void Environment::init(int x, int y, int numPs){
+void Environment::init(int x, int y, int z, int numPs){
 	xSize = x;
 	ySize = y;
-	particles.init(numPs, x, y);
+	zSize = z;
+	particles.init(numPs, x, y, z);
 	numParticles = numPs;
-	grid.init(x, y);
+	grid.init(x, y, z);
 }
 
 /*
@@ -22,7 +23,7 @@ void Environment::init(int x, int y, int numPs){
 
 void Environment::generateNodes()
 {
-	int x, y;
+	int x, y, z;
 	float r, g, b;
 	float forceX, forceY;
 	forceX = 0.0;//0.064;
@@ -31,13 +32,16 @@ void Environment::generateNodes()
 		forceY = 0.0f;
 		for(y = 0; y < ySize; y++)
 		{
-			Node a;
-			r = 0.2f + rand()%30/100.0f;
-			g = 0.2f + rand()%30/100.0f;
-			b = 0.2f + rand()%30/100.0f;
-			a.setRGBA(r, g, b, 1.0f);
-			a.setForce(forceX + rand()%100/1000.0f - 0.055f, forceY + rand()%100/1000.0f - 0.055f); //, rand()%100/1000.0f - 0.055f);
-			grid.grid[x][y] = a;
+			for(z = 0; z < zSize; z++)
+			{
+				Node a;
+				r = 0.2f + rand()%30/100.0f;
+				g = 0.2f + rand()%30/100.0f;
+				b = 0.2f + rand()%30/100.0f;
+				a.setRGBA(r, g, b, 1.0f);
+				a.setForce(forceX + rand()%100/1000.0f - 0.055f, forceY + rand()%100/1000.0f - 0.055f); //, rand()%100/1000.0f - 0.055f);
+				grid.grid[x][y][z] = a;
+			}
 		}
 	}
 }
@@ -59,6 +63,6 @@ void Environment::generateShapes()
 }
 
 void Environment::sortParticles(){
-    particles.sortParticles();
+	particles.sortParticles();
 }
 

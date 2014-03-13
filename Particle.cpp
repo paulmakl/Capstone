@@ -6,18 +6,20 @@
  */
 #include "Particle.h"
 
-void Particle::setPosition(float x, float y)
+void Particle::setPosition(float x, float y, float z)
 {
     position.x = x;
     position.y = y;
+    position.z = z;
     boxID.x = floor(position.x);
     boxID.y = floor(position.y);
 }
 
-void Particle::setVelocity(float x, float y)
+void Particle::setVelocity(float x, float y, float z)
 {
     velocity.x = x;
     velocity.y = y;
+    // TODO: ADD VELOCITY.Z
 }
 
 void Particle::setMass(float newMass)
@@ -42,7 +44,7 @@ Vec2 Particle::getVelocity()
     return velocity;
 }
 
-Vec2 Particle::getPosition()
+Vec3 Particle::getPosition()
 {
     return position;
 }

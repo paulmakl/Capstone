@@ -1,4 +1,5 @@
 #include "Switch.h"
+#include <math.h>
 #include <iostream>
 #include <sstream>
 
@@ -8,19 +9,17 @@ Draw draw;
 int disps = 0;
 int frame, oldTime, curTime;
 
-Switch::Switch(float x, float y, int numPs, int argc, char** argv)
+Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, char** argv)
 {
 
-	env.init(x, y, numPs);
+	env.init(xWidth, yWidth, zWidth, numPs);
 
 	phys.init(&env);
 	draw.init(&env);
 
 	glutInit(&argc, argv); // Initialize GLUT
 	//glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-	glutInitDisplayMode(GLUT_DEPTH |
-			GLUT_DOUBLE |
-			GLUT_RGBA);
+	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 
 	glutInitWindowSize(pixels, pixels); // Set the window's initial width & height
 	glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
@@ -32,7 +31,14 @@ Switch::Switch(float x, float y, int numPs, int argc, char** argv)
 	oldTime = 0;
 	curTime = 0;
 
-	glOrtho(-0.1f , env.xSize - 0.9f, -0.1f, env.ySize - 0.9f, 30.0, -10.0);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+	gluPerspective(85.0, 1.0, 0.0, env.xSize);
+	gluLookAt(env.xSize, env.ySize/2.0, env.xSize*1.3,
+	            0.0, env.ySize/2.0, 0.0,
+	            0.0, 1.0, 0.0); // eye, center, up
+	//glOrtho(-0.1f , env.xSize - 0.9f, -0.1f, env.ySize - 0.9f, 30.0, -10.0);
 
 }
 

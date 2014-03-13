@@ -27,7 +27,8 @@ void Physics::updateGridForces()
 	int index = 0; // The index of the current particle
 	float xOffset, yOffset; // The distance between the particle at 'index'
 	// the upper xnode and upper ynode
-	Vec2 position, velocity, newForce, xHighForce, xLowForce;
+	Vec2 velocity, newForce, xHighForce, xLowForce;
+	Vec3 position;
 	float mass;
 	// Go through every valid box on the grid.
 	// A box is vaid if the lower left corner is between
@@ -60,25 +61,25 @@ void Physics::updateGridForces()
 				xLowForce = extrapolate(momentum, xOffset);
 
 				// Extrapolate the force at xLowForce to the bottom left node of boxID.
-				Node* node = &env -> grid.grid[x][y];
+				Node* node = &env -> grid.grid[x][y][0.0L];
 				newForce = extrapolate(xLowForce, yOffset);
 				node -> incForce(newForce.x, newForce.y);
 				node -> incParticlesNearNode();
 
 				// Extrapolate the force at xLowForce to the upper left node of boxID.
-				node = &env -> grid.grid[x][y + 1];
+				node = &env -> grid.grid[x][y + 1][0.0L];
 				newForce = extrapolate(xLowForce, 1 - yOffset);
 				node -> incForce(newForce.x, newForce.y);
 				node -> incParticlesNearNode();
 
 				// Extrapolate the force at xHighForce to the upper right node of boxID.
-				node = &env -> grid.grid[x + 1][y];
+				node = &env -> grid.grid[x + 1][y][0.0L];
 				newForce = extrapolate(xLowForce, yOffset);
 				node -> incForce(newForce.x, newForce.y);
 				node -> incParticlesNearNode();
 
 				// Extrapolate the force at xHighForce to the upper left node of boxID.
-				node = &env -> grid.grid[x + 1][y + 1];
+				node = &env -> grid.grid[x + 1][y + 1][0.0L];
 				newForce = extrapolate(xLowForce, 1 - yOffset);
 				node -> incForce(newForce.x, newForce.y);
 				node -> incParticlesNearNode();
@@ -100,7 +101,8 @@ void Physics::updateGridForces()
 
 void Physics::updateParticleVelocities()
 {
-	Vec2 position, velocity, newVelocity;
+	Vec2 velocity, newVelocity;
+	Vec3 position;
 	Particle* cur;
 	for(int i = 0; i < env -> numParticles; i++)
 	{
@@ -112,11 +114,13 @@ void Physics::updateParticleVelocities()
 		int highX = fmin(ceil(position.x), env -> xSize - 1);
 		int lowY = fmax( floor(position.y), 0);
 		int highY = fmin( ceil(position.y), env -> ySize - 1);
+		int lowZ = fmax( floor(position.z), 0);
+		int highZ = fmin( ceil(position.z), env -> zSize - 1);
 
-		Vec2 downLeftForce = env->grid.grid[lowX][lowY].getForce();
-		Vec2 downRightForce = env->grid.grid[highX][lowY].getForce();
-		Vec2 upLeftForce = env->grid.grid[lowX][highY].getForce();
-		Vec2 upRightForce = env->grid.grid[highX][highY].getForce();
+		Vec2 downLeftForce = env->grid.grid[lowX][lowY][0.0L].getForce();
+		Vec2 downRightForce = env->grid.grid[highX][lowY][0.0L].getForce();
+		Vec2 upLeftForce = env->grid.grid[lowX][highY][0.0L].getForce();
+		Vec2 upRightForce = env->grid.grid[highX][highY][0.0L].getForce();
 
 		float xOffset = highX - position.x;
 		float yOffset = highY - position.y;
@@ -143,18 +147,18 @@ void Physics::updateParticleVelocities()
 			//newVelocity.y = 0;
 			newVelocity.y = -newVelocity.y;
 		}
-		cur -> setVelocity(newVelocity.x, newVelocity.y);
-        
-        //Based on the new velocity, we calculate the new position
-        Vec2 bNewPosition;
-        bNewPosition.x = cur -> position.x + newVelocity.x;
-        bNewPosition.y = cur -> position.y + newVelocity.y;
-        cur -> nextPosition = bNewPosition;
-        
+		cur -> setVelocity(newVelocity.x, newVelocity.y, 0.0L);
+
+		//Based on the new velocity, we calculate the new position
+		Vec2 bNewPosition;
+		bNewPosition.x = cur -> position.x + newVelocity.x;
+		bNewPosition.y = cur -> position.y + newVelocity.y;
+		cur -> nextPosition = bNewPosition;
+
 	}
 }
 
-float Physics::calculateDistance(Vec2 a, Vec2 b)
+float Physics::calculateDistance(Vec3 a, Vec3 b)
 {
 	return pow(a.x - b.x, 2) + pow(a.y - b.y, 2);
 }
@@ -163,66 +167,67 @@ void Physics::checkParticleCollisions()
 {
 	for(int i = 0; i < env -> numParticles; i++)
 	{
-        Particle* cur = env -> particles.getParticle(i);
-        checkParticlecollisionsAtIndex(i, cur -> boxID);
-        if(cur -> nextBoxID.x != cur -> boxID.x || cur -> nextBoxID.y != cur -> boxID.y){
-            checkParticlecollisionsAtIndex(i, cur -> nextBoxID);
-        }
+		Particle* cur = env -> particles.getParticle(i);
+		checkParticlecollisionsAtIndex(i, cur -> boxID);
+		if(cur -> nextBoxID.x != cur -> boxID.x || cur -> nextBoxID.y != cur -> boxID.y){
+			checkParticlecollisionsAtIndex(i, cur -> nextBoxID);
+		}
 	}
 }
 
 void Physics::checkParticlecollisionsAtIndex(int i, int2 boxID){
-    Particle* ballistic; // The particle we are checking to see if it collides with other particles.
+	Particle* ballistic; // The particle we are checking to see if it collides with other particles.
 	Particle* target; // The target particle we are checking collision with.
-    
-    ballistic = env -> particles.getParticle(i);
-    
-    int2 boxListIndex = env -> particles.getParticlesListIndex(boxID);
-    //int2 boxListIndex = env -> particles.pseudoBinarySearch(boxID);
-    //std::cout << boxListIndex.x << " " << boxListIndex.y;
-    //for(int j = i+1; j <= env -> numParticles; j++)
-    for(int j = boxListIndex.x; j < boxListIndex.y; j++)
-    {
-        
-        target = env -> particles.getParticle(j);
-        if(target->name != ballistic->name){
-            Vec2 bVelocity, tVelocity;
-            bVelocity = ballistic -> getVelocity();
-            tVelocity = target -> getVelocity();
-            
-            Vec2 bPosition, tPosition;
-            bPosition = ballistic -> getPosition();
-            tPosition = target -> getPosition();
-            
-            // Calculate the distance between the ballistic and target particles.
-            float distanceBetweenParticles = calculateDistance(bPosition, tPosition);
-            
-            Vec2 bNewPosition, tNewPosition;
-            bNewPosition.x = bPosition.x + bVelocity.x;
-            tNewPosition.x = tPosition.x + tVelocity.x;
-            bNewPosition.y = bPosition.y + bVelocity.y;
-            tNewPosition.y = tPosition.y + tVelocity.y;
-            
-            float bDistance = calculateDistance(bPosition, bNewPosition);
-            float tDistance = calculateDistance(tPosition, tNewPosition);
-            
-            if(distanceBetweenParticles < bDistance + tDistance)
-            {
-                ballistic -> setColor(1.0f, 0.0f, 0.0f);
-                target -> setColor(1.0f, 0.0f, 0.0f);
-                
-                float newX = (bVelocity.x + tVelocity.x)/2;
-                float newY = (bVelocity.y + tVelocity.y)/2;
-                
-                ballistic -> setVelocity(newX, newY);
-                target -> setVelocity(newX, newY);
-                
-                ballistic -> setMass(0.0f);
-                target -> setMass(0.0f);
-            }
-        }
 
-    }
+	ballistic = env -> particles.getParticle(i);
+
+	int2 boxListIndex = env -> particles.getParticlesListIndex(boxID);
+	//int2 boxListIndex = env -> particles.pseudoBinarySearch(boxID);
+	//std::cout << boxListIndex.x << " " << boxListIndex.y;
+	//for(int j = i+1; j <= env -> numParticles; j++)
+	for(int j = boxListIndex.x; j < boxListIndex.y; j++)
+	{
+
+		target = env -> particles.getParticle(j);
+		if(target->name != ballistic->name){
+			Vec2 bVelocity, tVelocity;
+			bVelocity = ballistic -> getVelocity();
+			tVelocity = target -> getVelocity();
+
+			Vec3 bPosition, tPosition;
+			bPosition = ballistic -> getPosition();
+			tPosition = target -> getPosition();
+
+			// Calculate the distance between the ballistic and target particles.
+			float distanceBetweenParticles = calculateDistance(bPosition, tPosition);
+
+			Vec3 bNewPosition, tNewPosition;
+			bNewPosition.x = bPosition.x + bVelocity.x;
+			tNewPosition.x = tPosition.x + tVelocity.x;
+			bNewPosition.y = bPosition.y + bVelocity.y;
+			tNewPosition.y = tPosition.y + tVelocity.y;
+			// TODO z
+
+			float bDistance = calculateDistance(bPosition, bNewPosition);
+			float tDistance = calculateDistance(tPosition, tNewPosition);
+
+			if(distanceBetweenParticles < bDistance + tDistance)
+			{
+				ballistic -> setColor(1.0f, 0.0f, 0.0f);
+				target -> setColor(1.0f, 0.0f, 0.0f);
+
+				float newX = (bVelocity.x + tVelocity.x)/2;
+				float newY = (bVelocity.y + tVelocity.y)/2;
+
+				ballistic -> setVelocity(newX, newY, 0.0L);
+				target -> setVelocity(newX, newY, 0.0L);
+
+				ballistic -> setMass(0.0f);
+				target -> setMass(0.0f);
+			}
+		}
+
+	}
 }
 
 void Physics::updateParticlePositions()
@@ -245,7 +250,7 @@ void Physics::addRandomVelocity()
 		velocity.x += (rand()%100)/10000.0f - 0.0054f;
 		velocity.y += (rand()%100)/10000.0f - 0.0054f;
 
-		cur->setVelocity(velocity.x, velocity.y);
+		cur->setVelocity(velocity.x, velocity.y, 0.0L);
 	}
 }
 
@@ -258,7 +263,7 @@ void Physics::gravity()
 		Vec2 velocity = cur-> getVelocity();
 		velocity.y -= (2.0f - cur -> getMass()) * force_gravity;
 
-		cur->setVelocity(velocity.x, velocity.y);
+		cur->setVelocity(velocity.x, velocity.y, 0.0L);
 	}
 }
 
@@ -293,7 +298,10 @@ void Physics::checkEulerianCollisions()
 		{
 			for(int y = floor(position.y - offset); y <= ceil(position.y + offset); y++)
 			{
-				env->grid.grid[x][y].setRGBA(1.0f, 0.0f, 0.0f, 1.0f);
+				for(int z = floor(position.z - offset); y <= ceil(position.z + offset); y++)
+				{
+					env->grid.grid[x][y][z].setRGBA(1.0f, 0.0f, 0.0f, 1.0f);
+				}
 			}
 		}
 	}
@@ -305,7 +313,10 @@ void Physics::resetNodes()
 	{
 		for (int j = 0; j < env -> ySize; j++)
 		{
-			env -> grid.grid[i][j].reset();
+			for(int k = 0; k < env -> zSize; k++)
+			{
+				env -> grid.grid[i][j][k].reset();
+			}
 		}
 	}
 }

@@ -3,14 +3,15 @@
 /*
  * Initialization Algorithms
  */
-void ParticleCollection::init(float nparticles, int xSize, int ySize){
+void ParticleCollection::init(float nparticles, int xSize, int ySize, int zSize)
+{
     numParticles = nparticles;
     particles.resize(numParticles);
     this->xSize = xSize;
 	for(int i = 0; i < numParticles; i++)
 	{
 		Particle a;
-        a = Configs::random_confic_particles(xSize, ySize);
+        a = Configs::random_confic_particles(xSize, ySize, zSize);
 		//a = Configs::test_config_particles();
         a.name = i;
         particles[i] = a;

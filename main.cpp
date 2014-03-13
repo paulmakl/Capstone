@@ -14,9 +14,11 @@
 #include <windows.h>
 #endif
 
-#define xWidth 64
-#define yWidth 64 // For now, keep xSize and ySize the same!
-#define Particles 3000
+/*#define xWidth 64
+#define yWidth 64
+#define zWidth 64 // Keep these the same for now!
+#define Particles 1000
+*/
 
 #include "Switch.h"
 #include "Randy.h"
@@ -28,7 +30,11 @@
  */
 int main(int argc, char** argv)
 {
-    Switch x(xWidth, yWidth, Particles, argc, argv);
+	int xa = 128;
+	int ya = 128;
+	int za = 128;
+	int p = 2000;
+    Switch x(xa, ya, za, p, argc, argv);
    	glutMainLoop();
 
 	return 0;
