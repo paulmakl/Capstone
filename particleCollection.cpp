@@ -23,6 +23,11 @@ void ParticleCollection::initializeIndexTracker(int xSize, int ySize){
     for (int i = 0; i < ySize; i++) {
         indexTracker[i].resize(ySize);
     }
+    for (int i = 0; i < indexTracker.size(); i++) {
+        for (int j = 0; j < indexTracker[0].size(); j++) {
+            indexTracker[i][j] = -1;
+        }
+    }
 }
 
 /*
@@ -65,7 +70,7 @@ int2 ParticleCollection::getParticlesListIndex(int2 boxID){
 /*
  * returns an int2 a
  * a.x is the start of a box in the list of particles
- * a.y is the end index of the box in the list of particles
+ * a.y is the end index of the b    ox in the list of particles
  */
 int2 ParticleCollection::pseudoBinarySearch(int2 boxID){
     int2 ret;
@@ -154,8 +159,7 @@ void ParticleCollection::sortParticles()
 		shakerSort(startIndex, endIndex);
         startIndex = endIndex;
 	}
-    
-    
+
 }
 
 

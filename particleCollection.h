@@ -22,6 +22,11 @@ public:
     void sortParticles();
     Particle* getParticle(int index);
     std::vector<Particle> particles;
+    /*
+     * This 2d vector tracks the starting locations for each box
+     * in the list of particles
+     * boxes that have no particles in them have -1 as their index;
+     */
     std::vector<std::vector<int>> indexTracker;
 
     int xSize;
