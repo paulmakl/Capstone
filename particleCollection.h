@@ -27,7 +27,7 @@ public:
      * in the list of particles
      * boxes that have no particles in them have -1 as their index;
      */
-    std::vector<std::vector<int>> indexTracker;
+    std::vector<std::vector<int> > indexTracker;
 
     int xSize;
     int numParticles;
