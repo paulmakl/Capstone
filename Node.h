@@ -20,7 +20,7 @@ class Node
 {
 public:
 	Vec4 color;
-	Vec2 force;
+	Vec3 force;
     float particles_near_node;
     
     
@@ -29,11 +29,11 @@ public:
     void setRGBA(float r, float g, float b, float a);
     void setForceColor();
 
-	Vec2 getForce();
+	Vec3 getForce();
 	Vec4 getRGBA();
     
     void incParticlesNearNode();
-    void incForce(float x, float y);
+    void incForce(float x, float y, float z);
     
     void reset();
     

@@ -25,14 +25,14 @@
 #include "vectors.h"
 #include <iostream>
 
-/*
- * Main function
+/**
+ * The main function will initialize a switch instance, then proceed to initiate the FreeGLUT loop.
  */
 int main(int argc, char** argv)
 {
-	int xa = 128;
-	int ya = 128;
-	int za = 128;
+	int xa = 16;
+	int ya = 16;
+	int za = 16;
 	int p = 2000;
     Switch x(xa, ya, za, p, argc, argv);
    	glutMainLoop();

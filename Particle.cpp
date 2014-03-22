@@ -13,13 +13,14 @@ void Particle::setPosition(float x, float y, float z)
     position.z = z;
     boxID.x = floor(position.x);
     boxID.y = floor(position.y);
+    boxID.z = floor(position.z);
 }
 
 void Particle::setVelocity(float x, float y, float z)
 {
     velocity.x = x;
     velocity.y = y;
-    // TODO: ADD VELOCITY.Z
+    velocity.z = z;
 }
 
 void Particle::setMass(float newMass)
@@ -39,7 +40,7 @@ void Particle::setColor(float r, float g, float b)
     color.z = b;
 }
 
-Vec2 Particle::getVelocity()
+Vec3 Particle::getVelocity()
 {
     return velocity;
 }
@@ -71,4 +72,5 @@ void Particle::moveFromVelocity()
     position.y += velocity.y;
     boxID.x = floor(position.x);
     boxID.y = floor(position.y);
+    boxID.z = floor(position.z);
 }

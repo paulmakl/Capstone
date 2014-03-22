@@ -27,4 +27,9 @@ struct int2
 {
     int x, y;
 };
+
+struct int3
+{
+	int x, y, z;
+};
 #endif /* VECTORS_H_ */

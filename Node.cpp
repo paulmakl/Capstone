@@ -12,19 +12,20 @@ void Node::setForce(float x, float y)
     force.y = y;
 }
 
-void Node::incForce(float x, float y)
+void Node::incForce(float x, float y, float z)
 {
     force.x += x;
     force.y += y;
+    force.z += z;
 }
 
 void Node::incParticlesNearNode(){
     particles_near_node++;
 }
 
-Vec2 Node::getForce()
+Vec3 Node::getForce()
 {
-    Vec2 ret;
+    Vec3 ret;
     if(force.x == 0)
     	ret.x = 0.0f;
     else
@@ -33,6 +34,10 @@ Vec2 Node::getForce()
     	ret.y = 0.0f;
     else
     	ret.y = force.y/ particles_near_node;
+    if(force.z ==0)
+    	ret.z = 0.0f;
+    else
+    	ret.z = force.z/ particles_near_node;
 
     return ret;
 }

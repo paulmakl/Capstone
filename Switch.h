@@ -18,7 +18,7 @@
 #ifdef __APPLE__
 #define pixels 720
 #else
-#define pixels 1000
+#define pixels 900
 #endif
 
 class Switch{

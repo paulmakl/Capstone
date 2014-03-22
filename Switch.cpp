@@ -60,7 +60,7 @@ void Switch::display(void)
 	env.sortParticles();
 
 	// Extrapolate particles forces to the grid.
-	//phys.gravity();
+	phys.gravity();
 	phys.updateGridForces();
 
 

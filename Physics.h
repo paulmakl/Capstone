@@ -12,8 +12,8 @@ public:
     
     void init(Environment* envPointer);
     
-    Vec2 interpolate(Vec2* a, Vec2* b, float offset);
-    Vec2 extrapolate(Vec2 velocity, float offset);
+    Vec3 interpolate(Vec3* a, Vec3* b, float offset);
+    Vec3 extrapolate(Vec3 velocity, float offset);
     
     /*
      * This function requires that the environment's 
@@ -35,7 +35,7 @@ public:
      * particles in the same box
      */
     void checkParticleCollisions();
-    void checkParticlecollisionsAtIndex(int i, int2 boxID);
+    void checkParticlecollisionsAtIndex(int i, int3 boxID);
     
     /*
      * Based on the grid forces and each

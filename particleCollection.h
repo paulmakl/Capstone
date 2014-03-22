@@ -30,14 +30,16 @@ public:
 	 */
 	std::vector<std::vector<int> > indexTracker;
 
-	int xSize;
+	int xSize, ySize, zSize;
 	int numParticles;
 
 	int carlSort(int value, int start);
+	int carlYSort(int value, int start);
 	void shakerSort(int start, int end);
-	int2 getParticlesListIndex(int2 boxID);
 
-	int2 pseudoBinarySearch(int2 boxID);
+	int2 getParticlesListIndex(int3 boxID);
+
+	int2 pseudoBinarySearch(int3 boxID);
 
 	void initializeIndexTracker(int xSize, int ySize);
 private:
