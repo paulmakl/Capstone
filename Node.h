@@ -25,7 +25,7 @@ public:
     
     
     
-	void setForce(float x, float y);
+	void setForce(float x, float y, float z);
     void setRGBA(float r, float g, float b, float a);
     void setForceColor();
 

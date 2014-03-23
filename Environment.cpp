@@ -39,7 +39,7 @@ void Environment::generateNodes()
 				g = 0.2f + rand()%30/100.0f;
 				b = 0.2f + rand()%30/100.0f;
 				a.setRGBA(r, g, b, 1.0f);
-				a.setForce(forceX + rand()%100/1000.0f - 0.055f, forceY + rand()%100/1000.0f - 0.055f); //, rand()%100/1000.0f - 0.055f);
+				a.setForce(forceX + rand()%100/1000.0f - 0.055f, forceY + rand()%100/1000.0f - 0.055f, 0); //, rand()%100/1000.0f - 0.055f);
 				grid.grid[x][y][z] = a;
 			}
 		}

@@ -20,7 +20,7 @@ public:
     
     int name;
     
-    Vec2 nextPosition;
+    Vec3 nextPosition;
     
     float mass;
     float volume;

@@ -148,13 +148,14 @@ void Physics::updateParticleVelocities()
 		position = cur -> getPosition();
 		velocity = cur -> getVelocity();
 
-		int lowX = fmax( floor(position.x), 0);
+		int lowX = fmax(floor(position.x), 0);
 		int highX = fmin(ceil(position.x), env -> xSize - 1);
-		int lowY = fmax( floor(position.y), 0);
-		int highY = fmin( ceil(position.y), env -> ySize - 1);
-		int lowZ = fmax( floor(position.z), 0);
-		int highZ = fmin( ceil(position.z), env -> zSize - 1);
+		int lowY = fmax(floor(position.y), 0);
+		int highY = fmin(ceil(position.y), env -> ySize - 1);
+		int lowZ = fmax(floor(position.z), 0);
+		int highZ = fmin(ceil(position.z), env -> zSize - 1);
 
+		// Uppercase letter = higher, lowercase letter = lower
 		Vec3 force_xyz = env -> grid.grid[lowX][lowY][lowZ].getForce();
 		Vec3 force_Xyz = env -> grid.grid[highX][lowY][lowZ].getForce();
 		Vec3 force_xYz = env -> grid.grid[lowX][highY][lowZ].getForce();
@@ -168,19 +169,24 @@ void Physics::updateParticleVelocities()
 		float yOffset = highY - position.y;
 		float zOffset = highZ - position.z;
 
+		// Interpolate along the x-axis for high and low z-values.
 		Vec3 r1 = interpolate(&force_xyz, &force_Xyz, xOffset);
 		Vec3 r2 = interpolate(&force_xYz, &force_XYz, xOffset);
 		Vec3 r3 = interpolate(&force_xyZ, &force_XyZ, xOffset);
 		Vec3 r4 = interpolate(&force_xYZ, &force_XYZ, xOffset);
 
+		// Interpolate between the r-interpolations.
 		Vec3 s1 = interpolate(&r1, &r2, yOffset);
 		Vec3 s2 = interpolate(&r3, &r4, yOffset);
+
+		// Interpolate between the s-interpolations. This is the final velocity for the particle.
 		newVelocity = interpolate(&s1, &s2, zOffset);
 
 		// Apply particle's mass to maintain momentum.
 		float mass = cur -> getMass();
 		newVelocity.x = (newVelocity.x*(1.0f - mass) + (velocity.x * mass));
 		newVelocity.y = (newVelocity.y*(1.0f - mass) + (velocity.y * mass));
+		newVelocity.z = (newVelocity.z*(1.0f - mass) + (velocity.z * mass));
 
 		if(position.x + newVelocity.x <= 0 || position.x + newVelocity.x >= env -> xSize - 1)
 		{
@@ -194,14 +200,21 @@ void Physics::updateParticleVelocities()
 			//newVelocity.y = 0;
 			newVelocity.y = -newVelocity.y;
 		}
-		cur -> setVelocity(newVelocity.x, newVelocity.y, 0.0L);
+		if(position.z + newVelocity.z <= 0 || position.z  + newVelocity.z >= env -> zSize - 1)
+		{
+			//newVelocity.x = 0;
+			//newVelocity.y = 0;
+			newVelocity.z = -newVelocity.z;
+		}
+
+		cur -> setVelocity(newVelocity.x, newVelocity.y, newVelocity.z);
 
 		//Based on the new velocity, we calculate the new position
-		Vec2 bNewPosition;
+		Vec3 bNewPosition;
 		bNewPosition.x = cur -> position.x + newVelocity.x;
 		bNewPosition.y = cur -> position.y + newVelocity.y;
+		bNewPosition.z = cur -> position.z + newVelocity.z;
 		cur -> nextPosition = bNewPosition;
-
 	}
 }
 
@@ -218,14 +231,20 @@ void Physics::checkParticleCollisions()
 	for(int i = 0; i < env -> numParticles; i++)
 	{
 		Particle* cur = env -> particles.getParticle(i);
+		//std::cout << "A " << cur -> boxID.x << " " << cur -> boxID.y << " " << cur -> boxID.z << "\n";
 		checkParticlecollisionsAtIndex(i, cur -> boxID);
-		if(cur -> nextBoxID.x != cur -> boxID.x || cur -> nextBoxID.y != cur -> boxID.y){
+		if(cur -> nextBoxID.x != cur -> boxID.x || cur -> nextBoxID.y != cur -> boxID.y || cur -> nextBoxID.z != cur -> boxID.z)
+		{
+			//std::cout << "B " << cur -> boxID.x << " " << cur -> boxID.y << " " << cur -> boxID.z << "\n";
+			//std::cout << "B NEXT " << cur -> nextBoxID.x << " " << cur -> nextBoxID.y << " " << cur -> nextBoxID.z << "\n";
+
 			checkParticlecollisionsAtIndex(i, cur -> nextBoxID);
 		}
 	}
 }
 
-void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID){
+void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID)
+{
 	Particle* ballistic; // The particle we are checking to see if it collides with other particles.
 	Particle* target; // The target particle we are checking collision with.
 
@@ -233,7 +252,8 @@ void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID){
 
 	int2 boxListIndex = env -> particles.getParticlesListIndex(boxID);
 	//int2 boxListIndex = env -> particles.pseudoBinarySearch(boxID);
-	//std::cout << boxListIndex.x << " " << boxListIndex.y;
+	//std::cout << boxListIndex.x << " " << boxListIndex.y << "\n";
+	//std::cout << boxID.x << " " << boxID.y << " " << boxID.z << "\n";
 	//for(int j = i+1; j <= env -> numParticles; j++)
 	for(int j = boxListIndex.x; j < boxListIndex.y; j++)
 	{
@@ -277,9 +297,13 @@ void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID){
 				ballistic -> setVelocity(newX, newY, newZ);
 				target -> setVelocity(newX, newY, newZ);
 
+				ballistic -> setColor(1.0f, 0.0f, 0.0f);
+				target -> setColor(1.0f, 0.0f, 0.0f);
+
 				ballistic -> setMass(0.0f);
 				target -> setMass(0.0f);
 			}
+
 		}
 	}
 }
@@ -318,7 +342,7 @@ void Physics::gravity()
 		Vec3 velocity = cur-> getVelocity();
 		velocity.y -= (2.0f - cur -> getMass()) * force_gravity;
 
-		cur->setVelocity(velocity.x, velocity.y, velocity.z);
+		cur -> setVelocity(velocity.x, velocity.y, velocity.z);
 	}
 }
 

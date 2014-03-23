@@ -6,10 +6,11 @@
  */
 #include "Node.h"
 
-void Node::setForce(float x, float y)
+void Node::setForce(float x, float y, float z)
 {
     force.x = x;
     force.y = y;
+    force.z = z;
 }
 
 void Node::incForce(float x, float y, float z)
@@ -58,19 +59,21 @@ Vec4 Node::getRGBA()
 void Node::reset()
 {
     particles_near_node = 0;
-    setForce(0.0f, 0.0f);
+    setForce(0.0f, 0.0f, 0.0f);
 }
 
 void Node::setForceColor(){
     float xforce = getForce().x;
     float yforce = getForce().y;
+    float zforce = getForce().z;
     
-    float approximate_maximum_speed = 0.01;
+    float approximate_maximum_speed = 0.3;
     
     float blue = fabs( xforce/approximate_maximum_speed ); //fabs function is Float Absolute value
     float red = fabs( yforce/approximate_maximum_speed );
+    float green = fabs( zforce/approximate_maximum_speed );
     
-    this -> setRGBA(blue, this -> color.g, red, this -> color.a);
+    this -> setRGBA(red, green, blue, this -> color.a);
 }
 
 

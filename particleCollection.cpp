@@ -46,7 +46,6 @@ int2 ParticleCollection::getParticlesListIndex(int3 boxID){
 	ret.x = 0;
 	ret.y = 0;
 	int i = 0;
-	int j = 0;
 
 	// Find the beginning of the list of the given boxID.
 	for (i = 0; i < particles.size(); i++)
@@ -59,7 +58,7 @@ int2 ParticleCollection::getParticlesListIndex(int3 boxID){
 	}
 
 	// Find the end of the list at the given boxID.
-	for (j = i; j < particles.size(); j++)
+	for (int j = i; j < particles.size(); j++)
 	{
 		if (particles[j].boxID.y != boxID.y && particles[j].boxID.x != boxID.x && particles[i].boxID.z != boxID.z)
 		{
@@ -67,8 +66,6 @@ int2 ParticleCollection::getParticlesListIndex(int3 boxID){
 			break;
 		}
 	}
-
-
 
 	return ret;
 }
