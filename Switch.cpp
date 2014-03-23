@@ -8,6 +8,7 @@ Physics phys;
 Draw draw;
 int disps = 0;
 int frame, oldTime, curTime;
+float angle = 0;
 
 Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, char** argv)
 {
@@ -35,9 +36,21 @@ Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, ch
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
 	gluPerspective(85.0, 1.0, 0.0, env.xSize);
-	gluLookAt(env.xSize, env.ySize/2.0, env.xSize*1.3,
-	            0.0, env.ySize/2.0, 0.0,
-	            0.0, 1.0, 0.0); // eye, center, up
+	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
+		float distance = env.xSize;
+		angle = 50.0f;
+		eyeX = distance*cos(angle);
+		eyeY = env.ySize/2.0f;
+		eyeZ = distance*sin(angle);
+		targetX = env.xSize/2.0f;
+		targetY = env.ySize/2.0f;
+		targetZ = env.zSize/2.0f;
+		upX = 0.0f;
+		upY = 1.0f;
+		upZ = 0.0f;
+
+		gluLookAt(eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ);
+
 	//glOrtho(-0.1f , env.xSize - 0.9f, -0.1f, env.ySize - 0.9f, 30.0, -10.0);
 
 }
@@ -53,6 +66,22 @@ void Switch::display(void)
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
 
+	/*float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
+	float distance = env.xSize;
+	angle = 50.0f;
+	eyeX = distance*cos(0.01f);
+	eyeY = env.ySize/2.0f;
+	eyeZ = distance*sin(0.01f);
+	targetX = env.xSize/2.0f;
+	targetY = env.ySize/2.0f;
+	targetZ = env.zSize/2.0f;
+	upX = 0.0f;
+	upY = 1.0f;
+	upZ = 0.0f;
+
+	gluLookAt(eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ);*/
+
+
 	// Reset all nodes to have clean forces.
 	phys.resetNodes();
 
@@ -60,7 +89,7 @@ void Switch::display(void)
 	env.sortParticles();
 
 	// Extrapolate particles forces to the grid.
-	phys.gravity();
+	//phys.gravity();
 	phys.updateGridForces();
 
 

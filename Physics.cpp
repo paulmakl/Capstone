@@ -238,7 +238,7 @@ void Physics::checkParticleCollisions()
 			//std::cout << "B " << cur -> boxID.x << " " << cur -> boxID.y << " " << cur -> boxID.z << "\n";
 			//std::cout << "B NEXT " << cur -> nextBoxID.x << " " << cur -> nextBoxID.y << " " << cur -> nextBoxID.z << "\n";
 
-			checkParticlecollisionsAtIndex(i, cur -> nextBoxID);
+			//checkParticlecollisionsAtIndex(i, cur -> nextBoxID);
 		}
 	}
 }
