@@ -67,7 +67,7 @@ void Node::setForceColor(){
     float yforce = getForce().y;
     float zforce = getForce().z;
     
-    float approximate_maximum_speed = 0.3;
+    float approximate_maximum_speed = 0.1;
     
     float blue = fabs( xforce/approximate_maximum_speed ); //fabs function is Float Absolute value
     float red = fabs( yforce/approximate_maximum_speed );

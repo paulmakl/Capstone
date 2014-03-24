@@ -40,7 +40,7 @@ void Physics::updateGridForces()
 	Vec3 position, velocity;
 	float mass;
 	// Go through every valid box on the grid.
-	// A box is vaid if the lower left corner is between
+	// A box is valid if the lower left corner is between
 	// 0 and size - 1.
 	for(int x = 0; x < env -> xSize-1; x++)
 	{
@@ -54,8 +54,8 @@ void Physics::updateGridForces()
 				// While we are in the same box...
 				while (cur -> boxID.x == x && cur -> boxID.y == y && cur -> boxID.z == z)
 				{
-					// Get values for the current particle.
 
+					// Get values for the current particle.
 					position = cur -> getPosition();
 					velocity = cur -> getVelocity();
 					mass = cur -> getMass();
@@ -233,12 +233,13 @@ void Physics::checkParticleCollisions()
 		Particle* cur = env -> particles.getParticle(i);
 		//std::cout << "A " << cur -> boxID.x << " " << cur -> boxID.y << " " << cur -> boxID.z << "\n";
 		checkParticlecollisionsAtIndex(i, cur -> boxID);
+
 		if(cur -> nextBoxID.x != cur -> boxID.x || cur -> nextBoxID.y != cur -> boxID.y || cur -> nextBoxID.z != cur -> boxID.z)
 		{
 			//std::cout << "B " << cur -> boxID.x << " " << cur -> boxID.y << " " << cur -> boxID.z << "\n";
 			//std::cout << "B NEXT " << cur -> nextBoxID.x << " " << cur -> nextBoxID.y << " " << cur -> nextBoxID.z << "\n";
 
-			//checkParticlecollisionsAtIndex(i, cur -> nextBoxID);
+			checkParticlecollisionsAtIndex(i, cur -> nextBoxID);
 		}
 	}
 }
@@ -257,7 +258,6 @@ void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID)
 	//for(int j = i+1; j <= env -> numParticles; j++)
 	for(int j = boxListIndex.x; j < boxListIndex.y; j++)
 	{
-
 		target = env -> particles.getParticle(j);
 
 		// Check that the particle is not being compared to itself.
@@ -297,9 +297,6 @@ void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID)
 				ballistic -> setVelocity(newX, newY, newZ);
 				target -> setVelocity(newX, newY, newZ);
 
-				ballistic -> setColor(1.0f, 0.0f, 0.0f);
-				target -> setColor(1.0f, 0.0f, 0.0f);
-
 				ballistic -> setMass(0.0f);
 				target -> setMass(0.0f);
 			}
@@ -313,7 +310,7 @@ void Physics::updateParticlePositions()
 	Particle* cur;
 	for(int i = 0; i < env -> numParticles; i++)
 	{
-		cur = env->particles.getParticle(i);
+		cur = env -> particles.getParticle(i);
 		cur -> moveFromVelocity();
 	}
 }
@@ -339,7 +336,7 @@ void Physics::gravity()
 	for(int i = 0; i < env -> numParticles; i++)
 	{
 		cur = env->particles.getParticle(i);
-		Vec3 velocity = cur-> getVelocity();
+		Vec3 velocity = cur -> getVelocity();
 		velocity.y -= (2.0f - cur -> getMass()) * force_gravity;
 
 		cur -> setVelocity(velocity.x, velocity.y, velocity.z);

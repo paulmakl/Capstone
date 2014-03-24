@@ -135,10 +135,10 @@ int ParticleCollection::carlSort(int value, int start)
 	return insert;
 }
 
-int ParticleCollection::carlYSort(int value, int start)
+int ParticleCollection::carlYSort(int value, int start, int end)
 {
 	int insert = start;
-	for(int i = start; i < numParticles; i++)
+	for(int i = start; i < end; i++)
 	{
 		if(particles[i].boxID.y == value)
 		{
@@ -176,20 +176,20 @@ void ParticleCollection::shakerSort(int start, int end)
 
 void ParticleCollection::sortParticles()
 {
-	int startIndex = 0; // The index of the start of the current values.
-	int endIndex = 0; // The index of the end of the current values.
+	int xStart = 0; // The index of the start of the current x-values.
+	int yStart = 0; // The index of the start of the current y-values.
+	int xEnd = 0; // The index of the end of the current x-values.
+	int yEnd = 0; // The index of the end of the current y-values.
 
 	for(int x = 0; x < xSize; x++)
 	{
-		endIndex = carlSort(x, startIndex); // carlSort will return the last index of the current x-values
+		xEnd = carlSort(x, xStart); // carlSort will return the last index of the current x-values.
 		for(int y = 0; y < ySize; y++)
 		{
-			endIndex = carlYSort(y, startIndex); // carlYSort will return the last index of the current y-values
-			shakerSort(startIndex, endIndex); // shaker sort will sort the z-values at the given x,y values.
+			yEnd = carlYSort(y, yStart, xEnd); // carlYSort will return the last index of the current y-values.
+			shakerSort(yStart, yEnd); // shaker sort will sort the z-values at the given x,y values.
+			yStart = yEnd;
 		}
-		startIndex = endIndex;
+		xStart = xEnd;
 	}
-
 }
-
-

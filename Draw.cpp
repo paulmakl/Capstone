@@ -19,7 +19,7 @@ void Draw::displayGrid()
 				cur -> setForceColor();
 				color = cur -> getRGBA();
 				float alpha = 0.2f;
-				if(cur -> particles_near_node > 0)
+				if(color.r + color.g + color.b > 0)
 					alpha = 1.0f;
 				glColor4f(color.r, color.g, color.b, alpha);
 				glVertex3f(x, y, z);

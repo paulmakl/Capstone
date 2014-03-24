@@ -34,7 +34,7 @@ public:
 	int numParticles;
 
 	int carlSort(int value, int start);
-	int carlYSort(int value, int start);
+	int carlYSort(int value, int start, int end);
 	void shakerSort(int start, int end);
 
 	int2 getParticlesListIndex(int3 boxID);
