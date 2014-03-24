@@ -62,14 +62,14 @@ Node Configs::dead_config_nodes(){
 Particle Configs::random_confic_particles(int xSize, int ySize, int zSize)
 {
     Particle a;
-    float xPos = Randy::randf(0, xSize/2.0f) + xSize/4.0f;
-    float yPos = Randy::randf(0, ySize/2.0f) + ySize/4.0f;
-    float zPos = Randy::randf(0, zSize/2.0f) + zSize/4.0f;
+    float xPos = Randy::randf(0, xSize/4.0f) + xSize/4.0f;
+    float yPos = Randy::randf(0, ySize/4.0f) + ySize/4.0f;
+    float zPos = Randy::randf(0, zSize/4.0f) + zSize/4.0f;
     a.setPosition(xPos, yPos, zPos);
     
-    float xVelo = Randy::randf(-0.3, 0.3);
-    float yVelo = Randy::randf(-0.3, 0.3);
-    float zVelo = Randy::randf(-0.3, 0.3);
+    float xVelo = Randy::randf(-0.03, 0.03);
+    float yVelo = Randy::randf(-0.3, 0.0);
+    float zVelo = Randy::randf(-0.03, 0.03);
     a.setVelocity(xVelo, yVelo, zVelo);
 
     a.setColor(0.1f, 1.0f, 1.0f);

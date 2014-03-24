@@ -38,10 +38,10 @@ Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, ch
 	gluPerspective(85.0, 1.0, 0.0, env.xSize);
 	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
 		float distance = env.xSize;
-		angle = 50.0f;
-		eyeX = distance*cos(angle);
-		eyeY = env.ySize/2.0f;
-		eyeZ = distance*sin(angle);
+		angle = 0.0f;
+		eyeX = distance;//*cos(angle);
+		eyeY = 3.0f;//env.ySize/1.3f;
+		eyeZ = distance;//*sin(angle);
 		targetX = env.xSize/2.0f;
 		targetY = env.ySize/2.0f;
 		targetZ = env.zSize/2.0f;
@@ -66,7 +66,8 @@ void Switch::display(void)
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
 
-	/*float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
+	/*gluPerspective(85.0, 1.0, 0.0, env.xSize);
+	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
 	float distance = env.xSize;
 	angle = 50.0f;
 	eyeX = distance*cos(0.01f);
@@ -89,9 +90,8 @@ void Switch::display(void)
 	env.sortParticles();
 
 	// Extrapolate particles forces to the grid.
-	//phys.gravity();
+	phys.gravity();
 	phys.updateGridForces();
-
 
 	// Interpolate forces from the grid to the particles
 	phys.updateParticleVelocities();
@@ -102,8 +102,9 @@ void Switch::display(void)
 
 	glPushMatrix();
 
+	draw.displayBackdrop();
 	draw.displayParticles();
-	draw.displayGrid();
+	//draw.displayGrid();
 	//draw.displayShapes();
 
 	frame++;

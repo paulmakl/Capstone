@@ -6,7 +6,7 @@ void Draw::init(Environment* envPointer){
 
 void Draw::displayGrid()
 {
-	glPointSize(1.0);
+	glPointSize(2.0);
 	glBegin(GL_POINTS);
 	Vec4 color;
 	for(int x = 0; x < env -> xSize; x++)
@@ -19,7 +19,7 @@ void Draw::displayGrid()
 				cur -> setForceColor();
 				color = cur -> getRGBA();
 				float alpha = 0.2f;
-				if(color.r + color.g + color.b > 0)
+				//if(color.r + color.g + color.b > 0)
 					alpha = 1.0f;
 				glColor4f(color.r, color.g, color.b, alpha);
 				glVertex3f(x, y, z);
@@ -66,4 +66,16 @@ void Draw::displayShapes()
 		glTranslatef(position.x, position.y, position.z);
 		glutWireCube(cur -> getLength());
 	}
+}
+
+void Draw::displayBackdrop()
+{
+	glBegin(GL_QUADS); // Start drawing a quad primitive
+		glColor3f(0.1f, 0.1f, 0.1f);
+		glVertex3f(0.0f, 0.0f, 0.0f); // The bottom left corner
+		glVertex3f(env -> xSize, 0.0f, 0.0f); // The bottom right corner
+		glVertex3f(env -> xSize, 0.0f, env -> zSize-1); // The top right corner
+		glVertex3f(0.0f, 0.0f, env -> zSize-1); // The top left corner
+
+	glEnd();
 }

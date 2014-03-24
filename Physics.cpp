@@ -1,6 +1,8 @@
 #include "Physics.h" 
 #include <iostream>
 
+#define COLLIDED_COLOR 1.0f, 0.7f, 0.7f
+
 /**
  * Sets the environment pointer that the physics will be working with.
  */
@@ -190,21 +192,27 @@ void Physics::updateParticleVelocities()
 
 		if(position.x + newVelocity.x <= 0 || position.x + newVelocity.x >= env -> xSize - 1)
 		{
-			//newVelocity.x = 0;
-			//newVelocity.y = 0;
-			newVelocity.x = -newVelocity.x;
+			newVelocity.x = 0;
+			newVelocity.y = 0;
+			newVelocity.z = 0;
+			//newVelocity.x = -newVelocity.x;
+			cur -> setColor(COLLIDED_COLOR);
 		}
 		if(position.y + newVelocity.y <= 0 || position.y  + newVelocity.y >= env -> ySize - 1)
 		{
-			//newVelocity.x = 0;
-			//newVelocity.y = 0;
-			newVelocity.y = -newVelocity.y;
+			newVelocity.x = 0;
+			newVelocity.y = 0;
+			newVelocity.z = 0;
+			//newVelocity.y = -newVelocity.y;
+			cur -> setColor(COLLIDED_COLOR);
 		}
 		if(position.z + newVelocity.z <= 0 || position.z  + newVelocity.z >= env -> zSize - 1)
 		{
-			//newVelocity.x = 0;
-			//newVelocity.y = 0;
-			newVelocity.z = -newVelocity.z;
+			newVelocity.x = 0;
+			newVelocity.y = 0;
+			newVelocity.z = 0;
+			//newVelocity.z = -newVelocity.z;
+			cur -> setColor(COLLIDED_COLOR);
 		}
 
 		cur -> setVelocity(newVelocity.x, newVelocity.y, newVelocity.z);
@@ -287,8 +295,8 @@ void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID)
 
 			if(distanceBetweenParticles < bDistance + tDistance)
 			{
-				ballistic -> setColor(1.0f, 0.0f, 0.0f);
-				target -> setColor(1.0f, 0.0f, 0.0f);
+				ballistic -> setColor(COLLIDED_COLOR);
+				target -> setColor(COLLIDED_COLOR);
 
 				float newX = (bVelocity.x + tVelocity.x)/2;
 				float newY = (bVelocity.y + tVelocity.y)/2;
