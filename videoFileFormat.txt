@@ -1,0 +1,22 @@
+The video file format for our simulations needs to be extendable.
+It should not need to do any physics work while it is running.
+This is very important to speed up playback.
+Only calculations that need to be made the hte ones for displaying the image with opengl.
+While some of these (shaders) are nontrivial, this will still greatly speed up performacne.
+
+A video file will have the following
+
+HEADER
+DATA AT TIME 1
+DATA AT TIME 2
+...
+DATA AT TIME N
+FOOTER
+
+The data at each timestep needs to be extentable,
+but not big enough to cause performance problems.
+All header information will be proprietary
+
+$$
+
+

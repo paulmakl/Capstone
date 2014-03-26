@@ -7,6 +7,7 @@ Physics phys;
 Draw draw;
 int disps = 0;
 int frame, oldTime, curTime;
+std::ofstream myfile;
 
 Switch::Switch(float x, float y, int numPs, int argc, char** argv)
 {
@@ -33,7 +34,7 @@ Switch::Switch(float x, float y, int numPs, int argc, char** argv)
 	curTime = 0;
 
 	glOrtho(-0.1f , env.xSize - 0.9f, -0.1f, env.ySize - 0.9f, 30.0, -10.0);
-
+    myfile.open("/Users/paulmakl/Documents/Capstone/video.txt");
 }
 
 void Switch::timer(int id)
@@ -89,6 +90,24 @@ void Switch::display(void)
 	glFlush();
 	glutSwapBuffers();
 	glutTimerFunc(50, timer, 0);
-	//std::cout << disps << " ";
-	//disps++;
+	std::cout << disps << " ";
+	disps++;
+    if (disps > 100) {
+        glutLeaveMainLoop();
+    }
+    myfile << "Time Step " << disps << "\n";
+    for (int i = 0; i < env.particles.particles.size(); i++) {
+        myfile << env.particles.particles[i].getPosition().x << " " << env.particles.particles[i].getPosition().y << "::";
+    }
+    myfile << "\n";
 }
+
+void Switch::readVideo(void){
+    
+}
+
+void Switch::cleanup(){
+    myfile.close();
+}
+
+

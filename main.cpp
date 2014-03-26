@@ -16,12 +16,13 @@
 
 #define xWidth 64
 #define yWidth 64 // For now, keep xSize and ySize the same!
-#define Particles 3000
+#define Particles 1000
 
 #include "Switch.h"
 #include "Randy.h"
 #include "vectors.h"
 #include <iostream>
+#include <fstream>
 
 /*
  * Main function
@@ -30,6 +31,6 @@ int main(int argc, char** argv)
 {
     Switch x(xWidth, yWidth, Particles, argc, argv);
    	glutMainLoop();
-
+    x.cleanup();
 	return 0;
 };

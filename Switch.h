@@ -14,6 +14,7 @@
 #include "Physics.h"
 #include "Draw.h"
 #include <iostream>
+#include <fstream>
 
 #ifdef __APPLE__
 #define pixels 720
@@ -26,7 +27,9 @@ public:
 
     Switch(float x, float y, int numPs, int argc, char** argv);
     void init(float sizeX, float sizeY, int argc, char** argv);
+    void cleanup();
     static void display();
+    static void readVideo();
     static void timer(int id);
 
 };

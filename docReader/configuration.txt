@@ -1,0 +1,44 @@
+Configuring your simulation.
+
+To configure your simulation, you will need to specify a few parameters.
+Each line will have the name of a parameter, followed by a colon, folowed by the input of the parameters.
+Each parameter is seperated by a comma.
+
+Everything is case insensitive
+Example:
+
+config:
+	size:64,64,64
+	gravitystuff: blah
+snowbox:
+	Name: Box1
+	Location: 0, 0,32
+	Size: 10,10,10
+	Particles: 1000
+	Distribution: Random
+	Particle Description: p1
+
+snowbox: 
+	Name: Box2
+	location: 54,54,32
+	Size: 10,10,10
+	Particles: 1000
+	Distribution: Random
+	Particle Description: ParticleDescriptiopn2
+
+ParticleDescription:
+	Name: p1
+	Velocit: 1,1,1
+	Velocity: [0.1, 0.3], [0.1, 0.3], 0
+	mass: [0, 0.5]
+	volume: 2
+
+ParticleDescription:
+	Name: p2
+	Velocity: [-0.3, -0.1], [-0.3, -0.1], 0
+	mass: [0, 0.5]
+	volume: 2
+
+Particle:
+	Name: part1
+	ParticleDescription: p3

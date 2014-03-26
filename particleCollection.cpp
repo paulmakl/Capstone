@@ -159,7 +159,20 @@ void ParticleCollection::sortParticles()
 		shakerSort(startIndex, endIndex);
         startIndex = endIndex;
 	}
-
+    initializeIndexTracker(xSize, xSize);
+    /*
+     * In this section we update the
+     */
+    Particle * cur = &particles[0];
+    indexTracker[cur -> boxID.x][cur ->boxID.y] = 0;
+    
+    for (int i = 0; i < particles.size(); i++) {
+        if(cur -> boxID.x != particles[i].boxID.x && cur -> boxID.y != particles[i].boxID.y){
+            cur = &particles[i];
+            indexTracker[cur -> boxID.x][cur -> boxID.y] = i;
+        }
+    }
+    
 }
 
 

@@ -176,14 +176,15 @@ void Physics::checkParticlecollisionsAtIndex(int i, int2 boxID){
 	Particle* target; // The target particle we are checking collision with.
     
     ballistic = env -> particles.getParticle(i);
+    target = env -> particles.getParticle(i);
     
     int2 boxListIndex = env -> particles.getParticlesListIndex(boxID);
     //int2 boxListIndex = env -> particles.pseudoBinarySearch(boxID);
     //std::cout << boxListIndex.x << " " << boxListIndex.y;
     //for(int j = i+1; j <= env -> numParticles; j++)
     for(int j = boxListIndex.x; j < boxListIndex.y; j++)
+    //for(int j = env -> particles.indexTracker[boxID.x][boxID.y]; target -> boxID.x == boxID.x && target -> boxID.x ==boxID.y; j++)
     {
-        
         target = env -> particles.getParticle(j);
         if(target->name != ballistic->name){
             Vec2 bVelocity, tVelocity;
