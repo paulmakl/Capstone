@@ -9,13 +9,13 @@
 
 class Configs{
 public:
-    static Particle random_confic_particles(int xSize, int ySize);
+    static Particle random_confic_particles(int xSize, int ySize, int zSize);
     static Particle up_config_particles(int xSize, int ySize);
     static Particle up_config_2_particles(int xSize, int ySize);
     static Particle test_config_particles();
     
     
-    static Node random_config_nodes(int x, int y);
+    static Node random_config_nodes(int x, int y, int z);
     static Node towards_center_nodes(int x, int y, int ySize);
     static Node towards_center_2_nodes(int x, int y, int ySize);
     static Node up_nodes(int x, int y);

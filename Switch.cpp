@@ -1,4 +1,5 @@
 #include "Switch.h"
+#include <math.h>
 #include <iostream>
 #include <sstream>
 
@@ -8,20 +9,19 @@ Draw draw;
 int disps = 0;
 int frame, oldTime, curTime;
 std::ofstream myfile;
+float angle = 0;
 
-Switch::Switch(float x, float y, int numPs, int argc, char** argv)
+Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, char** argv)
 {
 
-	env.init(x, y, numPs);
+	env.init(xWidth, yWidth, zWidth, numPs);
 
 	phys.init(&env);
 	draw.init(&env);
 
 	glutInit(&argc, argv); // Initialize GLUT
 	//glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-	glutInitDisplayMode(GLUT_DEPTH |
-			GLUT_DOUBLE |
-			GLUT_RGBA);
+	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 
 	glutInitWindowSize(pixels, pixels); // Set the window's initial width & height
 	glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
@@ -33,8 +33,32 @@ Switch::Switch(float x, float y, int numPs, int argc, char** argv)
 	oldTime = 0;
 	curTime = 0;
 
-	glOrtho(-0.1f , env.xSize - 0.9f, -0.1f, env.ySize - 0.9f, 30.0, -10.0);
-    myfile.open("/Users/paulmakl/Documents/Capstone/video.txt");
+
+	//glOrtho(-0.1f , env.xSize - 0.9f, -0.1f, env.ySize - 0.9f, 30.0, -10.0);
+    //myfile.open("/Users/paulmakl/Documents/Capstone/video.txt");
+    
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+	gluPerspective(85.0, 1.0, 0.001, env.xSize);
+	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
+		float distance = env.xSize;
+		angle = 0.0f;
+		eyeX = distance;//*cos(angle);
+		eyeY = 3.0f;//env.ySize/1.3f;
+		eyeZ = distance;//*sin(angle);
+		targetX = env.xSize/2.0f;
+		targetY = env.ySize/2.0f;
+		targetZ = env.zSize/2.0f;
+		upX = 0.0f;
+		upY = 1.0f;
+		upZ = 0.0f;
+
+		gluLookAt(eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ);
+
+	//glOrtho(-0.1f , env.xSize - 0.9f, -0.1f, env.ySize - 0.9f, 30.0, -10.0);
+
+
 }
 
 void Switch::timer(int id)
@@ -48,6 +72,23 @@ void Switch::display(void)
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
 
+	/*gluPerspective(85.0, 1.0, 0.0, env.xSize);
+	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
+	float distance = env.xSize;
+	angle = 50.0f;
+	eyeX = distance*cos(0.01f);
+	eyeY = env.ySize/2.0f;
+	eyeZ = distance*sin(0.01f);
+	targetX = env.xSize/2.0f;
+	targetY = env.ySize/2.0f;
+	targetZ = env.zSize/2.0f;
+	upX = 0.0f;
+	upY = 1.0f;
+	upZ = 0.0f;
+
+	gluLookAt(eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ);*/
+
+
 	// Reset all nodes to have clean forces.
 	phys.resetNodes();
 
@@ -55,9 +96,8 @@ void Switch::display(void)
 	env.sortParticles();
 
 	// Extrapolate particles forces to the grid.
-	//phys.gravity();
+	phys.gravity();
 	phys.updateGridForces();
-
 
 	// Interpolate forces from the grid to the particles
 	phys.updateParticleVelocities();
@@ -68,8 +108,9 @@ void Switch::display(void)
 
 	glPushMatrix();
 
+	draw.displayBackdrop();
 	draw.displayParticles();
-	draw.displayGrid();
+	//draw.displayGrid();
 	//draw.displayShapes();
 
 	frame++;
@@ -90,16 +131,20 @@ void Switch::display(void)
 	glFlush();
 	glutSwapBuffers();
 	glutTimerFunc(50, timer, 0);
-	std::cout << disps << " ";
+	//std::cout << disps << " ";
 	disps++;
     if (disps > 100) {
-        glutLeaveMainLoop();
+        //glutLeaveMainLoop();
     }
-    myfile << "Time Step " << disps << "\n";
+    //myfile << "Time Step " << disps << "\n";
     for (int i = 0; i < env.particles.particles.size(); i++) {
-        myfile << env.particles.particles[i].getPosition().x << " " << env.particles.particles[i].getPosition().y << "::";
+        //myfile << env.particles.particles[i].getPosition().x << " " << env.particles.particles[i].getPosition().y << "::";
     }
-    myfile << "\n";
+    //myfile << "\n";
+    std::cout <<
+        env.particles.getParticle(3) -> position.x << ", " <<
+        env.particles.getParticle(3) -> position.y << ", " <<
+        env.particles.getParticle(3) -> position.z << ", " << "\n";
 }
 
 void Switch::readVideo(void){
@@ -107,7 +152,7 @@ void Switch::readVideo(void){
 }
 
 void Switch::cleanup(){
-    myfile.close();
+    //myfile.close();
 }
 
 

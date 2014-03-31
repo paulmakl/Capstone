@@ -14,23 +14,22 @@
 class Particle
 {
 public:
-    Vec2 position;
-    Vec2 velocity;
+    Vec3 position;
+    Vec3 velocity;
     Vec3 color;
     
     int name;
     
-    Vec2 nextPosition;
-    int2 nextBoxID;
+    Vec3 nextPosition;
     
     float mass;
     float volume;
     
-    int2 boxID;
+    int3 boxID;
+    int3 nextBoxID;
     
-    
-    void setPosition(float x, float y);
-    void setVelocity(float x, float y);
+    void setPosition(float x, float y, float z);
+    void setVelocity(float x, float y, float z);
     void setMass(float newMass);
     void setVolume(float newVolume);
     void setColor(float r, float g, float b);
@@ -41,8 +40,8 @@ public:
      */
     void moveFromVelocity();
     
-    Vec2 getVelocity();
-	Vec2 getPosition();
+    Vec3 getVelocity();
+	Vec3 getPosition();
     Vec3 getColor();
     
 	float getMass();

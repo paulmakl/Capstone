@@ -23,6 +23,7 @@ public:
     void displayGrid();
     void displayParticles();
     void displayShapes();
+    void displayBackdrop();
 };
 
 #endif

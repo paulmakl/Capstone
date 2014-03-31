@@ -1,5 +1,5 @@
-#ifndef SWITCH_H_
-#define SWITCH_H_
+#ifndef PLAYBACK_H_
+#define PLAYBACK_H_
 
 #ifdef __APPLE__
 #include "/usr/local/Cellar/freeglut/2.8.1/include/GL/glut.h"
@@ -22,15 +22,15 @@
 #define pixels 900
 #endif
 
-class Switch{
+class Playback{
 public:
-
-    Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, char** argv);
+    
+    Playback(float xWidth, float yWidth, float zWidth, int numPs, int argc, char** argv);
     void init(float sizeX, float sizeY, int argc, char** argv);
     void cleanup();
     static void display();
     static void readVideo();
     static void timer(int id);
-
+    
 };
 #endif

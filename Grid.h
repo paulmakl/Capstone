@@ -11,8 +11,8 @@
 
 class Grid{
     public:
-        std::vector<std::vector<Node> > grid;
-        void init(float a, float b);
+        std::vector<std::vector<std::vector<Node> > > grid;
+        void init(float xSize, float ySize, float zSize);
 };
 
 

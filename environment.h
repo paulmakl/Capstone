@@ -17,6 +17,7 @@ public:
 
     int xSize;
     int ySize;
+    int zSize;
     int numParticles;
     ParticleCollection particles;
     Grid grid;
@@ -24,7 +25,7 @@ public:
     Environment();
 	void generateNodes();
     
-    void init(int x, int y, int numPs);
+    void init(int x, int y,int z, int numPs);
 
     
     void generateParticles();

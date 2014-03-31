@@ -6,18 +6,26 @@
  */
 #include "Particle.h"
 
-void Particle::setPosition(float x, float y)
+void Particle::setPosition(float x, float y, float z)
 {
-    position.x = x;
-    position.y = y;
-    boxID.x = floor(position.x);
-    boxID.y = floor(position.y);
+	position.x = x;
+	position.y = y;
+	position.z = z;
+
+	boxID.x = floor(position.x);
+	boxID.y = floor(position.y);
+	boxID.z = floor(position.z);
+
+	nextBoxID.x = floor(position.x + velocity.x);
+	nextBoxID.y = floor(position.y + velocity.y);
+	nextBoxID.z = floor(position.z + velocity.z);
 }
 
-void Particle::setVelocity(float x, float y)
+void Particle::setVelocity(float x, float y, float z)
 {
-    velocity.x = x;
-    velocity.y = y;
+	velocity.x = x;
+	velocity.y = y;
+	velocity.z = z;
 }
 
 void Particle::setMass(float newMass)
@@ -32,24 +40,24 @@ void Particle:: setVolume(float newVolume)
 
 void Particle::setColor(float r, float g, float b)
 {
-    color.x = r;
-    color.y = g;
-    color.z = b;
+	color.x = r;
+	color.y = g;
+	color.z = b;
 }
 
-Vec2 Particle::getVelocity()
+Vec3 Particle::getVelocity()
 {
-    return velocity;
+	return velocity;
 }
 
-Vec2 Particle::getPosition()
+Vec3 Particle::getPosition()
 {
-    return position;
+	return position;
 }
 
 Vec3 Particle::getColor()
 {
-    return color;
+	return color;
 }
 
 float Particle::getMass()
@@ -65,8 +73,15 @@ float Particle::getVolume()
 
 void Particle::moveFromVelocity()
 {
-    position.x += velocity.x;
-    position.y += velocity.y;
-    boxID.x = floor(position.x);
-    boxID.y = floor(position.y);
+	position.x += velocity.x;
+	position.y += velocity.y;
+	position.z += velocity.z;
+
+	boxID.x = floor(position.x);
+	boxID.y = floor(position.y);
+	boxID.z = floor(position.z);
+
+	nextBoxID.x = floor(position.x + velocity.x);
+	nextBoxID.y = floor(position.y + velocity.y);
+	nextBoxID.z = floor(position.z + velocity.z);
 }
