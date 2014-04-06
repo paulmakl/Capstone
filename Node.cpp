@@ -27,15 +27,15 @@ void Node::incParticlesNearNode(){
 Vec3 Node::getForce()
 {
     Vec3 ret;
-    if(force.x == 0)
+    if(force.x == 0.0f)
     	ret.x = 0.0f;
     else
     	ret.x = force.x/ particles_near_node;
-    if(force.y == 0)
+    if(force.y == 0.0f)
     	ret.y = 0.0f;
     else
     	ret.y = force.y/ particles_near_node;
-    if(force.z ==0)
+    if(force.z ==0.0f)
     	ret.z = 0.0f;
     else
     	ret.z = force.z/ particles_near_node;

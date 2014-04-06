@@ -44,7 +44,7 @@ Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, ch
 	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
 		float distance = env.xSize;
 		angle = 0.0f;
-		eyeX = distance;//*cos(angle);
+		eyeX = distance;//*cows(angle);
 		eyeY = 3.0f;//env.ySize/1.3f;
 		eyeZ = distance;//*sin(angle);
 		targetX = env.xSize/2.0f;
@@ -56,7 +56,7 @@ Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, ch
 
 		gluLookAt(eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ);
 
-	//glOrtho(-0.1f , env.xSize - 0.9f, -0.1f, env.ySize - 0.9f, 30.0, -10.0);
+	//glOrtho(-0.1f , env.xSize - 0.9f, -0.1f, env.ySize - 0.1f, env.zSize, -0.1f);
 
 
 }
@@ -101,7 +101,7 @@ void Switch::display(void)
 
 	// Interpolate forces from the grid to the particles
 	phys.updateParticleVelocities();
-	phys.checkParticleCollisions();
+	//phys.checkParticleCollisions();
 	phys.updateParticlePositions();
 	//phys.updateShapePositions();
 	//phys.checkEulerianCollisions();
@@ -119,7 +119,7 @@ void Switch::display(void)
 	// Calculate only if the difference is greater than 1 second.
 	if(curTime - oldTime > 1000)
 	{
-		//std::cout << "FPS: " << frame*1000.0f/(curTime - oldTime) << "\n";
+		std::cout << "FPS: " << frame*1000.0f/(curTime - oldTime) << "\n";
 	//	char unsigned display[] = { 'F','P','S',':', ' ', '\0'};
 	//	glutBitmapString(GLUT_BITMAP_HELVETICA_10, display);
 		oldTime = curTime;

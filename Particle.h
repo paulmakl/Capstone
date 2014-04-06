@@ -29,7 +29,9 @@ public:
     int3 nextBoxID;
     
     void setPosition(float x, float y, float z);
+    void changePosition(float x, float y, float z);
     void setVelocity(float x, float y, float z);
+    void changeVelocity(float x, float y, float z);
     void setMass(float newMass);
     void setVolume(float newVolume);
     void setColor(float r, float g, float b);

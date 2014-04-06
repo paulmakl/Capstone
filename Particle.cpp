@@ -21,11 +21,33 @@ void Particle::setPosition(float x, float y, float z)
 	nextBoxID.z = floor(position.z + velocity.z);
 }
 
+void Particle::changePosition(float x, float y, float z)
+{
+	position.x += x;
+	position.y += y;
+	position.z += z;
+
+	//boxID.x = floor(position.x);
+	//boxID.y = floor(position.y);
+	//boxID.z = floor(position.z);
+
+	nextBoxID.x = floor(position.x + velocity.x);
+	nextBoxID.y = floor(position.y + velocity.y);
+	nextBoxID.z = floor(position.z + velocity.z);
+}
+
 void Particle::setVelocity(float x, float y, float z)
 {
 	velocity.x = x;
 	velocity.y = y;
 	velocity.z = z;
+}
+
+void Particle::changeVelocity(float x, float y, float z)
+{
+	velocity.x += x;
+	velocity.y += y;
+	velocity.z += z;
 }
 
 void Particle::setMass(float newMass)

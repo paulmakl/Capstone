@@ -1,7 +1,7 @@
 #include "Physics.h" 
 #include <iostream>
 
-#define COLLIDED_COLOR 1.0f, 0.7f, 0.7f
+#define COLLIDED_COLOR 1.0f, 0.1f, 0.1f
 
 /**
  * Sets the environment pointer that the physics will be working with.
@@ -229,9 +229,13 @@ void Physics::updateParticleVelocities()
 /**
  * Returns the squared distance between two points.
  */
-float Physics::calculateDistance(Vec3 a, Vec3 b)
+Vec3 Physics::calculateDistance(Vec3 a, Vec3 b)
 {
-	return pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2);
+	Vec3 ret;
+	ret.x = pow(a.x - b.x, 2);
+	ret.y = pow(a.y - b.y, 2);
+	ret.z = pow(a.z - b.z, 2);
+	return ret;
 }
 
 void Physics::checkParticleCollisions()
@@ -280,7 +284,8 @@ void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID)
 			tPosition = target -> getPosition();
 
 			// Calculate the distance between the ballistic and target particles.
-			float distanceBetweenParticles = calculateDistance(bPosition, tPosition);
+			Vec3 distanceVector = calculateDistance(bPosition, tPosition);
+			float distanceBetweenParticles = distanceVector.x + distanceVector.y + distanceVector.z;
 
 			Vec3 bNewPosition, tNewPosition;
 			bNewPosition.x = bPosition.x + bVelocity.x;
@@ -290,10 +295,10 @@ void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID)
 			bNewPosition.z = bPosition.z + bVelocity.z;
 			tNewPosition.z = tPosition.z + tVelocity.z;
 
-			float bDistance = calculateDistance(bPosition, bNewPosition);
-			float tDistance = calculateDistance(tPosition, tNewPosition);
+			Vec3 bDistance = calculateDistance(bPosition, bNewPosition);
+			Vec3 tDistance = calculateDistance(tPosition, tNewPosition);
 
-			if(distanceBetweenParticles < bDistance + tDistance)
+			/*if(distanceBetweenParticles < bDistance + tDistance)
 			{
 				ballistic -> setColor(COLLIDED_COLOR);
 				target -> setColor(COLLIDED_COLOR);
@@ -305,10 +310,38 @@ void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID)
 				ballistic -> setVelocity(newX, newY, newZ);
 				target -> setVelocity(newX, newY, newZ);
 
-				ballistic -> setMass(0.0f);
-				target -> setMass(0.0f);
-			}
+				ballistic -> setVelocity(-bVelocity.x, -bVelocity.y, -bVelocity.z);
+				target -> setVelocity(-tVelocity.x, -tVelocity.y, -tVelocity.z);
 
+				ballistic -> setMass(0.3f);
+				target -> setMass(0.3f);
+			}*/
+
+			/*
+			 * Particles are occupying the same space.
+			 */
+			if(distanceBetweenParticles < ballistic -> getVolume() + target -> getVolume())
+			{
+				ballistic -> setColor(COLLIDED_COLOR);
+				target -> setColor(COLLIDED_COLOR);
+
+				float newX = (bVelocity.x + tVelocity.x)/2;
+				float newY = (bVelocity.y + tVelocity.y)/2;
+				float newZ = (bVelocity.z + tVelocity.z)/2;
+
+				//ballistic -> setVelocity(newX, newY, newZ);
+				//target -> setVelocity(newX, newY, newZ);
+
+				//target -> changePosition(0.0f, 0.1f, 0.0f);
+				ballistic-> changePosition(-distanceVector.x*0.5f, -distanceVector.y*0.5f, -distanceVector.z*0.5f);
+
+			//	ballistic -> setVelocity(0.0f, 0.0f, 0.0f);
+			//	target -> setVelocity(0.0f, 0.0f, 0.0f);
+
+
+				ballistic -> setMass(0.01f);
+				target -> setMass(0.01f);
+			}
 		}
 	}
 }
@@ -319,6 +352,21 @@ void Physics::updateParticlePositions()
 	for(int i = 0; i < env -> numParticles; i++)
 	{
 		cur = env -> particles.getParticle(i);
+		Vec3 position = cur -> getPosition();
+
+	/*	if(position.x < 0.0f)
+			position.x = 0.0f;
+		else if (position.x > env -> xSize - 1)
+			position.x = env -> xSize - 1;
+		if(position.y < 0.0f)
+			position.y = 0.0f;
+		else if(position.y > env -> ySize - 1)
+			position.y = env -> ySize - 1;
+		if(position.z < 0.0f)
+			position.z = 0.0f;
+		else if(position.z > env -> zSize - 1)
+			position.z = env -> zSize - 1;*/
+
 		cur -> moveFromVelocity();
 	}
 }
@@ -345,7 +393,7 @@ void Physics::gravity()
 	{
 		cur = env->particles.getParticle(i);
 		Vec3 velocity = cur -> getVelocity();
-		velocity.y -= (2.0f - cur -> getMass()) * force_gravity;
+		velocity.y -= (2.0f) * force_gravity;
 
 		cur -> setVelocity(velocity.x, velocity.y, velocity.z);
 	}
