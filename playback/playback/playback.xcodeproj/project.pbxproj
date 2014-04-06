@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0004B0018EB479000BCFF76 /* particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0004AF618EB479000BCFF76 /* particle.cpp */; };
+		C0004B0118EB479000BCFF76 /* playback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0004AF818EB479000BCFF76 /* playback.cpp */; };
+		C0004B0218EB479000BCFF76 /* reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0004AFA18EB479000BCFF76 /* reader.cpp */; };
+		C0004B0318EB479000BCFF76 /* state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0004AFC18EB479000BCFF76 /* state.cpp */; };
+		C0004B0418EB479000BCFF76 /* video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0004AFE18EB479000BCFF76 /* video.cpp */; };
+		C062041D18F0B9E400351F5D /* Draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C062041B18F0B9E400351F5D /* Draw.cpp */; };
+		C062041F18F1D96500351F5D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C062041E18F1D96500351F5D /* OpenGL.framework */; };
+		C062042118F1D98D00351F5D /* libglut.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C062042018F1D98D00351F5D /* libglut.3.dylib */; };
 		C0C8B5F918E098FC008FE1EE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0C8B5F818E098FC008FE1EE /* main.cpp */; };
 		C0C8B5FB18E098FC008FE1EE /* playback.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C0C8B5FA18E098FC008FE1EE /* playback.1 */; };
 /* End PBXBuildFile section */
@@ -25,9 +33,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C0004AF618EB479000BCFF76 /* particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = particle.cpp; path = ../../particle.cpp; sourceTree = "<group>"; };
+		C0004AF718EB479000BCFF76 /* particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = particle.h; path = ../../particle.h; sourceTree = "<group>"; };
+		C0004AF818EB479000BCFF76 /* playback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = playback.cpp; path = ../../playback.cpp; sourceTree = "<group>"; };
+		C0004AF918EB479000BCFF76 /* playback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = playback.h; path = ../../playback.h; sourceTree = "<group>"; };
+		C0004AFA18EB479000BCFF76 /* reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reader.cpp; path = ../../reader.cpp; sourceTree = "<group>"; };
+		C0004AFB18EB479000BCFF76 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reader.h; path = ../../reader.h; sourceTree = "<group>"; };
+		C0004AFC18EB479000BCFF76 /* state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = state.cpp; path = ../../state.cpp; sourceTree = "<group>"; };
+		C0004AFD18EB479000BCFF76 /* state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = state.h; path = ../../state.h; sourceTree = "<group>"; };
+		C0004AFE18EB479000BCFF76 /* video.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = video.cpp; path = ../../video.cpp; sourceTree = "<group>"; };
+		C0004AFF18EB479000BCFF76 /* video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = video.h; path = ../../video.h; sourceTree = "<group>"; };
+		C062041B18F0B9E400351F5D /* Draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Draw.cpp; path = ../../Draw.cpp; sourceTree = "<group>"; };
+		C062041C18F0B9E400351F5D /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Draw.h; path = ../../Draw.h; sourceTree = "<group>"; };
+		C062041E18F1D96500351F5D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = ../../../../../../System/Library/Frameworks/OpenGL.framework; sourceTree = "<group>"; };
+		C062042018F1D98D00351F5D /* libglut.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglut.3.dylib; path = ../../../../../../usr/local/Cellar/freeglut/2.8.1/lib/libglut.3.dylib; sourceTree = "<group>"; };
 		C0C8B5F518E098FC008FE1EE /* playback */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = playback; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C8B5F818E098FC008FE1EE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C0C8B5FA18E098FC008FE1EE /* playback.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = playback.1; sourceTree = "<group>"; };
+		C0F34DE318EB4EBE00750B7B /* vectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vectors.h; path = ../../vectors.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,15 +58,73 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C062041F18F1D96500351F5D /* OpenGL.framework in Frameworks */,
+				C062042118F1D98D00351F5D /* libglut.3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C0004B0518EB479C00BCFF76 /* Particle */ = {
+			isa = PBXGroup;
+			children = (
+				C0004AF618EB479000BCFF76 /* particle.cpp */,
+				C0004AF718EB479000BCFF76 /* particle.h */,
+			);
+			name = Particle;
+			sourceTree = "<group>";
+		};
+		C0004B0618EB47A700BCFF76 /* Playback */ = {
+			isa = PBXGroup;
+			children = (
+				C0004AF818EB479000BCFF76 /* playback.cpp */,
+				C0004AF918EB479000BCFF76 /* playback.h */,
+			);
+			name = Playback;
+			sourceTree = "<group>";
+		};
+		C0004B0718EB47B400BCFF76 /* Reader */ = {
+			isa = PBXGroup;
+			children = (
+				C0004AFA18EB479000BCFF76 /* reader.cpp */,
+				C0004AFB18EB479000BCFF76 /* reader.h */,
+			);
+			name = Reader;
+			sourceTree = "<group>";
+		};
+		C0004B0818EB47C000BCFF76 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				C0004AFC18EB479000BCFF76 /* state.cpp */,
+				C0004AFD18EB479000BCFF76 /* state.h */,
+			);
+			name = State;
+			sourceTree = "<group>";
+		};
+		C0004B0918EB47C800BCFF76 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				C0004AFE18EB479000BCFF76 /* video.cpp */,
+				C0004AFF18EB479000BCFF76 /* video.h */,
+			);
+			name = Video;
+			sourceTree = "<group>";
+		};
+		C062041A18F0B9BC00351F5D /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				C062041B18F0B9E400351F5D /* Draw.cpp */,
+				C062041C18F0B9E400351F5D /* Draw.h */,
+			);
+			name = Draw;
+			sourceTree = "<group>";
+		};
 		C0C8B5EC18E098FC008FE1EE = {
 			isa = PBXGroup;
 			children = (
+				C062042018F1D98D00351F5D /* libglut.3.dylib */,
+				C062041E18F1D96500351F5D /* OpenGL.framework */,
 				C0C8B5F718E098FC008FE1EE /* playback */,
 				C0C8B5F618E098FC008FE1EE /* Products */,
 			);
@@ -60,6 +141,13 @@
 		C0C8B5F718E098FC008FE1EE /* playback */ = {
 			isa = PBXGroup;
 			children = (
+				C0004B0718EB47B400BCFF76 /* Reader */,
+				C0F34DE318EB4EBE00750B7B /* vectors.h */,
+				C062041A18F0B9BC00351F5D /* Draw */,
+				C0004B0918EB47C800BCFF76 /* Video */,
+				C0004B0818EB47C000BCFF76 /* State */,
+				C0004B0618EB47A700BCFF76 /* Playback */,
+				C0004B0518EB479C00BCFF76 /* Particle */,
 				C0C8B5F818E098FC008FE1EE /* main.cpp */,
 				C0C8B5FA18E098FC008FE1EE /* playback.1 */,
 			);
@@ -117,7 +205,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0004B0318EB479000BCFF76 /* state.cpp in Sources */,
+				C0004B0418EB479000BCFF76 /* video.cpp in Sources */,
+				C0004B0118EB479000BCFF76 /* playback.cpp in Sources */,
+				C062041D18F0B9E400351F5D /* Draw.cpp in Sources */,
 				C0C8B5F918E098FC008FE1EE /* main.cpp in Sources */,
+				C0004B0218EB479000BCFF76 /* reader.cpp in Sources */,
+				C0004B0018EB479000BCFF76 /* particle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +291,10 @@
 		C0C8B5FF18E098FC008FE1EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/freeglut/2.8.1/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -204,6 +302,10 @@
 		C0C8B60018E098FC008FE1EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/freeglut/2.8.1/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -227,6 +329,7 @@
 				C0C8B60018E098FC008FE1EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -57,7 +57,8 @@ Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, ch
 		gluLookAt(eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ);
 
 	//glOrtho(-0.1f , env.xSize - 0.9f, -0.1f, env.ySize - 0.1f, env.zSize, -0.1f);
-
+    myfile.open(path);
+    myfile << "$size\n" << xWidth << "," << yWidth << "," << zWidth << "," << numPs << "\n";
 
 }
 
@@ -96,7 +97,7 @@ void Switch::display(void)
 	env.sortParticles();
 
 	// Extrapolate particles forces to the grid.
-	phys.gravity();
+	//phys.gravity();
 	phys.updateGridForces();
 
 	// Interpolate forces from the grid to the particles
@@ -132,19 +133,23 @@ void Switch::display(void)
 	glutSwapBuffers();
 	glutTimerFunc(50, timer, 0);
 	//std::cout << disps << " ";
-	disps++;
+	
     if (disps > 100) {
-        //glutLeaveMainLoop();
+        glutLeaveMainLoop();
     }
-    //myfile << "Time Step " << disps << "\n";
+    std::cout << disps << "\n";
+    myfile << "$" << disps << "\n";
     for (int i = 0; i < env.particles.particles.size(); i++) {
-        //myfile << env.particles.particles[i].getPosition().x << " " << env.particles.particles[i].getPosition().y << "::";
+        myfile
+               << env.particles.particles[i].getPosition().x << ","
+               << env.particles.particles[i].getPosition().y << ","
+               << env.particles.particles[i].getPosition().z;
+        if (i != env.particles.particles.size() - 1) {
+            myfile << "\n";
+        }
     }
-    //myfile << "\n";
-    std::cout <<
-        env.particles.getParticle(3) -> position.x << ", " <<
-        env.particles.getParticle(3) -> position.y << ", " <<
-        env.particles.getParticle(3) -> position.z << ", " << "\n";
+    disps++;
+    myfile << "\n";
 }
 
 void Switch::readVideo(void){

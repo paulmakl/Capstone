@@ -18,8 +18,10 @@
 
 #ifdef __APPLE__
 #define pixels 720
+#define path "/Users/paulmakl/Documents/Capstone/playback/video.txt"
 #else
 #define pixels 900
+#define path "PUT YOUR PATH HERE"
 #endif
 
 class Switch{
