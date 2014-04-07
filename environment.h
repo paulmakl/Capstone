@@ -19,6 +19,7 @@ public:
     int ySize;
     int zSize;
     int numParticles;
+    int maxParticles;
     ParticleCollection particles;
     Grid grid;
     
@@ -35,5 +36,7 @@ public:
 	void generateShapes();
     
     void sortParticles();
+
+    void releaseParticles(int num);
 };
 #endif

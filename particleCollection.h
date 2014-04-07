@@ -21,7 +21,7 @@ public:
 	void init(float nparticles, int xSize, int ySize, int zSize);
     //void init(float nparticles, int xSize, int ySize, int zSize);
 	void init2(float nparticles, int xSize, int ySize, int zSize);
-	void sortParticles();
+	void sortParticles(int particles);
 	Particle* getParticle(int index);
 	std::vector<Particle> particles;
 	/*

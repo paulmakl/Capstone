@@ -174,8 +174,10 @@ void ParticleCollection::shakerSort(int start, int end)
 	} while(exchange);
 }
 
-void ParticleCollection::sortParticles()
+void ParticleCollection::sortParticles(int particles)
 {
+	numParticles = particles; // How many of the particles we are sorting.
+
 	int xStart = 0; // The index of the start of the current x-values.
 	int yStart = 0; // The index of the start of the current y-values.
 	int xEnd = 0; // The index of the end of the current x-values.

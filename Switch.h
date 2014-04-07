@@ -24,14 +24,14 @@
 #define path "C://Users/Etan/Desktop/video.txt"
 #endif
 
+#define FRAME_LIMIT 250
+
 class Switch{
 public:
 
     Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, char** argv);
     void init(float sizeX, float sizeY, int argc, char** argv);
-    void cleanup();
     static void display();
-    static void readVideo();
     static void timer(int id);
 
 };
