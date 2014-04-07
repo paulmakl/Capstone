@@ -5,7 +5,7 @@ reader::reader(string p){
 }
 
 void reader::read(){
-    myfile.open(path);
+    myfile.open(path.c_str());
     vector <vector <string> > data;
     string line;
     int i = 0;
