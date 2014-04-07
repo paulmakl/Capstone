@@ -3,7 +3,9 @@
 
 #include <fstream>
 #include <iostream>
+#include <cstdlib>
 #include <sstream>
+#include <algorithm>
 #include <string>
 #include <vector>
 #include "video.h"
@@ -13,8 +15,8 @@ using namespace std;
 
 class reader{
 public:
-    string path;
-    fstream myfile;
+    std::string path;
+    std::fstream myfile;
     reader(string path);
     video vid;
     void read();

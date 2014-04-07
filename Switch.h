@@ -21,7 +21,7 @@
 #define path "/Users/paulmakl/Documents/Capstone/playback/video.txt"
 #else
 #define pixels 900
-#define path "PUT YOUR PATH HERE"
+#define path "C://Users/Etan/Desktop/video.txt"
 #endif
 
 class Switch{

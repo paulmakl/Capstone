@@ -4,8 +4,10 @@ reader::reader(string p){
     path = p;
 }
 
-void reader::read(){
-    myfile.open(path);
+void reader::read()
+{
+	myfile.open(path.c_str());
+
     vector <vector <string> > data;
     string line;
     int i = 0;
