@@ -371,17 +371,16 @@ void Physics::updateParticlePositions()
 	}
 }
 
-void Physics::addRandomVelocity()
+void Physics::addRandomVelocity(int index)
 {
-	Particle* cur;
-	for(int i = 0; i < env -> numParticles; i++)
+	//if(index < env -> numParticles && index >= 0)
 	{
-		cur = env->particles.getParticle(i);
+		index = rand()% env -> numParticles;
+		Particle* cur;
+		cur = env->particles.getParticle(index);
 		Vec3 velocity = cur-> getVelocity();
-		velocity.x += (rand()%100)/10000.0f - 0.0054f;
-		velocity.y += (rand()%100)/10000.0f - 0.0054f;
-		velocity.z += (rand()%100)/10000.0f - 0.0054f;
-
+		velocity.y -= (rand()%100)/100.0f;
+		//cur -> changePosition(0.0f, -1.0f, 0.0f);
 		cur->setVelocity(velocity.x, velocity.y, velocity.z);
 	}
 }

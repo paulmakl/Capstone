@@ -44,7 +44,7 @@ public:
      */
     void updateParticlePositions();
     
-    void addRandomVelocity();
+    void addRandomVelocity(int index);
     void gravity();
 
     void updateShapePositions();

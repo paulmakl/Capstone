@@ -13,14 +13,14 @@ void Environment::init(int x, int y, int z, int numPs){
 	ySize = y;
 	zSize = z;
 	particles.init(numPs, x, y, z);
-	numParticles = numPs;
+	maxParticles = numPs;
+	numParticles = 0;
 	grid.init(x, y, z);
 }
 
 /*
  *Generating Environment Variables
  */
-
 void Environment::generateNodes()
 {
 	int x, y, z;
@@ -63,6 +63,12 @@ void Environment::generateShapes()
 }
 
 void Environment::sortParticles(){
-	particles.sortParticles();
+	particles.sortParticles(numParticles);
 }
 
+void Environment::releaseParticles(int num)
+{
+	numParticles += num;
+	if(numParticles > maxParticles)
+		numParticles = maxParticles;
+}

@@ -10,6 +10,7 @@ int disps = 0;
 int frame, oldTime, curTime;
 std::ofstream myfile;
 float angle = 0;
+//int index = 0;
 
 Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, char** argv)
 {
@@ -114,6 +115,8 @@ void Switch::display(void)
 	draw.displayGrid();
 	//draw.displayShapes();
 
+	env.releaseParticles(50);
+
 	frame++;
 	curTime = glutGet(GLUT_ELAPSED_TIME);
 
@@ -134,7 +137,7 @@ void Switch::display(void)
 	glutTimerFunc(50, timer, 0);
 	//std::cout << disps << " ";
 	
-    if (disps > 100) {
+    if (disps > FRAME_LIMIT) {
         glutLeaveMainLoop();
     }
     std::cout << disps << "\n";
@@ -151,13 +154,3 @@ void Switch::display(void)
     disps++;
     myfile << "\n";
 }
-
-void Switch::readVideo(void){
-    
-}
-
-void Switch::cleanup(){
-    //myfile.close();
-}
-
-

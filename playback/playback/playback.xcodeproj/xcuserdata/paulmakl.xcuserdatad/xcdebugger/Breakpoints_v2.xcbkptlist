@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
             endingLineNumber = "62"
-            landmarkName = "reader::setVideoState(int stateNum)"
+            landmarkName = "reader::read()"
             landmarkType = "5">
             <Locations>
                <Location
@@ -109,7 +109,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
-            landmarkName = "reader::setVideoState(int stateNum)"
+            landmarkName = "reader::read()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -171,7 +171,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "55"
             endingLineNumber = "55"
-            landmarkName = "reader::setVideoState(int stateNum)"
+            landmarkName = "reader::read()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -219,7 +219,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
             endingLineNumber = "65"
-            landmarkName = "reader::setVideoState(int stateNum)"
+            landmarkName = "reader::read()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
