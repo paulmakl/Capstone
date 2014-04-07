@@ -102,16 +102,16 @@ void Switch::display(void)
 
 	// Interpolate forces from the grid to the particles
 	phys.updateParticleVelocities();
-	//phys.checkParticleCollisions();
+	phys.checkParticleCollisions();
 	phys.updateParticlePositions();
 	//phys.updateShapePositions();
-	//phys.checkEulerianCollisions();
+	phys.checkEulerianCollisions();
 
 	glPushMatrix();
 
 	draw.displayBackdrop();
 	draw.displayParticles();
-	//draw.displayGrid();
+	draw.displayGrid();
 	//draw.displayShapes();
 
 	frame++;

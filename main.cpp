@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 	int xa = 64;
 	int ya = 64;
 	int za = 64;
-	int p = 10;
+	int p = 10000       ;
     Switch x(xa, ya, za, p, argc, argv);
    	
     glutMainLoop();
