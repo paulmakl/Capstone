@@ -20,7 +20,7 @@
 #define path "/Users/paulmakl/Documents/Capstone/playback/video.txt"
 #else
 #define pixels 900
-#define path "C://Users/Etan/Desktop/video.txt"
+#define path "C://Users/Etan/Desktop/video2.txt"
 #endif
 
 using namespace std;
@@ -37,7 +37,8 @@ void timer(int id)
 	glutPostRedisplay();
 }
 
-void display(){
+void display()
+{
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
     
@@ -65,19 +66,14 @@ void display(){
 	glutSwapBuffers();
 	glutTimerFunc(50, timer, 0);
     curState += 1;
-    if(curState >= x.vid.states.size()){
+    if(curState >= x.vid.states.size())
+    {
         glutLeaveMainLoop();
     }
 }
 
 int main(int argc, char** argv)
 {
-    int xsize = 64;
-    int ysize = 64;
-    int zsize = 64;
-    //string a = "hello";
-    
-    
     x.read();
     drawer.init(&x.vid);
     glutInit(&argc, argv); // Initialize GLUT
@@ -96,7 +92,6 @@ int main(int argc, char** argv)
 	gluPerspective(85.0, 1.0, 0.001, x.vid.size.x);
 	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
     float distance = x.vid.size.x;
-    float angle = 0.0f;
     eyeX = distance;//*cos(angle);
     eyeY = 3.0f;//env.ySize/1.3f;
     eyeZ = distance;//*sin(angle);
