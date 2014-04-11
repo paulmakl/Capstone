@@ -21,7 +21,7 @@
 #define path "/Users/paulmakl/Documents/Capstone/playback/video.txt"
 #else
 #define pixels 900
-#define path "PUT YOUR PATH HERE"
+#define path "C://Users/Etan/Desktop/video2.txt"
 #endif
 
 using namespace std;
@@ -44,26 +44,6 @@ float zfar;
 void timer(int id)
 {
 	glutPostRedisplay();
-}
-
-void p(){
-    gluPerspective(fovy, aspect, 0.001, zfar);
-    //gluLookAt(cam.eyeX, cam.eyeY, cam.eyeZ, cam.targetX, cam.targetY, cam.targetZ, cam.upX, cam.upY, cam.upZ);
-    //gluPerspective(fovy, aspect, 0.001, x.vid.size.x);
-	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
-    float distance = x.vid.size.x;
-    float angle = 0.0f;
-    eyeX = distance;//*cos(angle);
-    eyeY = 3.0f;//env.ySize/1.3f;
-    eyeZ = distance;//*sin(angle);
-    targetX = x.vid.size.x/2.0f;
-    targetY = x.vid.size.y/2.0f;
-    targetZ = x.vid.size.z/2.0f;
-    upX = 0.0f;
-    upY = 1.0f;
-    upZ = 0.0f;
-    //glRotatef(0.5,1.0,0.0,0.0);
-    //gluLookAt(eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ);
 }
 
 void display(){
@@ -98,7 +78,6 @@ void display(){
         curState += 1;
     }else{
         //glutLeaveMainLoop();
-        
     }
 }
 
@@ -115,51 +94,40 @@ void keyboard(unsigned char key, int x, int y)
         case 113 :
             cout << "q" << endl;
             glTranslated(1, 0, 0);
-            p();
             break;
         case 97 :
             cout << "a" << endl;
             glTranslated(-1, 0, 0);
-            p();
             break;
         case 119 :
             cout << "w" << endl;
             glTranslated(0, 1, 0);
-            p();
             break;
         case 115 :
             cout << "s" << endl;
             glTranslated(0, -1, 0);
-            p();
             break;
         case 101 :
             cout << "e" << endl;
             glTranslated(0, 0, 1);
-            p();
             break;
         case 100 :
             cout << "d" << endl;
             glTranslated(0, 0, -1);
-            p();
             break;
         case 114 :
             cout << "r" << endl;
             glRotatef(1.0,0.0,1.0,0.0);
-            p();
             break;
         case 102 :
             cout << "f" << endl;
             glRotatef(-1.0,0.0,1.0,0.0);
-            p();
             break;
             // Delete
         case 127 :
             cout << "Pressed Delete" << endl;
             break;
         default :
-            cout << "Pressed key : " << (char)key
-			<< " at position : ("
-			<< x << "," << y << ")" << endl;
             break;
 	}
     int mod = glutGetModifiers();
@@ -176,12 +144,6 @@ void keyboard(unsigned char key, int x, int y)
 
 int main(int argc, char** argv)
 {
-    int xsize = 64;
-    int ysize = 64;
-    int zsize = 64;
-    //string a = "hello";
-    
-    
     x.read();
     drawer.init(&x.vid);
     glutInit(&argc, argv); // Initialize GLUT
@@ -202,7 +164,6 @@ int main(int argc, char** argv)
     gluPerspective(fovy, aspect, 0.001, x.vid.size.x);
 	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
     float distance = x.vid.size.x;
-    float angle = 0.0f;
     eyeX = distance;//*cos(angle);
     eyeY = 5;//env.ySize/1.3f;
     eyeZ = distance;//*sin(angle);

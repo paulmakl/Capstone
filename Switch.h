@@ -21,12 +21,13 @@
 #define path "/Users/paulmakl/Documents/Capstone/playback/video.txt"
 #else
 #define pixels 900
-#define path "C://Users/Etan/Desktop/video.txt"
+#define path "C://Users/Etan/Desktop/video2.txt"
 #endif
 
-#define FRAME_LIMIT 150
+#define FRAME_LIMIT 160
 
-class Switch{
+class Switch
+{
 public:
 
     Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, char** argv);

@@ -21,7 +21,6 @@ void reader::read(){
                 int num = atoi(line.c_str());
                 vid.addState();
                 setVideoState(num);
-                cout << "state " << num << " read\n";
             }
             else{
                 cout << "nou";
