@@ -3,6 +3,7 @@
 #include <string>
 #include "reader.h"
 #include "Draw.h"
+#include "camera.h"
 
 #ifdef __APPLE__
 #include "/usr/local/Cellar/freeglut/2.8.1/include/GL/glut.h"
@@ -30,17 +31,45 @@ int oldTime = 0;
 int curTime = 0;
 int curState = 0;
 reader x(path);
+camera cam;
 Draw drawer;
+float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
+float distance;
+float angle;
+
+float fovy = 85;
+float aspect = 1.0;
+float zfar;
 
 void timer(int id)
 {
 	glutPostRedisplay();
 }
 
+void p(){
+    gluPerspective(fovy, aspect, 0.001, zfar);
+    //gluLookAt(cam.eyeX, cam.eyeY, cam.eyeZ, cam.targetX, cam.targetY, cam.targetZ, cam.upX, cam.upY, cam.upZ);
+    //gluPerspective(fovy, aspect, 0.001, x.vid.size.x);
+	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
+    float distance = x.vid.size.x;
+    float angle = 0.0f;
+    eyeX = distance;//*cos(angle);
+    eyeY = 3.0f;//env.ySize/1.3f;
+    eyeZ = distance;//*sin(angle);
+    targetX = x.vid.size.x/2.0f;
+    targetY = x.vid.size.y/2.0f;
+    targetZ = x.vid.size.z/2.0f;
+    upX = 0.0f;
+    upY = 1.0f;
+    upZ = 0.0f;
+    //glRotatef(0.5,1.0,0.0,0.0);
+    //gluLookAt(eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ);
+}
+
 void display(){
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
-    
+    //gluLookAt(cam.eyeX, cam.eyeY, cam.eyeZ, cam.targetX, cam.targetY, cam.targetZ, cam.upX, cam.upY, cam.upZ);
     glPushMatrix();
     
     drawer.displayBackdrop();
@@ -64,10 +93,85 @@ void display(){
 	glFlush();
 	glutSwapBuffers();
 	glutTimerFunc(50, timer, 0);
-    curState += 1;
-    if(curState >= x.vid.states.size()){
-        glutLeaveMainLoop();
+    
+    if(curState < x.vid.states.size() - 1){
+        curState += 1;
+    }else{
+        //glutLeaveMainLoop();
+        
     }
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    
+    switch(key)
+	{
+            // Backspace
+        case 8 :
+            std::cout << "Pressed Backspace" << std::endl;
+            curState = 0;
+            break;
+        case 113 :
+            cout << "q" << endl;
+            glTranslated(1, 0, 0);
+            p();
+            break;
+        case 97 :
+            cout << "a" << endl;
+            glTranslated(-1, 0, 0);
+            p();
+            break;
+        case 119 :
+            cout << "w" << endl;
+            glTranslated(0, 1, 0);
+            p();
+            break;
+        case 115 :
+            cout << "s" << endl;
+            glTranslated(0, -1, 0);
+            p();
+            break;
+        case 101 :
+            cout << "e" << endl;
+            glTranslated(0, 0, 1);
+            p();
+            break;
+        case 100 :
+            cout << "d" << endl;
+            glTranslated(0, 0, -1);
+            p();
+            break;
+        case 114 :
+            cout << "r" << endl;
+            glRotatef(1.0,0.0,1.0,0.0);
+            p();
+            break;
+        case 102 :
+            cout << "f" << endl;
+            glRotatef(-1.0,0.0,1.0,0.0);
+            p();
+            break;
+            // Delete
+        case 127 :
+            cout << "Pressed Delete" << endl;
+            break;
+        default :
+            cout << "Pressed key : " << (char)key
+			<< " at position : ("
+			<< x << "," << y << ")" << endl;
+            break;
+	}
+    int mod = glutGetModifiers();
+    switch(mod)
+	{
+        case GLUT_ACTIVE_CTRL :
+            cout << "Ctrl Held" << endl; break;
+        case GLUT_ACTIVE_SHIFT :
+            cout << "Shift Held" << endl; break;
+        case GLUT_ACTIVE_ALT :
+            cout << "Alt Held" << endl; break;
+	}
 }
 
 int main(int argc, char** argv)
@@ -89,16 +193,18 @@ int main(int argc, char** argv)
 	glutCreateWindow("Video Tiem"); // Create a window with the given title
     
 	glutDisplayFunc( display ); // Register display callback handler for window re-paint
+    glutKeyboardFunc(keyboard);
     
     glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     
-	gluPerspective(85.0, 1.0, 0.001, x.vid.size.x);
+	//gluPerspective(85.0, 1.0, 0.001, x.vid.size.x);
+    gluPerspective(fovy, aspect, 0.001, x.vid.size.x);
 	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
     float distance = x.vid.size.x;
     float angle = 0.0f;
     eyeX = distance;//*cos(angle);
-    eyeY = 3.0f;//env.ySize/1.3f;
+    eyeY = 5;//env.ySize/1.3f;
     eyeZ = distance;//*sin(angle);
     targetX = x.vid.size.x/2.0f;
     targetY = x.vid.size.y/2.0f;
@@ -106,11 +212,11 @@ int main(int argc, char** argv)
     upX = 0.0f;
     upY = 1.0f;
     upZ = 0.0f;
-    
+    cam.init(eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ);
     gluLookAt(eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ);
-    
-    
-    
+    /*glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluLookAt(eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ);*/
     glutMainLoop();
 	return 0;
 };
