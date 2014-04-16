@@ -26,5 +26,6 @@ Capstone/
 test/
 #video
 *.txt
+playback/*.txt
 playback/playback
 
