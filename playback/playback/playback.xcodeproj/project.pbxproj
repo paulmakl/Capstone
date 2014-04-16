@@ -15,7 +15,8 @@
 		C062041D18F0B9E400351F5D /* Draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C062041B18F0B9E400351F5D /* Draw.cpp */; };
 		C062041F18F1D96500351F5D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C062041E18F1D96500351F5D /* OpenGL.framework */; };
 		C062042118F1D98D00351F5D /* libglut.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C062042018F1D98D00351F5D /* libglut.3.dylib */; };
-		C0C8B5F918E098FC008FE1EE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0C8B5F818E098FC008FE1EE /* main.cpp */; };
+		C062042318F3081100351F5D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C062042218F3081100351F5D /* main.cpp */; };
+		C062042618F73CDF00351F5D /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C062042418F73CDF00351F5D /* camera.cpp */; };
 		C0C8B5FB18E098FC008FE1EE /* playback.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C0C8B5FA18E098FC008FE1EE /* playback.1 */; };
 /* End PBXBuildFile section */
 
@@ -47,8 +48,10 @@
 		C062041C18F0B9E400351F5D /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Draw.h; path = ../../Draw.h; sourceTree = "<group>"; };
 		C062041E18F1D96500351F5D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = ../../../../../../System/Library/Frameworks/OpenGL.framework; sourceTree = "<group>"; };
 		C062042018F1D98D00351F5D /* libglut.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglut.3.dylib; path = ../../../../../../usr/local/Cellar/freeglut/2.8.1/lib/libglut.3.dylib; sourceTree = "<group>"; };
+		C062042218F3081100351F5D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../main.cpp; sourceTree = "<group>"; };
+		C062042418F73CDF00351F5D /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = camera.cpp; path = ../camera.cpp; sourceTree = "<group>"; };
+		C062042518F73CDF00351F5D /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = camera.h; path = ../camera.h; sourceTree = "<group>"; };
 		C0C8B5F518E098FC008FE1EE /* playback */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = playback; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0C8B5F818E098FC008FE1EE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C0C8B5FA18E098FC008FE1EE /* playback.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = playback.1; sourceTree = "<group>"; };
 		C0F34DE318EB4EBE00750B7B /* vectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vectors.h; path = ../../vectors.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,9 +123,19 @@
 			name = Draw;
 			sourceTree = "<group>";
 		};
+		C062042718F73CE400351F5D /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				C062042418F73CDF00351F5D /* camera.cpp */,
+				C062042518F73CDF00351F5D /* camera.h */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
 		C0C8B5EC18E098FC008FE1EE = {
 			isa = PBXGroup;
 			children = (
+				C062042718F73CE400351F5D /* Camera */,
 				C062042018F1D98D00351F5D /* libglut.3.dylib */,
 				C062041E18F1D96500351F5D /* OpenGL.framework */,
 				C0C8B5F718E098FC008FE1EE /* playback */,
@@ -141,6 +154,7 @@
 		C0C8B5F718E098FC008FE1EE /* playback */ = {
 			isa = PBXGroup;
 			children = (
+				C062042218F3081100351F5D /* main.cpp */,
 				C0004B0718EB47B400BCFF76 /* Reader */,
 				C0F34DE318EB4EBE00750B7B /* vectors.h */,
 				C062041A18F0B9BC00351F5D /* Draw */,
@@ -148,7 +162,6 @@
 				C0004B0818EB47C000BCFF76 /* State */,
 				C0004B0618EB47A700BCFF76 /* Playback */,
 				C0004B0518EB479C00BCFF76 /* Particle */,
-				C0C8B5F818E098FC008FE1EE /* main.cpp */,
 				C0C8B5FA18E098FC008FE1EE /* playback.1 */,
 			);
 			path = playback;
@@ -209,7 +222,8 @@
 				C0004B0418EB479000BCFF76 /* video.cpp in Sources */,
 				C0004B0118EB479000BCFF76 /* playback.cpp in Sources */,
 				C062041D18F0B9E400351F5D /* Draw.cpp in Sources */,
-				C0C8B5F918E098FC008FE1EE /* main.cpp in Sources */,
+				C062042618F73CDF00351F5D /* camera.cpp in Sources */,
+				C062042318F3081100351F5D /* main.cpp in Sources */,
 				C0004B0218EB479000BCFF76 /* reader.cpp in Sources */,
 				C0004B0018EB479000BCFF76 /* particle.cpp in Sources */,
 			);

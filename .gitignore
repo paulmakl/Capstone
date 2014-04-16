@@ -24,6 +24,7 @@
 #Paul's xcode Project
 Capstone/
 test/
-
 #video
 *.txt
+playback/playback
+

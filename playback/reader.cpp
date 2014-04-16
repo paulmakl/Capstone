@@ -4,10 +4,8 @@ reader::reader(string p){
     path = p;
 }
 
-void reader::read()
-{
-	myfile.open(path.c_str());
-
+void reader::read(){
+    myfile.open(path.c_str());
     vector <vector <string> > data;
     string line;
     int i = 0;
@@ -23,7 +21,6 @@ void reader::read()
                 int num = atoi(line.c_str());
                 vid.addState();
                 setVideoState(num);
-                cout << "state " << num << " read\n";
             }
             else{
                 cout << "nou";

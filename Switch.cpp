@@ -10,7 +10,10 @@ int disps = 0;
 int frame, oldTime, curTime;
 std::ofstream myfile;
 float angle = 0;
-int index = 0;
+bool ignoreRepeats = false;
+//int index = 0;
+using namespace std;
+
 
 Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, char** argv)
 {
@@ -29,7 +32,7 @@ Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, ch
 	glutCreateWindow("Snow Tiem"); // Create a window with the given title
 
 	glutDisplayFunc( display ); // Register display callback handler for window re-paint
-
+    //glutKeyboardFunc(keyboard);
 	frame = 0;
 	oldTime = 0;
 	curTime = 0;
@@ -103,16 +106,16 @@ void Switch::display(void)
 
 	// Interpolate forces from the grid to the particles
 	phys.updateParticleVelocities();
-	//phys.checkParticleCollisions();
+	phys.checkParticleCollisions();
 	phys.updateParticlePositions();
 	//phys.updateShapePositions();
-	//phys.checkEulerianCollisions();
+	phys.checkEulerianCollisions();
 
 	glPushMatrix();
 
 	draw.displayBackdrop();
 	draw.displayParticles();
-	//draw.displayGrid();
+	draw.displayGrid();
 	//draw.displayShapes();
 
 	env.releaseParticles(50);
