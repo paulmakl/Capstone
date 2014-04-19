@@ -9,34 +9,37 @@
 #include <math.h>
 #include <cstdlib>
 #include <vector>
+#include "COG.h"
 
 #define numShapes 1
 
 class Environment{
 public:
-
+    
     int xSize;
     int ySize;
     int zSize;
     int numParticles;
     int maxParticles;
     ParticleCollection particles;
+    vector <COG> groups;
     Grid grid;
     
     Environment();
 	void generateNodes();
     
     void init(int x, int y,int z, int numPs);
-
+    
     
     void generateParticles();
-
+    
 	Cube shapes[numShapes];
-
+    
 	void generateShapes();
     
     void sortParticles();
-
+    
     void releaseParticles(int num);
+    
 };
 #endif
