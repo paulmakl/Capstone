@@ -22,7 +22,7 @@ public:
     int numParticles;
     int maxParticles;
     ParticleCollection particles;
-    vector <COG> groups;
+
     Grid grid;
     
     Environment();
@@ -40,6 +40,7 @@ public:
     void sortParticles();
     
     void releaseParticles(int num);
+    void injectParticles(int num);
     
 };
 #endif

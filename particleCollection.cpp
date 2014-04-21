@@ -10,18 +10,56 @@ void ParticleCollection::init(float nparticles, int xSize, int ySize, int zSize)
 	this->xSize = xSize;
 	this->ySize = ySize;
 	this->zSize = zSize;
-	for(int i = 0; i < numParticles; i++)
+	int i = 0;
+	while(i < nparticles)
 	{
 		Particle a;
-		a = Configs::random_confic_particles(xSize, ySize, zSize);
+		a = Configs::random_config_particles(xSize, ySize, zSize);
 		//a = Configs::test_config_particles();
 		a.name = i;
 		particles[i] = a;
+		i++;
 	}
+	groups.resize(1);
 	initializeIndexTracker(xSize, ySize);
 }
 
-void ParticleCollection::initializeIndexTracker(int xSize, int ySize){
+void ParticleCollection::createCOG(Vec3 center, float radius, int numParticles)
+{
+	// Create a snowball.
+	int i = particles.size();
+	COG c;
+	c.init();
+	groups[groups.size() - 1] = c;
+	groups.resize(groups.size() + 1);
+	particles.resize(particles.size() + numParticles);
+	while(i < particles.size())
+	{
+		for(float x = -radius; x <= radius; x += 0.2f)
+		{
+			for(float y = -radius; y <= radius; y += 0.2f)
+			{
+				for(float z = -radius; z <= radius; z += 0.2f)
+				{
+					Particle a;
+					a.setPosition(x + center.x, y + center.y, z + center.z);
+					a.setVelocity(0.0f, 0.0f, 0.0f);
+					a.setMass(Randy::randf(0.0f, 0.0f)); // 1 = maximum inertia, 0 = no inertia
+					a.setVolume(Randy::randf(0.02f, 0.09f));
+					a.setColor(0.6f, 0.8f, 1.0f);
+					a.name = i;
+					particles[i] = a;
+					c.addParticle(&a);
+					i++;
+				}
+			}
+		}
+		i = particles.size();
+	}
+}
+
+void ParticleCollection::initializeIndexTracker(int xSize, int ySize)
+{
 	indexTracker.resize(xSize);
 	for (int i = 0; i < ySize; i++) {
 		indexTracker[i].resize(ySize);
@@ -37,11 +75,13 @@ void ParticleCollection::initializeIndexTracker(int xSize, int ySize){
  * Getters and Setters
  */
 
-Particle * ParticleCollection::getParticle(int index){
+Particle * ParticleCollection::getParticle(int index)
+{
 	return &particles[index];
 }
 
-int2 ParticleCollection::getParticlesListIndex(int3 boxID){
+int2 ParticleCollection::getParticlesListIndex(int3 boxID)
+{
 	int2 ret;
 	ret.x = 0;
 	ret.y = 0;

@@ -60,7 +60,7 @@ Node Configs::dead_config_nodes()
 /*
  * Particles
  */
-Particle Configs::random_confic_particles(int xSize, int ySize, int zSize)
+Particle Configs::random_config_particles(int xSize, int ySize, int zSize)
 {
     Particle a;
     float xPos = Randy::randf(2, xSize-2);
@@ -78,6 +78,12 @@ Particle Configs::random_confic_particles(int xSize, int ySize, int zSize)
     a.setVolume(Randy::randf(0.02f, 0.2f));
     return a;
 }
+
+/*Particle Configs::random_snowball_particles(int radius, Vec3 center)
+{
+
+	return a;
+}*/
 
 /*Particle Configs::up_config_particles(int xSize, int ySize){
     Particle a;

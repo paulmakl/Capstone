@@ -13,12 +13,10 @@ void Environment::init(int x, int y, int z, int numPs){
 	ySize = y;
 	zSize = z;
 	particles.init(numPs, x, y, z);
-    groups.resize(1);
-    COG c;
-    groups[0] = c;
-    for (int i = 0; i < numParticles; i++) {
-        c.addParticles(particles.getParticle(i));
-    }
+
+//    for (int i = 0; i < numParticles; i++) {
+//        c.addParticles(particles.getParticle(i));
+//    }
 	maxParticles = numPs;
 	numParticles = 0;
 	grid.init(x, y, z);
@@ -77,4 +75,10 @@ void Environment::releaseParticles(int num)
 	numParticles += num;
 	if(numParticles > maxParticles)
 		numParticles = maxParticles;
+}
+
+void Environment::injectParticles(int num)
+{
+	numParticles += num;
+	maxParticles += num;
 }

@@ -4,6 +4,7 @@
 #include "Particle.h"
 #include "Configs.h"
 #include "vectors.h"
+#include "COG.h"
 #include <math.h>
 #include <cstdlib>
 #include <vector>
@@ -19,6 +20,9 @@ public:
 	 * different initialization methods
 	 */
 	void init(float nparticles, int xSize, int ySize, int zSize);
+
+	void createCOG(Vec3 center, float radius, int numParticles);
+
     //void init(float nparticles, int xSize, int ySize, int zSize);
 	void init2(float nparticles, int xSize, int ySize, int zSize);
 	void sortParticles(int particles);
@@ -30,6 +34,7 @@ public:
 	 * boxes that have no particles in them have -1 as their index;
 	 */
 	std::vector<std::vector<int> > indexTracker;
+	std::vector <COG> groups;
 
 	int xSize, ySize, zSize;
 	int numParticles;

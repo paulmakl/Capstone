@@ -12,11 +12,16 @@ std::ofstream myfile;
 float angle = 0;
 bool ignoreRepeats = false;
 //int index = 0;
+int particles = 0;
+int releasedParticles = 0;
+bool snowballFlag = false; // Becomes true when we release a snowball.
+
 using namespace std;
 
 
 Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, char** argv)
 {
+	particles = numPs;
 
 	env.init(xWidth, yWidth, zWidth, numPs);
 
@@ -44,7 +49,7 @@ Switch::Switch(float xWidth, float yWidth, float zWidth, int numPs, int argc, ch
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
-	gluPerspective(85.0, 1.0, 0.001, env.xSize);
+	gluPerspective(85.0, 1.0, 0.001, env.xSize*2);
 	float eyeX, eyeY, eyeZ, targetX, targetY, targetZ, upX, upY, upZ;
 		float distance = env.xSize;
 		angle = 0.0f;
@@ -106,7 +111,7 @@ void Switch::display(void)
 
 	// Interpolate forces from the grid to the particles
 	phys.updateParticleVelocities();
-	phys.checkParticleCollisions();
+	//phys.checkParticleCollisions();
 	phys.updateParticlePositions();
 	//phys.updateShapePositions();
 	phys.checkEulerianCollisions();
@@ -115,10 +120,24 @@ void Switch::display(void)
 
 	draw.displayBackdrop();
 	draw.displayParticles();
-	draw.displayGrid();
+	//draw.displayGrid();
 	//draw.displayShapes();
 
-	env.releaseParticles(50);
+	if(releasedParticles < particles)
+	{
+		env.releaseParticles(50);
+		releasedParticles += 50;
+	}
+	else if(!snowballFlag)
+	{
+		Vec3 center;
+		center.x = 32.0f;
+		center.y = 1.5f;
+		center.z = 32.0f;
+		env.particles.createCOG(center, 2.0f, 10000);
+		env.injectParticles(10000);
+		snowballFlag = true;
+	}
 
 	frame++;
 	curTime = glutGet(GLUT_ELAPSED_TIME);
