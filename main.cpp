@@ -32,9 +32,9 @@
  */
 int main(int argc, char** argv)
 {
-	int xa = 64;
-	int ya = 64;
-	int za = 64;
+	int xa = 128;
+	int ya = 128;
+	int za = 128;
 	int p = 1000;
     Switch x(xa, ya, za, p, argc, argv);
 
