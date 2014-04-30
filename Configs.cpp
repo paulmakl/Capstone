@@ -69,13 +69,13 @@ Particle Configs::random_config_particles(int xSize, int ySize, int zSize)
     a.setPosition(xPos, yPos, zPos);
     
     float xVelo = Randy::randf(-0.01, 0.01);
-    float yVelo = Randy::randf(-0.4, -0.4);
+    float yVelo = Randy::randf(-0.4, -0.5);
     float zVelo = Randy::randf(-0.01, 0.01);
     a.setVelocity(xVelo, yVelo, zVelo);
 
     a.setColor(0.1f, 1.0f, 1.0f);
     a.setMass(Randy::randf(0.0f, 0.0f)); // 1 = maximum inertia, 0 = no intertia
-    a.setVolume(Randy::randf(0.02f, 0.2f));
+    a.setVolume(Randy::randf(0.2f, 0.2f));
     return a;
 }
 

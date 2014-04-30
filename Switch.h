@@ -24,7 +24,7 @@
 #define path "C://Users/Etan/Desktop/video2.txt"
 #endif
 
-#define FRAME_LIMIT 160
+#define FRAME_LIMIT 250
 
 class Switch
 {
