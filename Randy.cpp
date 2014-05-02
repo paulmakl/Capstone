@@ -1,7 +1,8 @@
 #include "Randy.h"
 
 
-float Randy::randf(float min, float max){
+float Randy::randf(float min, float max)
+{
     float random = ((float) rand()) / (float) RAND_MAX;
     float diff = max - min;
     float r = random * diff;

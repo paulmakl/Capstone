@@ -75,7 +75,7 @@ Particle Configs::random_config_particles(int xSize, int ySize, int zSize)
 
     a.setColor(0.1f, 1.0f, 1.0f);
     a.setMass(Randy::randf(0.0f, 0.0f)); // 1 = maximum inertia, 0 = no intertia
-    a.setVolume(Randy::randf(0.2f, 0.2f));
+    a.setVolume(Randy::randf(0.1f, 0.2f));
     return a;
 }
 

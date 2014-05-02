@@ -59,9 +59,9 @@ void Draw::displayParticles(int state)
 
 			position = cur -> pos;
 			float colorScale = 0.1f + (float)(vid -> size.x - position.z) / vid -> size.z;
-			float r = 1.0f * colorScale;
-			float g = 1.0f * colorScale;
-			float b = 1.0f * colorScale;
+			float r = 0.5f * colorScale;
+			float g = 0.5f * colorScale;
+			float b = 0.5f * colorScale;
 			glColor3f(r,g,b);
 			glPushMatrix();
 			glTranslatef(position.x, position.y, position.z);

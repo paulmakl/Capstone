@@ -1,7 +1,7 @@
 #include "Physics.h" 
 #include <iostream>
 
-#define COLLIDED_COLOR 1.0f, 0.1f, 0.1f
+#define COLLIDED_COLOR 1.0f, 1.0f, 1.0f
 
 /**
  * Sets the environment pointer that the physics will be working with.
@@ -222,7 +222,7 @@ void Physics::updateParticleVelocities()
 			newVelocity.y = 0;
 			newVelocity.z = 0;
 			//newVelocity.z = -newVelocity.z;
-			cur -> setColor(0.0f, 0.0f, 1.0f);
+			//cur -> setColor(0.0f, 0.0f, 1.0f);
 		}
 
 		cur -> setVelocity(newVelocity.x, newVelocity.y, newVelocity.z);
@@ -342,9 +342,8 @@ void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID)
 				//ballistic -> setVelocity(newX, newY, newZ);
 				//target -> setVelocity(newX, newY, newZ);
 
-				//target -> changePosition(0.0f, 0.1f, 0.0f);
-				ballistic-> changePosition(-distanceVector.x*0.5f, -distanceVector.y*0.5f, -distanceVector.z*0.5f);
-
+				target -> changePosition(distanceVector.x*0.1f, 0.0f, distanceVector.z*0.1f);
+				ballistic-> changePosition(-distanceVector.x*0.1f, 0.0f, -distanceVector.z*0.1f);
 				//	ballistic -> setVelocity(0.0f, 0.0f, 0.0f);
 				//	target -> setVelocity(0.0f, 0.0f, 0.0f);
 

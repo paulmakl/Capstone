@@ -4,7 +4,6 @@
 #include "particle.h"
 #include "vectors.h"
 using namespace std;
-class Particle;
 
 class COG
 {

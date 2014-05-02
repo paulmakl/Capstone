@@ -177,20 +177,23 @@ void Switch::display(void)
 	glutTimerFunc(50, timer, 0);
 	//std::cout << disps << " ";
 
-	/*if (disps > FRAME_LIMIT) {
+	/*if (disps > FRAME_LIMIT)
+	{
         glutLeaveMainLoop();
     }
     std::cout << disps << "\n";
-    myfile << "$" << disps << "," << env.numParticles << "\n";
-    for (int i = 0; i < env.particles.particles.size(); i++) {
+    myfile << "$" << disps << "," << env.numParticles << "\n" ;
+    for (int i = 0; i < env.particles.particles.size(); i++)
+    {
         myfile
                << env.particles.particles[i].getPosition().x << ","
                << env.particles.particles[i].getPosition().y << ","
                << env.particles.particles[i].getPosition().z;
-        if (i != env.particles.particles.size() - 1) {
+        if (i != env.particles.particles.size() - 1)
+        {
             myfile << "\n";
         }
-    }
+    }*/
     disps++;
-    myfile << "\n";*/
+    myfile << "\n";
 }
