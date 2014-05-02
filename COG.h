@@ -11,13 +11,20 @@ class COG
 public:
     vector <Particle*> particles;
     Vec3 center;
+    Vec3 rotationVector;
+    Vec3 translationVector;
     int numParticles;
     
     void init();
+
+    void rotateCOG(Vec3 rotation);
+    void translateCOG(Vec3 translation);
+
     void updateCenter();
     void addParticle(Particle* p);
 
     int getSize();
+    double getMass();
 };
 
 #endif

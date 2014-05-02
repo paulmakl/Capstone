@@ -215,6 +215,16 @@ void Physics::updateParticleVelocities()
 			cur -> setColor(COLLIDED_COLOR);
 		}
 
+		// Slope definition
+		if(newVelocity.y + position.y - newVelocity.z/5  - position.z/5 <= 0)
+		{
+			newVelocity.x = 0;
+			newVelocity.y = 0;
+			newVelocity.z = 0;
+			//newVelocity.z = -newVelocity.z;
+			cur -> setColor(0.0f, 0.0f, 1.0f);
+		}
+
 		cur -> setVelocity(newVelocity.x, newVelocity.y, newVelocity.z);
 
 		//Based on the new velocity, we calculate the new position
@@ -335,8 +345,8 @@ void Physics::checkParticlecollisionsAtIndex(int i, int3 boxID)
 				//target -> changePosition(0.0f, 0.1f, 0.0f);
 				ballistic-> changePosition(-distanceVector.x*0.5f, -distanceVector.y*0.5f, -distanceVector.z*0.5f);
 
-			//	ballistic -> setVelocity(0.0f, 0.0f, 0.0f);
-			//	target -> setVelocity(0.0f, 0.0f, 0.0f);
+				//	ballistic -> setVelocity(0.0f, 0.0f, 0.0f);
+				//	target -> setVelocity(0.0f, 0.0f, 0.0f);
 
 
 				ballistic -> setMass(0.01f);
@@ -354,7 +364,7 @@ void Physics::updateParticlePositions()
 		cur = env -> particles.getParticle(i);
 		Vec3 position = cur -> getPosition();
 
-	/*	if(position.x < 0.0f)
+		/*	if(position.x < 0.0f)
 			position.x = 0.0f;
 		else if (position.x > env -> xSize - 1)
 			position.x = env -> xSize - 1;

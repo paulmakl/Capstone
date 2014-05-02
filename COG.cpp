@@ -39,7 +39,22 @@ void COG::addParticle(Particle *p)
     numParticles++;
 }
 
+void COG::rotateCOG(Vec3 rotation)
+{
+	//TODO: Etan
+}
+
+void COG::translateCOG(Vec3 translation)
+{
+	//TODO: Etan
+}
+
 int COG::getSize()
 {
 	return numParticles;
+}
+
+double COG::getMass()
+{
+	//TODO: Etan
 }
