@@ -21,7 +21,7 @@ public:
     video vid;
     void read();
     void setVideoSize();
-    void setVideoState(int i);
+    void setVideoState(int i, int numParticlesInState);
     
     
     bool is_number(string s);

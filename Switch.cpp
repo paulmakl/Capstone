@@ -163,7 +163,7 @@ void Switch::display(void)
         glutLeaveMainLoop();
     }
     std::cout << disps << "\n";
-    myfile << "$" << disps << "\n";
+    myfile << "$" << disps << "," << env.numParticles << "\n";
     for (int i = 0; i < env.particles.particles.size(); i++) {
         myfile
                << env.particles.particles[i].getPosition().x << ","

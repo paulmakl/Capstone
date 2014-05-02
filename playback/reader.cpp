@@ -13,17 +13,19 @@ void reader::read(){
     {   
         if (line.at(0) == '$') {
             line.erase(0,1);
+            vector<string> line_broken_up_at_commas = chop(line);
             string temp = lowercase(line);
             if ( temp == "size" ) {
                 setVideoSize();
                 cout << vid.size.x << " " << vid.size.y << " " << vid.size.z << " " << vid.numParticles << "\n";
-            }else if (is_number(line)){
-                int num = atoi(line.c_str());
+            }else if (is_number(line_broken_up_at_commas[0])){
+                int num = atoi(line_broken_up_at_commas[0].c_str());
                 vid.addState();
-                setVideoState(num);
+                cout << line_broken_up_at_commas[1].c_str();
+                setVideoState(num, atoi( line_broken_up_at_commas[1].c_str() ) );
             }
             else{
-                cout << "nou";
+                cout << "Invlaid Video Files";
             }
         }
 
@@ -45,12 +47,12 @@ void reader::setVideoSize(){
     vid.numParticles = atoi(sizes[3].c_str());
 }
 
-void reader::setVideoState(int stateNum){
+void reader::setVideoState(int stateNum, int numParticlesInState){
     int i = 0;
     string temp;
-    vid.states[stateNum].init(vid.numParticles);
+    vid.states[stateNum].init(numParticlesInState);
     
-    while (i < vid.numParticles) {
+    while (i < numParticlesInState) {
         getline(myfile, temp);
         vector<string> pdata;
         pdata = chop(temp);
