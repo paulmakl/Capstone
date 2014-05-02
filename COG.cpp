@@ -1,5 +1,5 @@
 #include "COG.h"
-
+#include "Particle.h"
 void COG::init()
 {
 	numParticles = 0;
