@@ -42,7 +42,7 @@ void Draw::displayParticles(int state)
 	float color = 1.0f;
 	glBegin(GL_POINTS);
     
-	for(int i = 0; i < vid ->numParticles; i++)
+	for(int i = 0; i < vid ->states[state].particles.size(); i++)
 	{
 		particle* cur;
 		cur = &vid->states[state].particles[i];

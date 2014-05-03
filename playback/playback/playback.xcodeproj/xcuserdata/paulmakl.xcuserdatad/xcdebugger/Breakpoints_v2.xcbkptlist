@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../reader.cpp"
-            timestampString = "418899215.032293"
+            timestampString = "420743870.581669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "reader::setVideoState(int stateNum)"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "reader::setVideoState(int stateNum, int numParticlesInState)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../reader.cpp"
-            timestampString = "418899215.032293"
+            timestampString = "420743870.581669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48">
+            startingLineNumber = "50"
+            endingLineNumber = "50">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -132,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../reader.cpp"
-            timestampString = "418899215.032293"
+            timestampString = "420743870.581669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47">
+            startingLineNumber = "49"
+            endingLineNumber = "49">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -146,7 +146,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../reader.cpp"
-            timestampString = "418850536.477093"
+            timestampString = "420743695.427953"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
@@ -162,11 +162,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../reader.cpp"
-            timestampString = "418850536.477093"
+            timestampString = "420743695.427953"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "reader::read()"
             landmarkType = "5">
          </BreakpointContent>
@@ -178,12 +178,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../reader.cpp"
-            timestampString = "418899215.032293"
+            timestampString = "420743870.581669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "reader::setVideoState(int stateNum)"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "reader::setVideoState(int stateNum, int numParticlesInState)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -194,11 +194,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../reader.cpp"
-            timestampString = "418850536.477093"
+            timestampString = "420743870.581669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "reader::read()"
             landmarkType = "5">
          </BreakpointContent>

@@ -5,7 +5,7 @@
  *      Author: Etan and Paul
  */
 #include "Particle.h"
-
+#include "COG.h"
 void Particle::setPosition(float x, float y, float z)
 {
 	position.x = x;

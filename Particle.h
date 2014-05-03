@@ -10,7 +10,7 @@
 #define PARTICLE_H_
 #include "vectors.h"
 #include <math.h>
-
+class COG;
 class Particle
 {
 public:
