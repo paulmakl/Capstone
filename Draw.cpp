@@ -42,10 +42,10 @@ void Draw::displayParticles()
 		cur = env->particles.getParticle(i);
 
 		position = cur -> getPosition();
-		float colorScale = 0.1f + (float)(env -> zSize - position.z) / env -> zSize;
-		float r = cur -> getColor().x * colorScale;
-		float g = cur -> getColor().y * colorScale;
-		float b = cur -> getColor().z * colorScale;
+		float colorScale = 0.3f;//+ (float)(env -> zSize - position.z) / env -> zSize;
+		float r = cur -> getColor().x/3 * colorScale;
+		float g = cur -> getColor().y/3 * colorScale;
+		float b = cur -> getColor().z/3 * colorScale;
 		glColor3f(r,g,b);
 		glPushMatrix();
 		glTranslatef(position.x, position.y, position.z);

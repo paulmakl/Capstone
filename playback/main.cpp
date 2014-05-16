@@ -21,7 +21,7 @@
 #define path "/Users/paulmakl/Documents/Capstone/playback/video.txt"
 #else
 #define pixels 900
-#define path "C://Users/Etan/Desktop/video2.txt"
+#define path "C://Users/Etan/Desktop/video.txt"
 #endif
 
 using namespace std;
@@ -47,8 +47,17 @@ void timer(int id)
 }
 
 void display(){
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+    
+    
+    
+    
+    glClearColor(0.39f, 0.58f, 0.93f, 1.0f); // Set background color to cornflower blue
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
+    GLfloat lightColor0[] = {0.5f, 0.5f, 0.5f, 1.0f}; //Color (0.5, 0.5, 0.5)
+    GLfloat lightPos0[] = {4.0f, 0.0f, 8.0f, 1.0f}; //Positioned at (4, 0, 8)
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
+    glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
+    
     //gluLookAt(cam.eyeX, cam.eyeY, cam.eyeZ, cam.targetX, cam.targetY, cam.targetZ, cam.upX, cam.upY, cam.upZ);
     glPushMatrix();
     

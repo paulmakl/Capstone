@@ -32,10 +32,10 @@
  */
 int main(int argc, char** argv)
 {
-	int xa = 128;
-	int ya = 128;
-	int za = 128;
-	int p = 1000;
+	int xa = 32;
+	int ya = 32;
+	int za = 32;
+	int p = 5000;
     Switch x(xa, ya, za, p, argc, argv);
 
     glutMainLoop();

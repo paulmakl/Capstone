@@ -21,10 +21,10 @@
 #define path "/Users/paulmakl/Documents/Capstone/playback/video.txt"
 #else
 #define pixels 900
-#define path "C://Users/Etan/Desktop/video2.txt"
+#define path "C://Users/Etan/Desktop/video.txt"
 #endif
 
-#define FRAME_LIMIT 250
+#define FRAME_LIMIT 150
 
 class Switch
 {

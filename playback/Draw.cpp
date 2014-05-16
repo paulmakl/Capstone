@@ -25,11 +25,11 @@ void Draw::displayGrid(){
 void Draw::displayBackdrop()
 {
 	glBegin(GL_QUADS); // Start drawing a quad primitive
-    glColor3f(0.1f, 0.1f, 0.1f);
+    glColor3f(0.1f, 0.1f, 1.0f);
     glVertex3f(0.0f, 0.0f, 0.0f); // The bottom left corner
     glVertex3f(vid->size.x, 0.0f, 0.0f); // The bottom right corner
-    glVertex3f(vid->size.x, 0.0f, vid->size.z); // The top right corner
-    glVertex3f(0.0f, 0.0f, vid->size.z); // The top left corner
+    glVertex3f(vid->size.x, 6.5, vid->size.z); // The top right corner
+    glVertex3f(0.0f, 6.5, vid->size.z); // The top left corner
     
 	glEnd();
 }
@@ -40,15 +40,32 @@ void Draw::displayParticles(int state)
 	Vec3 position;
 	//glColor3f(1.0f, 1.0f, 1.0f);
 	float color = 1.0f;
-	glBegin(GL_POINTS);
+	/*glBegin(GL_POINTS);
     
 	for(int i = 0; i < vid ->states[state].particles.size(); i++)
 	{
 		particle* cur;
 		cur = &vid->states[state].particles[i];
         
-		glColor3f(1.0, 0.0, 0.0);
+		glColor3f(1.0, 1.0, 1.0);
 		glVertex3f(cur->pos.x, cur ->pos.y, cur->pos.z);
 	}
-	glEnd();
+	glEnd();*/
+
+	for(int i = 0; i < vid -> states[state].particles.size(); i++)
+		{
+			particle* cur;
+			cur = &vid->states[state].particles[i];
+
+			position = cur -> pos;
+			float colorScale = 0.1f + (float)(vid -> size.x - position.z) / vid -> size.z;
+			float r = 0.5f * colorScale;
+			float g = 0.5f * colorScale;
+			float b = 0.5f * colorScale;
+			glColor3f(r,g,b);
+			glPushMatrix();
+			glTranslatef(position.x, position.y, position.z);
+			glutSolidSphere(0.2f, 10, 10);
+			glPopMatrix();
+		}
 }

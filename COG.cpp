@@ -1,5 +1,5 @@
 #include "COG.h"
-#include "Particle.h"
+
 void COG::init()
 {
 	numParticles = 0;
@@ -39,7 +39,7 @@ void COG::addParticle(Particle *p)
     numParticles++;
 }
 
-void COG::rotateCOG(Vec3 rotation)
+/*void COG::rotateCOG(Vec3 rotation)
 {
 	//TODO: Etan
 }
@@ -57,4 +57,4 @@ int COG::getSize()
 double COG::getMass()
 {
 	//TODO: Etan
-}
+}*/

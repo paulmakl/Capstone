@@ -89,7 +89,7 @@ void Switch::timer(int id)
 void Switch::display(void)
 {
 	//glClearDepth(GL_DEPTH_TEST);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+	glClearColor(0.39f, 0.58f, 0.93f, 1.0f); // Set background color to cornflower blue
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
 
 	//float light_position[] = { env.xSize/2, env.ySize, env.zSize/2, 0.0f };
@@ -177,20 +177,23 @@ void Switch::display(void)
 	glutTimerFunc(50, timer, 0);
 	//std::cout << disps << " ";
 
-	/*if (disps > FRAME_LIMIT) {
+	if (disps > FRAME_LIMIT)
+	{
         glutLeaveMainLoop();
     }
     std::cout << disps << "\n";
-    myfile << "$" << disps << "," << env.numParticles << "\n";
-    for (int i = 0; i < env.particles.particles.size(); i++) {
+    myfile << "$" << disps << "," << env.numParticles << "\n" ;
+    for (int i = 0; i < env.particles.particles.size(); i++)
+    {
         myfile
                << env.particles.particles[i].getPosition().x << ","
                << env.particles.particles[i].getPosition().y << ","
                << env.particles.particles[i].getPosition().z;
-        if (i != env.particles.particles.size() - 1) {
+        if (i != env.particles.particles.size() - 1)
+        {
             myfile << "\n";
         }
     }
     disps++;
-    myfile << "\n";*/
+    myfile << "\n";
 }
